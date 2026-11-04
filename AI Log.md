@@ -1,0 +1,2233 @@
+Prompt
+
+You are a graduate student working on a project for a cybersecurity and software development class. You are tasked with acting as a DevSecOps Architect to build a cloud-native component for a Project Portal (PP) from scratch. This project will also include using an Autonomous AI Developer Agent.
+
+The Project Portal (PP) serves as a centralized, campus-wide ecosystem designed to showcase, share, and manage academic research, course capstones, and innovative student designs. To mirror an enterprise-grade cloud architecture, the portal is broken down into 4 distinct, isolated backend services that handle specific operational needs. You will be building one of these backend services to handle The Research Blog & Project Discussion Board. This service coordinates collaborative project updates, announcements, and interactive comment feeds to streamline communication within active academic project teams and course groups.
+
+Every project must be built in an isolated GitHub repository and communicate <em class="___11wyd0v f1j4dglz" data-lexical-text="true">only</em> with its own single-tenant infrastructure dependencies. No cross-communication between student services is permitted; external data dependencies must be managed using local static mock data structures.
+
+The technology stack you have chosen is Python, FastAPI, PostgreSQL and Docker.
+
+You are starting Phase 1. In this initial phase, you will define the boundaries of your proposed system and lay the infrastructure foundation for your automated security pipeline before generating any application source code. Based on your chosen high-level PP theme and preferred technology stack, you will write a comprehensive technical functional specification detailing your service's endpoints, JSON schemas, database models, and static mock data structures.
+
+The structure of the discussion board should be fairly simple: it will have Forums, Posts, and Comments. Forums group Posts into categories, such as for a specific project or class. Posts are how users can share updates, announcements, or questions related to the topic of the Forum. Comments can then be used to reply to a Post, and can be left as replies to other Comments as well. There will also be Users that create these Forums, Posts and Comments, and Users can be sorted into Groups as well to denote things like project teams or students in a certain class or major.
+
+The first task is to create a spec.md file, which should serve as an architectural design document mapping out your proposed REST endpoints, JSON payload schemas, and database entity relationships in a format that an AI coding agent can use as a guideline. Please determine and briefly describe what REST endpoints, JSON payload schemas, and database entity relationships will be needed for The Research Blog & Project Discussion Board backend service, then condense that information into a short usable spec.md file for an AI coding agent.
+
+Response
+
+Below is a concise **spec.md** suitable for Phase 1 of the Project Portal Research Blog & Project Discussion Board service. It defines service boundaries, REST endpoints, JSON schemas, PostgreSQL entities, and static mock data structures so an autonomous AI coding agent can scaffold the application consistently.
+
+---
+
+**spec.md**
+
+# Research Blog & Project Discussion Board Service
+
+Version: 1.0
+
+## Overview
+
+The Research Blog & Project Discussion Board is an isolated backend service within the Project Portal (PP) ecosystem.
+
+Responsibilities:
+
+- Manage discussion forums
+
+- Manage posts within forums
+
+- Manage threaded comments
+
+- Manage users and groups
+
+- Provide REST APIs for CRUD operations
+
+Out of Scope:
+
+- Authentication providers
+
+- File uploads
+
+- Cross-service communication
+
+- Real-time messaging
+
+- External APIs
+
+Technology Stack:
+
+- Python 3.12
+
+- FastAPI
+
+- PostgreSQL
+
+- SQLAlchemy
+
+- Docker
+
+---
+
+# Core Entities
+
+## User
+
+Represents a student, faculty member, or project participant.
+
+Fields:
+
+- id (UUID)
+
+- username (string)
+
+- email (string)
+
+- display_name (string)
+
+- role (string)
+
+- created_at (timestamp)
+
+Roles:
+
+- student
+
+- faculty
+
+- admin
+
+---
+
+## Group
+
+Represents a project team, class, or academic group.
+
+Fields:
+
+- id (UUID)
+
+- name (string)
+
+- description (string)
+
+- created_at (timestamp)
+
+---
+
+## Forum
+
+Discussion category.
+
+Fields:
+
+- id (UUID)
+
+- title (string)
+
+- description (string)
+
+- created_by (UUID)
+
+- group_id (UUID, nullable)
+
+- created_at (timestamp)
+
+Examples:
+
+- INFO620 Project Team
+
+- Cybersecurity Capstone
+
+- CS Research Methods
+
+---
+
+## Post
+
+Discussion thread within a forum.
+
+Fields:
+
+- id (UUID)
+
+- forum_id (UUID)
+
+- author_id (UUID)
+
+- title (string)
+
+- content (text)
+
+- post_type (string)
+
+- created_at (timestamp)
+
+- updated_at (timestamp)
+
+Post Types:
+
+- update
+
+- announcement
+
+- question
+
+---
+
+## Comment
+
+Threaded reply system.
+
+Fields:
+
+- id (UUID)
+
+- post_id (UUID)
+
+- author_id (UUID)
+
+- parent_comment_id (UUID, nullable)
+
+- content (text)
+
+- created_at (timestamp)
+
+---
+
+# Database Relationships
+
+User 1 ---- * Forum
+
+User 1 ---- * Post
+
+User 1 ---- * Comment
+
+Group 1 ---- * Forum
+
+Forum 1 ---- * Post
+
+Post 1 ---- * Comment
+
+Comment 1 ---- * Comment
+
+(parent_comment_id enables threading)
+
+User * ---- * Group
+
+Join Table:
+
+group_members
+
+Fields:
+
+- group_id (UUID)
+
+- user_id (UUID)
+
+---
+
+# REST API
+
+Base Path:
+
+/api/v1
+
+---
+
+## Users
+
+### GET /users
+
+Return all users.
+
+### GET /users/{user_id}
+
+Return single user.
+
+### POST /users
+
+Create user.
+
+### PUT /users/{user_id}
+
+Update user.
+
+### DELETE /users/{user_id}
+
+Delete user.
+
+---
+
+## Groups
+
+### GET /groups
+
+Return all groups.
+
+### GET /groups/{group_id}
+
+Return group details.
+
+### POST /groups
+
+Create group.
+
+### PUT /groups/{group_id}
+
+Update group.
+
+### DELETE /groups/{group_id}
+
+Delete group.
+
+### POST /groups/{group_id}/members
+
+Add user to group.
+
+### DELETE /groups/{group_id}/members/{user_id}
+
+Remove user from group.
+
+---
+
+## Forums
+
+### GET /forums
+
+List forums.
+
+Optional Query Parameters:
+
+- group_id
+
+### GET /forums/{forum_id}
+
+Return forum.
+
+### POST /forums
+
+Create forum.
+
+### PUT /forums/{forum_id}
+
+Update forum.
+
+### DELETE /forums/{forum_id}
+
+Delete forum.
+
+---
+
+## Posts
+
+### GET /forums/{forum_id}/posts
+
+List posts in forum.
+
+Optional Query Parameters:
+
+- post_type
+
+- author_id
+
+### GET /posts/{post_id}
+
+Return post details.
+
+### POST /forums/{forum_id}/posts
+
+Create post.
+
+### PUT /posts/{post_id}
+
+Update post.
+
+### DELETE /posts/{post_id}
+
+Delete post.
+
+---
+
+## Comments
+
+### GET /posts/{post_id}/comments
+
+Get all comments for a post.
+
+### POST /posts/{post_id}/comments
+
+Create comment.
+
+### PUT /comments/{comment_id}
+
+Update comment.
+
+### DELETE /comments/{comment_id}
+
+Delete comment.
+
+---
+
+# JSON Schemas
+
+## Create User
+
+POST /users
+
+Request
+
+{
+
+  "username": "jdoe",
+
+  "email": "jdoe@university.edu",
+
+  "display_name": "John Doe",
+
+  "role": "student"
+
+}
+
+Response
+
+{
+
+  "id": "uuid",
+
+  "username": "jdoe",
+
+  "email": "jdoe@university.edu",
+
+  "display_name": "John Doe",
+
+  "role": "student"
+
+}
+
+---
+
+## Create Group
+
+POST /groups
+
+Request
+
+{
+
+  "name": "Capstone Team Alpha",
+
+  "description": "Fall cybersecurity capstone team"
+
+}
+
+---
+
+## Create Forum
+
+POST /forums
+
+Request
+
+{
+
+  "title": "Capstone Discussion",
+
+  "description": "Team collaboration forum",
+
+  "created_by": "user_uuid",
+
+  "group_id": "group_uuid"
+
+}
+
+---
+
+## Create Post
+
+POST /forums/{forum_id}/posts
+
+Request
+
+{
+
+  "author_id": "user_uuid",
+
+  "title": "Sprint 1 Update",
+
+  "content": "Research completed.",
+
+  "post_type": "update"
+
+}
+
+Response
+
+{
+
+  "id": "uuid",
+
+  "forum_id": "uuid",
+
+  "author_id": "uuid",
+
+  "title": "Sprint 1 Update",
+
+  "content": "Research completed.",
+
+  "post_type": "update"
+
+}
+
+---
+
+## Create Comment
+
+POST /posts/{post_id}/comments
+
+Top Level Comment
+
+{
+
+  "author_id": "user_uuid",
+
+  "content": "Great progress."
+
+}
+
+Threaded Reply
+
+{
+
+  "author_id": "user_uuid",
+
+  "parent_comment_id": "comment_uuid",
+
+  "content": "I agree."
+
+}
+
+---
+
+# Static Mock Data
+
+The application must not consume external systems.
+
+Store local mock data under:
+
+/app/mock_data/
+
+Files:
+
+users.json
+
+groups.json
+
+forums.json
+
+posts.json
+
+comments.json
+
+Example User
+
+{
+
+  "id": "11111111-1111-1111-1111-111111111111",
+
+  "username": "jsmith",
+
+  "email": "jsmith@university.edu",
+
+  "display_name": "Jane Smith",
+
+  "role": "student"
+
+}
+
+Example Forum
+
+{
+
+  "id": "22222222-2222-2222-2222-222222222222",
+
+  "title": "Cybersecurity Capstone",
+
+  "description": "Discussion board for capstone project",
+
+  "created_by": "11111111-1111-1111-1111-111111111111"
+
+}
+
+Example Post
+
+{
+
+  "id": "33333333-3333-3333-3333-333333333333",
+
+  "forum_id": "22222222-2222-2222-2222-222222222222",
+
+  "author_id": "11111111-1111-1111-1111-111111111111",
+
+  "title": "Week 1 Progress",
+
+  "content": "Requirements gathering completed.",
+
+  "post_type": "update"
+
+}
+
+---
+
+# Security Requirements
+
+- UUID primary keys
+
+- Input validation through Pydantic
+
+- Parameterized database queries via ORM
+
+- No raw SQL execution
+
+- Least-privilege database account
+
+- Containerized deployment
+
+- Secrets supplied through environment variables
+
+- Structured error handling
+
+- Audit logging for create/update/delete actions
+
+---
+
+# Success Criteria
+
+The service must support:
+
+1. User management
+
+2. Group management
+
+3. Forum creation and organization
+
+4. Post creation and retrieval
+
+5. Threaded comments
+
+6. PostgreSQL persistence
+
+7. Docker deployment
+
+8. Mock data initialization
+
+9. FastAPI OpenAPI documentation
+
+This specification is intentionally compact but complete enough for an Autonomous AI Developer Agent to generate the Phase 2 FastAPI project structure, SQLAlchemy models, Pydantic schemas, routers, Docker configuration, and initial mock-data seed process.
+
+Prompt
+
+I have attached a markdown file detailing a backend service that includes database structure, REST API endpoints, and JSON schemas. Currently, the only JSON schemas included only cover the create operations. Please review the entire file, then correct any errors found in the existing JSON schemas and add new schemas covering PUT and GET requests, and list responses, status codes, and a standard error response. Mark required fields and constraints, like max length.
+
+(attached [spec v1.1.md](obsidian://open?vault=Obsidian%20Vault&file=spec%20v1.1))
+
+Response
+
+After reviewing the entire specification, I found several issues in the existing schemas and several gaps:
+
+## Issues Found in Existing Schemas
+
+### General Issues
+
+1. Timestamps are not valid JSON values.
+    
+    - Current:
+        
+        "created_at": 2026-11-02 11:06:07.235541
+        
+    - Should be:
+        
+        "created_at": "2026-11-02T11:06:07.235541Z"
+        
+2. IDs are inconsistently named.
+    
+    - Database uses `user_id`, `forum_id`, etc.
+    - Group responses use `usergroup_id`, `forumgroup_id`, `postgroup_id`.
+    - Consider standardizing to:
+        - `user_id`
+        - `forum_id`
+        - `post_id`
+    - Since groups are implemented as entity subtypes in the database.
+3. No required/optional field definitions.
+    
+4. No length limits or format constraints.
+    
+5. No validation constraints for email, arrays, or foreign keys.
+    
+6. No GET response schemas.
+    
+7. No PUT request/response schemas.
+    
+8. No list response schemas.
+    
+9. No standard error schema.
+    
+
+### Syntax Errors
+
+#### Create Forum Group
+
+Current request contains trailing comma:
+
+"tags": [
+
+  "Class Forum",
+
+  "METCS",
+
+  "Fall 2026"
+
+],
+
+}
+
+Invalid JSON.
+
+#### Create Forum Group Response
+
+Contains extra comma:
+
+],
+
+,
+
+"tags": [
+
+Invalid JSON.
+
+---
+
+# Recommended Constraints
+
+## User
+
+|Field|Required|Constraints|
+|---|---|---|
+|username|Yes|3-50 chars, unique|
+|email|Yes|Valid email, max 254 chars, unique|
+|display_name|Yes|1-100 chars|
+|roles|Yes|Minimum 1 value|
+
+## User Group
+
+|Field|Required|Constraints|
+|---|---|---|
+|name|Yes|1-100 chars|
+|description|No|Max 1000 chars|
+|users|No|Array of valid user IDs|
+|tags|No|Max 25 tags|
+
+## Forum
+
+|Field|Required|Constraints|
+|---|---|---|
+|user_id|Yes|Existing user|
+|title|Yes|1-200 chars|
+|description|No|Max 5000 chars|
+|tags|No|Max 25 tags|
+
+## Forum Group
+
+|Field|Required|Constraints|
+|---|---|---|
+|name|Yes|1-200 chars|
+|description|No|Max 5000 chars|
+|forums|No|Array of forum IDs|
+|tags|No|Max 25 tags|
+
+## Post
+
+|Field|Required|Constraints|
+|---|---|---|
+|user_id|Yes|Existing user|
+|forum_id|Yes|Existing forum|
+|title|Yes|1-200 chars|
+|content|Yes|1-10000 chars|
+|tags|No|Max 25 tags|
+
+## Post Group
+
+|Field|Required|Constraints|
+|---|---|---|
+|forum_id|Yes|Existing forum|
+|name|Yes|1-200 chars|
+|description|No|Max 5000 chars|
+|posts|No|Array of post IDs|
+|tags|No|Max 25 tags|
+
+## Comment
+
+|Field|Required|Constraints|
+|---|---|---|
+|user_id|Yes|Existing user|
+|post_id|Yes|Existing post|
+|p_comment_id|No|Existing comment|
+|content|Yes|1-5000 chars|
+
+---
+
+# Standard Resource Response Schema
+
+This structure should be used for GET and POST responses.
+
+{
+
+  "id": 123,
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-02T11:06:07.235541Z"
+
+}
+
+I also recommend adding `updated_at` to all mutable entities.
+
+---
+
+# GET Response Schemas
+
+## GET /users/{user_id}
+
+{
+
+  "user_id": 123,
+
+  "username": "jdoe",
+
+  "email": "[jdoe@university.edu](mailto:jdoe@university.edu)",
+
+  "display_name": "John Doe",
+
+  "roles": [
+
+    "student"
+
+  ],
+
+  "tags": [
+
+    "CS763",
+
+    "Fall2026"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+---
+
+## GET /usergroups/{usergroup_id}
+
+{
+
+  "usergroup_id": 12345,
+
+  "name": "CS763 Students (Fall 26)",
+
+  "description": "Fall 26 Students enrolled in CS763",
+
+  "users": [
+
+    123,
+
+    234,
+
+    345,
+
+    456
+
+  ],
+
+  "tags": [
+
+    "Student Group",
+
+    "Fall 2026"
+
+  ]
+
+}
+
+---
+
+## GET /forums/{forum_id}
+
+{
+
+  "forum_id": 874368,
+
+  "user_id": 987,
+
+  "title": "CS763 O2 Secure Software Development (Fall 26)",
+
+  "description": "Forum for all topics pertaining to CS763",
+
+  "tags": [
+
+    "Class Forum",
+
+    "METCS",
+
+    "Fall 2026"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+---
+
+## GET /posts/{post_id}
+
+{
+
+  "post_id": 64368473,
+
+  "user_id": 987,
+
+  "forum_id": 874368,
+
+  "title": "Lab 1 Q&A",
+
+  "content": "Please comment with any questions on Lab 1.",
+
+  "tags": [
+
+    "Lab",
+
+    "Q&A"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+---
+
+## GET /comments/{comment_id}
+
+{
+
+  "comment_id": 50413740,
+
+  "user_id": 413,
+
+  "post_id": 78932643,
+
+  "p_comment_id": 56532,
+
+  "content": "thanks, that's really helpful :)",
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+---
+
+# PUT Request Schemas
+
+## PUT /users/{user_id}
+
+{
+
+  "email": "[newemail@university.edu](mailto:newemail@university.edu)",
+
+  "display_name": "John A. Doe",
+
+  "roles": [
+
+    "student",
+
+    "admin"
+
+  ]
+
+}
+
+All fields optional.
+
+---
+
+## PUT /usergroups/{usergroup_id}
+
+{
+
+  "name": "CS763 Students",
+
+  "description": "Updated description",
+
+  "users": [
+
+    123,
+
+    234
+
+  ],
+
+  "tags": [
+
+    "Student Group"
+
+  ]
+
+}
+
+All fields optional.
+
+---
+
+## PUT /forums/{forum_id}
+
+{
+
+  "title": "Updated Forum Title",
+
+  "description": "Updated description",
+
+  "tags": [
+
+    "Class Forum",
+
+    "Graduate"
+
+  ]
+
+}
+
+---
+
+## PUT /forumgroups/{forumgroup_id}
+
+{
+
+  "name": "Updated Forum Group",
+
+  "description": "Updated description",
+
+  "forums": [
+
+    123,
+
+    234
+
+  ],
+
+  "tags": [
+
+    "METCS"
+
+  ]
+
+}
+
+---
+
+## PUT /posts/{post_id}
+
+{
+
+  "title": "Updated Post Title",
+
+  "content": "Updated content",
+
+  "tags": [
+
+    "Announcement"
+
+  ]
+
+}
+
+---
+
+## PUT /postgroups/{postgroup_id}
+
+{
+
+  "name": "Updated Post Group",
+
+  "description": "Updated description",
+
+  "posts": [
+
+    64368473
+
+  ],
+
+  "tags": [
+
+    "Final Review"
+
+  ]
+
+}
+
+---
+
+## PUT /comments/{comment_id}
+
+{
+
+  "content": "Updated comment content"
+
+}
+
+---
+
+# List Response Schema
+
+Use consistently for all collection endpoints.
+
+## GET /users
+
+{
+
+  "count": 2,
+
+  "results": [
+
+    {
+
+      "user_id": 123,
+
+      "username": "jdoe",
+
+      "display_name": "John Doe"
+
+    },
+
+    {
+
+      "user_id": 124,
+
+      "username": "asmith",
+
+      "display_name": "Alice Smith"
+
+    }
+
+  ]
+
+}
+
+## GET /forums
+
+{
+
+  "count": 2,
+
+  "results": [
+
+    {
+
+      "forum_id": 1,
+
+      "title": "CS763",
+
+      "user_id": 987
+
+    },
+
+    {
+
+      "forum_id": 2,
+
+      "title": "CS781",
+
+      "user_id": 654
+
+    }
+
+  ]
+
+}
+
+The same list wrapper can be reused for:
+
+- `/users`
+- `/usergroups`
+- `/forums`
+- `/forumgroups`
+- `/posts`
+- `/postgroups`
+- `/comments`
+
+---
+
+# Status Codes
+
+## GET
+
+|Status|Meaning|
+|---|---|
+|200|Success|
+|400|Invalid query parameter|
+|401|Unauthorized|
+|403|Forbidden|
+|404|Resource not found|
+|500|Internal server error|
+
+## POST
+
+|Status|Meaning|
+|---|---|
+|201|Created|
+|400|Validation error|
+|401|Unauthorized|
+|403|Forbidden|
+|409|Duplicate resource|
+|500|Internal server error|
+
+## PUT
+
+|Status|Meaning|
+|---|---|
+|200|Updated|
+|400|Validation error|
+|401|Unauthorized|
+|403|Forbidden|
+|404|Resource not found|
+|409|Conflict|
+|500|Internal server error|
+
+## DELETE
+
+|Status|Meaning|
+|---|---|
+|204|Deleted|
+|401|Unauthorized|
+|403|Forbidden|
+|404|Resource not found|
+|500|Internal server error|
+
+---
+
+# Standard Error Response
+
+{
+
+  "error": {
+
+    "code": "VALIDATION_ERROR",
+
+    "message": "One or more fields failed validation.",
+
+    "details": [
+
+      {
+
+        "field": "email",
+
+        "message": "Email address is invalid."
+
+      }
+
+    ]
+
+  },
+
+  "timestamp": "2026-11-02T11:06:07.235541Z",
+
+  "request_id": "0f45ef7d-790a-4b82-b9fc-fd2c8afc8d5b"
+
+}
+
+### Recommended Error Codes
+
+VALIDATION_ERROR
+
+UNAUTHORIZED
+
+FORBIDDEN
+
+RESOURCE_NOT_FOUND
+
+RESOURCE_CONFLICT
+
+DUPLICATE_RESOURCE
+
+INTERNAL_SERVER_ERROR
+
+One additional recommendation: add a dedicated **JSON Schema Definitions** section using Draft 2020-12 or OpenAPI 3.1 syntax. This would allow you to define reusable schemas (`User`, `Forum`, `Post`, `ErrorResponse`, etc.) once and reference them throughout the API specification, making the document more consistent and implementation-ready.
+
+Prompt
+
+Here are the JSON schemas for Users:  
+### Users  
+#### GET /users/{user_id} **Response** ```json {   "user_id": 123,   "username": "jdoe",   "email": "jdoe@university.edu",   "display_name": "John Doe",   "roles": [     "student"   ],   "tags": [     "Undergraduate",     "METCS"   ],   "created_at": "2026-11-02T11:06:07.235541Z",   "updated_at": "2026-11-05T15:22:11.947651Z" } ```  
+#### POST /users **Request** ```json {   "username": "jdoe",   "email": "jdoe@university.edu",   "display_name": "John Doe",   "roles": [     "student"   ],   "tags": [     "Undergraduate",     "METCS"   ] } ```  
+**Response** ```json {   "user_id": 123,   "username": "jdoe",   "email": "jdoe@university.edu",   "display_name": "John Doe",   "roles": [     "student"   ],   "tags": [     "Undergraduate",     "METCS"   ],   "created_at": "2026-11-02T11:06:07.235541Z",   "updated_at": "2026-11-05T15:22:11.947651Z" } ```  
+#### PUT /users/{user_id} **Request** ```json { "email": "newemail@university.edu", "display_name": "John A. Doe", "roles": [ "student", "admin" ] } ```  
+**Response** ```json {   "user_id": 123,   "username": "jdoe",   "email": "newemail@university.edu",   "display_name": "John A. Doe",   "roles": [     "student", "admin"   ],   "tags": [     "Undergraduate",     "METCS"   ],   "created_at": "2026-11-02T11:06:07.235541Z",   "updated_at": "2026-11-17T15:22:11.947651Z" } ```  
+Please give me the JSON schemas for User Groups, Forums, Forum Groups, Posts, Post Groups, and Comments in the same order and format.
+
+Response
+
+### User Groups
+
+  
+
+#### GET /usergroups/{usergroup_id}
+
+**Response**
+
+{
+
+  "usergroup_id": 12345,
+
+  "name": "CS763 Students (Fall 26)",
+
+  "description": "Fall 26 Students enrolled in CS763: Secure Software Development",
+
+  "users": [
+
+    123,
+
+    234,
+
+    345,
+
+    456
+
+  ],
+
+  "tags": [
+
+    "Student Group",
+
+    "Fall 2026"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### POST /usergroups
+
+**Request**
+
+{
+
+  "name": "CS763 Students (Fall 26)",
+
+  "description": "Fall 26 Students enrolled in CS763: Secure Software Development",
+
+  "users": [
+
+    123,
+
+    234,
+
+    345,
+
+    456
+
+  ],
+
+  "tags": [
+
+    "Student Group",
+
+    "Fall 2026"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "usergroup_id": 12345,
+
+  "name": "CS763 Students (Fall 26)",
+
+  "description": "Fall 26 Students enrolled in CS763: Secure Software Development",
+
+  "users": [
+
+    123,
+
+    234,
+
+    345,
+
+    456
+
+  ],
+
+  "tags": [
+
+    "Student Group",
+
+    "Fall 2026"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### PUT /usergroups/{usergroup_id}
+
+**Request**
+
+{
+
+  "name": "CS763 Students (Fall 2026)",
+
+  "description": "Updated description",
+
+  "users": [
+
+    123,
+
+    234,
+
+    345
+
+  ],
+
+  "tags": [
+
+    "Student Group",
+
+    "Graduate"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "usergroup_id": 12345,
+
+  "name": "CS763 Students (Fall 2026)",
+
+  "description": "Updated description",
+
+  "users": [
+
+    123,
+
+    234,
+
+    345
+
+  ],
+
+  "tags": [
+
+    "Student Group",
+
+    "Graduate"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+
+}
+
+---
+
+### Forums
+
+  
+
+#### GET /forums/{forum_id}
+
+**Response**
+
+{
+
+  "forum_id": 874368,
+
+  "user_id": 987,
+
+  "title": "CS763 O2 Secure Software Development (Fall 26)",
+
+  "description": "Forum for all topics pertaining to CS763, Fall 2026",
+
+  "tags": [
+
+    "Class Forum",
+
+    "METCS",
+
+    "Fall 2026"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### POST /forums
+
+**Request**
+
+{
+
+  "user_id": 987,
+
+  "title": "CS763 O2 Secure Software Development (Fall 26)",
+
+  "description": "Forum for all topics pertaining to CS763, Fall 2026",
+
+  "tags": [
+
+    "Class Forum",
+
+    "METCS",
+
+    "Fall 2026"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "forum_id": 874368,
+
+  "user_id": 987,
+
+  "title": "CS763 O2 Secure Software Development (Fall 26)",
+
+  "description": "Forum for all topics pertaining to CS763, Fall 2026",
+
+  "tags": [
+
+    "Class Forum",
+
+    "METCS",
+
+    "Fall 2026"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### PUT /forums/{forum_id}
+
+**Request**
+
+{
+
+  "title": "CS763 O2 Secure Software Development",
+
+  "description": "Updated forum description",
+
+  "tags": [
+
+    "Class Forum",
+
+    "Graduate Course"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "forum_id": 874368,
+
+  "user_id": 987,
+
+  "title": "CS763 O2 Secure Software Development",
+
+  "description": "Updated forum description",
+
+  "tags": [
+
+    "Class Forum",
+
+    "Graduate Course"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+
+}
+
+---
+
+### Forum Groups
+
+  
+
+#### GET /forumgroups/{forumgroup_id}
+
+**Response**
+
+{
+
+  "forumgroup_id": 56789,
+
+  "name": "METCS Class Forums (Fall 26)",
+
+  "description": "Forums for all METCS classes offered in Fall 2026 Semester",
+
+  "forums": [
+
+    123,
+
+    234,
+
+    345,
+
+    456
+
+  ],
+
+  "tags": [
+
+    "Class Forum",
+
+    "METCS",
+
+    "Fall 2026"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### POST /forumgroups
+
+**Request**
+
+{
+
+  "name": "METCS Class Forums (Fall 26)",
+
+  "description": "Forums for all METCS classes offered in Fall 2026 Semester",
+
+  "forums": [
+
+    123,
+
+    234,
+
+    345,
+
+    456
+
+  ],
+
+  "tags": [
+
+    "Class Forum",
+
+    "METCS",
+
+    "Fall 2026"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "forumgroup_id": 56789,
+
+  "name": "METCS Class Forums (Fall 26)",
+
+  "description": "Forums for all METCS classes offered in Fall 2026 Semester",
+
+  "forums": [
+
+    123,
+
+    234,
+
+    345,
+
+    456
+
+  ],
+
+  "tags": [
+
+    "Class Forum",
+
+    "METCS",
+
+    "Fall 2026"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### PUT /forumgroups/{forumgroup_id}
+
+**Request**
+
+{
+
+  "name": "METCS Graduate Forums",
+
+  "description": "Updated description",
+
+  "forums": [
+
+    123,
+
+    234,
+
+    345
+
+  ],
+
+  "tags": [
+
+    "Graduate",
+
+    "METCS"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "forumgroup_id": 56789,
+
+  "name": "METCS Graduate Forums",
+
+  "description": "Updated description",
+
+  "forums": [
+
+    123,
+
+    234,
+
+    345
+
+  ],
+
+  "tags": [
+
+    "Graduate",
+
+    "METCS"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+
+}
+
+---
+
+### Posts
+
+  
+
+#### GET /posts/{post_id}
+
+**Response**
+
+{
+
+  "post_id": 64368473,
+
+  "user_id": 987,
+
+  "forum_id": 874368,
+
+  "title": "Lab 1 Q&A",
+
+  "content": "Please comment with any questions on Lab 1.",
+
+  "tags": [
+
+    "Lab",
+
+    "Q&A",
+
+    "Instructor Post"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### POST /posts
+
+**Request**
+
+{
+
+  "user_id": 987,
+
+  "forum_id": 874368,
+
+  "title": "Lab 1 Q&A",
+
+  "content": "Please comment with any questions on Lab 1.",
+
+  "tags": [
+
+    "Lab",
+
+    "Q&A",
+
+    "Instructor Post"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "post_id": 64368473,
+
+  "user_id": 987,
+
+  "forum_id": 874368,
+
+  "title": "Lab 1 Q&A",
+
+  "content": "Please comment with any questions on Lab 1.",
+
+  "tags": [
+
+    "Lab",
+
+    "Q&A",
+
+    "Instructor Post"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### PUT /posts/{post_id}
+
+**Request**
+
+{
+
+  "title": "Lab 1 Questions and Answers",
+
+  "content": "Please post any questions related to Lab 1 here.",
+
+  "tags": [
+
+    "Lab",
+
+    "Q&A"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "post_id": 64368473,
+
+  "user_id": 987,
+
+  "forum_id": 874368,
+
+  "title": "Lab 1 Questions and Answers",
+
+  "content": "Please post any questions related to Lab 1 here.",
+
+  "tags": [
+
+    "Lab",
+
+    "Q&A"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+
+}
+
+---
+
+### Post Groups
+
+  
+
+#### GET /postgroups/{postgroup_id}
+
+**Response**
+
+{
+
+  "postgroup_id": 56735,
+
+  "forum_id": 874368,
+
+  "name": "Lab Q&A Threads",
+
+  "description": "All CS763 Lab Q&A Threads for Final Exam reference.",
+
+  "posts": [
+
+    64368473,
+
+    78932643,
+
+    87364832,
+
+    89723648
+
+  ],
+
+  "tags": [
+
+    "Final Review"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### POST /postgroups
+
+**Request**
+
+{
+
+  "forum_id": 874368,
+
+  "name": "Lab Q&A Threads",
+
+  "description": "All CS763 Lab Q&A Threads for Final Exam reference.",
+
+  "posts": [
+
+    64368473,
+
+    78932643,
+
+    87364832,
+
+    89723648
+
+  ],
+
+  "tags": [
+
+    "Final Review"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "postgroup_id": 56735,
+
+  "forum_id": 874368,
+
+  "name": "Lab Q&A Threads",
+
+  "description": "All CS763 Lab Q&A Threads for Final Exam reference.",
+
+  "posts": [
+
+    64368473,
+
+    78932643,
+
+    87364832,
+
+    89723648
+
+  ],
+
+  "tags": [
+
+    "Final Review"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### PUT /postgroups/{postgroup_id}
+
+**Request**
+
+{
+
+  "name": "Lab and Exam Review Threads",
+
+  "description": "Updated collection of review discussions.",
+
+  "posts": [
+
+    64368473,
+
+    78932643
+
+  ],
+
+  "tags": [
+
+    "Review",
+
+    "Exam Prep"
+
+  ]
+
+}
+
+  
+
+**Response**
+
+{
+
+  "postgroup_id": 56735,
+
+  "forum_id": 874368,
+
+  "name": "Lab and Exam Review Threads",
+
+  "description": "Updated collection of review discussions.",
+
+  "posts": [
+
+    64368473,
+
+    78932643
+
+  ],
+
+  "tags": [
+
+    "Review",
+
+    "Exam Prep"
+
+  ],
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+
+}
+
+---
+
+### Comments
+
+  
+
+#### GET /comments/{comment_id}
+
+**Response**
+
+{
+
+  "comment_id": 50413740,
+
+  "user_id": 413,
+
+  "post_id": 78932643,
+
+  "p_comment_id": 56532,
+
+  "content": "thanks, that's really helpful :)",
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### POST /comments
+
+**Request**
+
+{
+
+  "user_id": 413,
+
+  "post_id": 78932643,
+
+  "p_comment_id": 56532,
+
+  "content": "thanks, that's really helpful :)"
+
+}
+
+  
+
+**Response**
+
+{
+
+  "comment_id": 50413740,
+
+  "user_id": 413,
+
+  "post_id": 78932643,
+
+  "p_comment_id": 56532,
+
+  "content": "thanks, that's really helpful :)",
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+
+}
+
+  
+
+#### PUT /comments/{comment_id}
+
+**Request**
+
+{
+
+  "content": "Thank you, that's really helpful."
+
+}
+
+  
+
+**Response**
+
+{
+
+  "comment_id": 50413740,
+
+  "user_id": 413,
+
+  "post_id": 78932643,
+
+  "p_comment_id": 56532,
+
+  "content": "Thank you, that's really helpful.",
+
+  "created_at": "2026-11-02T11:06:07.235541Z",
+
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+
+}
