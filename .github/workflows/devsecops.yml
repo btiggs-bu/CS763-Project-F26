@@ -1,3 +1,4 @@
+#AI Contribution Weight: [80%] AI Generated / [20%] Human Refactored
 name: DevSecOps Pipeline
 
 on:
@@ -39,18 +40,42 @@ jobs:
         run: |
           docker build -t rbpdb .
 
-      - name: Run Semgrep
-        uses: returntocorp/semgrep-action@v1
-
       - name: Run Trivy Scan
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: rbpdb
-          format: table
+          format: 'sarif'
+          output: 'trivy-results.sarif'
           exit-code: 0
-
-      - name: Upload Security Reports
-        uses: actions/upload-artifact@v4
+      
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
         with:
-          name: security-results
-          path: .
+          sarif_file: 'trivy-results.sarif'
+
+  semgrep:
+    name: Semgrep Security Scan
+    runs-on: ubuntu-latest
+    
+    # Required if you want Semgrep to upload findings to GitHub Security Tab (SARIF)
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+
+    container:
+      image: semgrep/semgrep:latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep Scan
+        run: semgrep scan --config auto --sarif --output=semgrep.sarif
+
+      - name: Upload SARIF file for GitHub Advanced Security
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
+        if: always() # Upload results even if vulnerabilities are found
