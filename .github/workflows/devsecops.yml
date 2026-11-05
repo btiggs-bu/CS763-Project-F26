@@ -49,16 +49,21 @@ jobs:
           exit-code: 0
       
       - name: Upload Trivy scan results to GitHub Security tab
+        # Required for Trivy to upload findings to GitHub Security Tab (SARIF)
+        permissions:
+          security-events: write
+          actions: read
+          contents: read    
         uses: github/codeql-action/upload-sarif@v3
-        if: always()
         with:
           sarif_file: 'trivy-results.sarif'
+        if: always() # Upload results even if vulnerabilities are found
 
   semgrep:
     name: Semgrep Security Scan
     runs-on: ubuntu-latest
     
-    # Required if you want Semgrep to upload findings to GitHub Security Tab (SARIF)
+    # Required for Semgrep to upload findings to GitHub Security Tab (SARIF)
     permissions:
       security-events: write
       actions: read
