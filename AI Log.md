@@ -2646,3 +2646,300 @@ Trivy
 ✅ Prompt_test_log.md
 
 That gives you a clean infrastructure baseline that directly supports the remaining phases of the semester project.
+
+Prompt
+
+What steps should I take to set up the GitHub Actions Pipeline and why?
+
+For this assignment, the GitHub Actions pipeline is not just a CI tool, it's evidence that you've implemented a DevSecOps process. The instructor is specifically looking for a pipeline that automatically builds, tests, scans, and reports on your application whenever code is committed.
+
+Since you'll be using FastAPI, Docker, and PostgreSQL, I'd recommend building the pipeline incrementally.
+
+Step 1: Create the Workflow Directory
+
+In your repository:
+
+.github/
+└── workflows/
+    └── devsecops.yml
+
+
+GitHub automatically discovers workflow files placed in .github/workflows.
+
+Step 2: Define Pipeline Triggers
+
+Start with:
+
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    branches:
+      - main
+
+Why?
+
+This demonstrates:
+
+Continuous Integration on commits
+Validation of pull requests
+Automatic execution
+
+The assignment specifically wants automation rather than manual security checks.
+
+Step 3: Create a Build Job
+
+Add a build stage:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+Why?
+
+GitHub runners do not automatically contain your code.
+
+This step:
+
+Downloads repository contents
+Makes Dockerfile available
+Makes source files available
+Step 4: Configure Python
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+Why?
+
+FastAPI is Python-based.
+
+This ensures:
+
+Consistent runtime
+Reproducible builds
+Matching development environment
+Step 5: Install Dependencies
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+Why?
+
+Allows:
+
+Testing
+Static analysis
+Dependency validation
+
+Without this step, security tools cannot analyze imported packages.
+
+Step 6: Run Basic Quality Checks
+
+Even if no tests exist yet:
+
+      - name: Verify Application Imports
+        run: |
+          python -c "from app.main import app"
+
+Why?
+
+This catches:
+
+Syntax errors
+Missing packages
+Import failures
+
+before wasting time on security scans.
+
+Step 7: Build Docker Image
+      - name: Build Docker Image
+        run: |
+          docker build -t pp-discussion-board .
+
+Why?
+
+This verifies:
+
+Dockerfile works
+Multi-stage build works
+Container can be deployed
+
+This is one of the explicit assignment requirements.
+
+Step 8: Add SAST (Semgrep)
+
+Add:
+
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+
+Why?
+
+Semgrep performs:
+
+Static Application Security Testing (SAST)
+Source code security analysis
+
+It detects things like:
+
+Hardcoded secrets
+Dangerous API use
+Injection vulnerabilities
+
+This directly satisfies the assignment's SAST requirement.
+
+Step 9: Add Dependency Scanning (Trivy)
+
+After Docker builds:
+
+      - name: Run Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: pp-discussion-board
+          format: table
+          exit-code: 0
+
+Why?
+
+Trivy scans:
+
+OS packages
+Python packages
+Docker image vulnerabilities
+
+The assignment explicitly requires dependency scanning.
+
+Step 10: Make Scanning Non-Blocking
+
+Notice:
+
+exit-code: 0
+
+Why?
+
+The assignment requires:
+
+successful, non-blocking SAST and dependency scanning telemetry
+
+This means:
+
+✅ Findings are reported
+
+✅ Pipeline still succeeds
+
+Not:
+
+❌ Pipeline fails because one medium vulnerability exists
+
+A successful run with visible findings is usually what instructors are looking for in Assignment 1.
+
+Step 11: Generate Security Artifacts
+
+Add:
+
+      - name: Upload Security Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-results
+          path: .
+
+
+In a more mature pipeline you'd upload specific reports.
+
+Why?
+
+Artifacts provide evidence of:
+
+Security scans executed
+Reports generated
+Pipeline telemetry captured
+
+Useful for screenshots and grading.
+
+Step 12: Verify the Workflow
+
+Commit:
+
+git add .
+git commit -m "Add DevSecOps pipeline"
+git push
+
+
+Then navigate to:
+
+GitHub Repository
+→ Actions
+→ DevSecOps Pipeline
+
+
+You should see:
+
+✓ Checkout
+✓ Python Setup
+✓ Dependency Install
+✓ App Validation
+✓ Docker Build
+✓ Semgrep Scan
+✓ Trivy Scan
+✓ Artifact Upload
+
+Why This Order Matters
+
+Many students try to build the security scanning first.
+
+A DevSecOps pipeline should roughly follow this sequence:
+
+Checkout Code
+        ↓
+Build Application
+        ↓
+Validate Application
+        ↓
+Build Container
+        ↓
+Security Scan Source
+        ↓
+Security Scan Dependencies
+        ↓
+Publish Results
+
+
+If Docker doesn't build, the security scans against the container become meaningless.
+
+Minimum Viable Assignment 1 Pipeline
+
+For your project, I'd consider this the minimum acceptable flow:
+
+Push Code
+    ↓
+Checkout Repository
+    ↓
+Install Python Dependencies
+    ↓
+Verify FastAPI App Loads
+    ↓
+Build Docker Image
+    ↓
+Run Semgrep SAST
+    ↓
+Run Trivy Vulnerability Scan
+    ↓
+Upload Reports
+    ↓
+Pipeline Success
+
+
+Once that works, capture screenshots of the Actions run and logs. Those screenshots will become the "verified pipeline execution log" deliverable and are often the easiest points to lose if you wait until the end of the assignment.

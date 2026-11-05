@@ -1,10 +1,12 @@
-Design Specifications
+#### AI Contribution Weight: [35%] AI Generated / [65%] Human Written
+
+
+# Design Specifications
 Project Portal Research Blog & Project Discussion Board Service
 Version 1.11
 
 #### Notes
-AI Contribution Percentage: ~35%
-I used Copilot to help generate initial ideas and a baseline to start from, but this document is originally largely written by hand. The first draft did not include the constraints section or mock data and only included create operations for JSON schemas, so those portions and the remainder of the JSON schemas were generated using that first draft and then edited. The percentage above is a rough estimate representing the contribution of the initial generated baseline plus those added sections, not the actual text percentage in this document.
+I used Copilot to help generate initial ideas and a baseline to start from, but this document is originally largely written by hand. The first draft did not include the constraints section or mock data and only included create operations for JSON schemas, so those portions and the remainder of the JSON schemas were generated using that first draft and then edited. The AI contribution percentage above is a rough estimate representing the contribution of the initial generated baseline plus those added sections, not the actual text percentage in this document.
 
 The log of the conversation is lengthy, so I have included it as a separate AI log file in this repo.
 

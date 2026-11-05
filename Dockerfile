@@ -1,3 +1,5 @@
+#AI Contribution Weight: [95%] AI Generated / [5%] Human Refactored
+
 # ---------- Builder Stage ----------
 FROM python:3.10-slim AS builder
 

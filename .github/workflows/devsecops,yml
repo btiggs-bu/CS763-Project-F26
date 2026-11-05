@@ -1,0 +1,55 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify Application Imports
+        run: |
+          python -c "from app.main import app"
+
+      - name: Build Docker Image
+        run: |
+          docker build -t rbpdb .
+
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+
+      - name: Run Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: rbpdb
+          format: table
+          exit-code: 0
+
+      - name: Upload Security Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-results
+          path: .
