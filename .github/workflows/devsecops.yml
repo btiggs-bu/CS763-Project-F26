@@ -63,6 +63,9 @@ jobs:
           sudo apt-get install -y postgresql-client
           pg_isready -h localhost -p 5432 -U postgres
 
+      - name: Run Tests
+        run: pytest
+
   semgrep:
     name: Semgrep Security Scan
     needs: build
