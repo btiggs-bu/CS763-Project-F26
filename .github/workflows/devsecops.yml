@@ -80,7 +80,7 @@ jobs:
 
   trivy:
     name: Trivy Security Scan
-    needs: semgrep
+    needs: sonarqube
     runs-on: ubuntu-latest
     
     # Required for Trivy to upload findings to GitHub Security Tab (SARIF)
