@@ -17,19 +17,13 @@ jobs:
 
     runs-on: ubuntu-latest
     
-    # Required for Trivy to upload findings to GitHub Security Tab (SARIF)
-    permissions:
-      security-events: write
-      actions: read
-      contents: read   
-    
     steps:
 
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
       - name: Set Up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 #v7.0.0
         with:
           python-version: '3.10'
 
@@ -46,22 +40,9 @@ jobs:
         run: |
           docker build -t rbpdb .
 
-      - name: Run Trivy Scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: rbpdb
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          exit-code: 0
-      
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy-results.sarif'
-        if: always() # Upload results even if vulnerabilities are found
-
   semgrep:
     name: Semgrep Security Scan
+    needs: build
     runs-on: ubuntu-latest
     
     # Required for Semgrep to upload findings to GitHub Security Tab (SARIF)
@@ -75,13 +56,57 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
       - name: Run Semgrep Scan
         run: semgrep scan --config auto --sarif --output=semgrep.sarif
 
       - name: Upload SARIF file for GitHub Advanced Security
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066 #v4.39.3
         with:
           sarif_file: semgrep.sarif
+        if: always() # Upload results even if vulnerabilities are found
+
+  sonarqube:
+    name: SonarQube Scan
+    runs-on: ubuntu-latest
+    needs: semgrep
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+        with:
+          fetch-depth: 0        # Disabling shallow clones is recommended for improving the relevancy of reporting
+      
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@e805d875275f728fac1885b413934be6d7c63f65 #v8.4.1
+        env:
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+
+  trivy:
+    name: Trivy Security Scan
+    needs: semgrep
+    runs-on: ubuntu-latest
+    
+    # Required for Trivy to upload findings to GitHub Security Tab (SARIF)
+    permissions:
+      security-events: write
+      actions: read
+      contents: read   
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+
+      - name: Run Trivy Scan
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 #v0.36.0
+        with:
+          image-ref: rbpdb
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          exit-code: 0
+      
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066 #v4.39.3
+        with:
+          sarif_file: 'trivy-results.sarif'
         if: always() # Upload results even if vulnerabilities are found
