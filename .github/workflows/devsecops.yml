@@ -1,4 +1,4 @@
-#AI Contribution Weight: [80%] AI Generated / [20%] Human Refactored
+#AI Contribution Weight: [50%] AI Generated / [50%] Human Refactored
 name: DevSecOps Pipeline
 
 on:
@@ -16,6 +16,27 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+
+        env:
+          POSTGRES_DB: rbpdb
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+        ports:
+          - 5432:5432
+
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/rbpdb
     
     steps:
 
@@ -35,6 +56,12 @@ jobs:
       - name: Verify Application Imports
         run: |
           python -c "from app.main import app"
+      
+      - name: Verify PostgreSQL Connectivity
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+          pg_isready -h localhost -p 5432 -U postgres
 
   semgrep:
     name: Semgrep Security Scan
