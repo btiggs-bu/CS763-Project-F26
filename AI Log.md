@@ -3371,3 +3371,129 @@ For Assignment 1, I would:
 ✅ Add one simple pytest test (if time permits)
 
 That gives you a pipeline that validates the application, database, container build, SAST findings, and dependency vulnerabilities while still remaining simple enough for an initial submission.
+
+Prompt
+
+I am now working on the last parts of the project:
+<br>
+<ul><li>Agent_environment.md: the exact configuration of their autonomous developer AI agent, including the exact tool use and its operational mode, the LLM model, the hyperparameters and configuration, and host environment, etc. (20%)</li><li>Prompt_test_log.md: the initial prompts and generated code to show the AI developer agent is working (10%)</li></ul><br>
+I am using VSCode and plan on using the built-in Copilot features to autonomously generate code. Please create a short Agent_environment.md file and suggest a test prompt to show that the AI agent is working.
+
+Response
+
+Since this is an academic assignment, I would keep the documentation concise, specific, and defensible. The instructor is likely looking for evidence that you configured and used an AI coding agent rather than a lengthy technical write-up.
+
+Agent_environment.md
+# Agent Environment Configuration
+
+## Project
+Research Blog & Project Discussion Board (RBPDB)
+
+## Autonomous AI Developer Agent
+Microsoft GitHub Copilot Agent Mode
+
+## Development Environment
+- IDE: Visual Studio Code
+- Operating System: Windows 11
+- Source Control: GitHub
+- Repository Host: GitHub
+- Container Platform: Docker Desktop
+- CI/CD Platform: GitHub Actions
+
+## LLM Configuration
+- AI Assistant: GitHub Copilot
+- Model: GPT-5 (selected through GitHub Copilot)
+- Operational Mode: Agent Mode
+- Task Type: Autonomous code generation, code modification, refactoring, and workflow creation
+
+## Tool Access
+The agent was granted access to:
+- Repository source code
+- Local project files
+- VS Code workspace context
+- GitHub repository contents
+- Terminal commands (Agent Mode)
+- File creation and modification tools
+
+## Development Stack
+- Backend Framework: FastAPI
+- Language: Python 3.10
+- Database: PostgreSQL 16
+- Containerization: Docker
+- Orchestration: Docker Compose
+- Security Scanning: Semgrep, Trivy, SonarQube
+- CI/CD: GitHub Actions
+
+## Agent Usage
+The AI agent was used to:
+1. Generate the initial FastAPI application structure.
+2. Generate Docker and Docker Compose configurations.
+3. Assist with GitHub Actions workflow creation.
+4. Generate and refactor security scanning configurations.
+5. Provide implementation recommendations for the DevSecOps pipeline.
+
+## Human Oversight
+All AI-generated code was reviewed, tested, and modified by the developer before being committed to the repository. Final implementation decisions remained under human supervision.
+
+Suggested Test Prompt for Prompt_test_log.md
+
+You want a prompt that:
+
+Produces multiple files
+Is realistic
+Creates code that can actually be committed
+Demonstrates autonomous behavior
+
+I would use:
+
+Create a minimal FastAPI application for a Research Blog and Project Discussion Board project.
+
+Requirements:
+- Create app/main.py.
+- Configure a FastAPI application.
+- Add a GET /health endpoint that returns {"status":"healthy"}.
+- Create a requirements.txt file containing the required Python dependencies.
+- Follow Python best practices and include code comments where appropriate.
+
+Example Prompt Log Entry
+# Prompt Test Log
+
+## Test 1 - FastAPI Application Generation
+
+### Prompt
+
+Create a minimal FastAPI application for a Research Blog and Project Discussion Board project.
+
+Requirements:
+- Create app/main.py.
+- Configure a FastAPI application.
+- Add a GET /health endpoint that returns {"status":"healthy"}.
+- Create a requirements.txt file containing the required Python dependencies.
+- Follow Python best practices and include code comments where appropriate.
+
+### AI Agent Output
+
+Generated Files:
+- app/main.py
+- requirements.txt
+
+Generated Functionality:
+- FastAPI application initialization
+- Health-check endpoint
+- Dependency list for FastAPI and Uvicorn
+
+### Verification
+
+The generated code was reviewed and executed locally.
+
+Result:
+- Application started successfully.
+- GET /health returned HTTP 200.
+- Response body returned {"status":"healthy"}.
+
+### Outcome
+
+Successful generation and execution of a basic FastAPI application using GitHub Copilot Agent Mode.
+
+
+For a stronger submission, you could add a second test prompt showing the agent generating part of docker-compose.yml or the GitHub Actions workflow, which demonstrates that the agent was used for both application code and DevSecOps infrastructure.
