@@ -1,0 +1,212 @@
+{
+  "main": {
+    "id": "f10db00f9130ded3",
+    "type": "split",
+    "children": [
+      {
+        "id": "0e788f8bef464381",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "873803ccf2e34510",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": ".ai_logs/AI_agent_log.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "AI_agent_log"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "65a6f58f5d189512",
+    "type": "split",
+    "children": [
+      {
+        "id": "61c2f5a27c351c6b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5c5155a3a0ae8bcc",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "7016822cbfbe0e16",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "03e1587207dff535",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8709a0b2bbdefe07",
+    "type": "split",
+    "children": [
+      {
+        "id": "49e4fb5ccfd8f015",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4d3f94f4a6155cdd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": ".ai_logs/AI_agent_log.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "111744a0f347c4cc",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": ".ai_logs/AI_agent_log.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "56dacd2e5131d3eb",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "8ac409e870a44fa7",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "b9246fab56d71c34",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": ".ai_logs/AI_agent_log.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "873803ccf2e34510",
+  "lastOpenFiles": [
+    ".ai_logs/AI_external_log.md",
+    ".ai_logs/conceptual_journal.md",
+    "Agent_environment.md",
+    ".obsidian/community-plugins.json",
+    ".obsidian/plugins/unhide/styles.css",
+    ".obsidian/plugins/unhide/manifest.json",
+    ".obsidian/plugins/unhide/main.js",
+    ".ai_logs/assignment_1/Prompt_test_log_assignment1.md",
+    ".ai_logs/assignment_1/AI_log_assignment1.md",
+    ".obsidian/plugins/unhide",
+    ".github/workflows/devsecops.yml",
+    ".obsidian/plugins/unhide/data.json",
+    ".ai_logs/assignment_1",
+    ".ai_logs/AI_agent_log.md",
+    ".obsidian/workspace.json",
+    ".obsidian/plugins",
+    "README.md",
+    "spec.md"
+  ]
+}
