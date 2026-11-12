@@ -14,10 +14,10 @@
 
 *Identify all autonomous developer agents, conversational LLMs, inline assistants, or documentation tools utilized during this project milestone.*
 
-| Tool Context | Framework / Platform Name & Version | Underlying LLM Brain Model String | Operational Setting / Access Mode |
-| :---- | :---- | :---- | :---- |
-| **Code Generation** | \[e.g., OpenHands v0.12.1\] | \[e.g., claude-3-5-sonnet-20241022\] | \[e.g., Local Sandboxed Docker Container\] |
-| **Document/Design** | \[e.g., ChatGPT Web Interface\] | \[e.g., gpt-4o-2024-05-13\] | \[e.g., Web Browser Cloud Interface\] |
+| Tool Context        | Framework / Platform Name & Version                      | Underlying LLM Brain Model String                                                       | Operational Setting / Access Mode                |
+| :------------------ | :------------------------------------------------------- | :-------------------------------------------------------------------------------------- | :----------------------------------------------- |
+| **Code Generation** | GitHub Copilot - VSCode Interface (VSCode version 1.146) | Copilot Fusion \| Standard (Claude Sonnet 5.5, Claude Opus 5.5, GPT-6 Sol, GPT-6 Astra) | Agent, Interactive, Manual Permissions (Default) |
+| **Document/Design** | Copilot Web Interface                                    | Dynamic (OpenAI GPT-5.6, GPT-6 Sol, GPT-6 Astra)                                        | Web Browser Cloud Interface                      |
 
 ### 1.2 Verification Telemetry Access Checklist
 

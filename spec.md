@@ -3,7 +3,7 @@
 
 # Design Specifications
 Project Portal Research Blog & Project Discussion Board Service
-Version 1.11
+Version 2.0
 
 #### Notes
 I used Copilot to help generate initial ideas and a baseline to start from, but this document is originally largely written by hand. The first draft did not include the constraints section or mock data and only included create operations for JSON schemas, so those portions and the remainder of the JSON schemas were generated using that first draft and then edited. The AI contribution percentage above is a rough estimate representing the contribution of the initial generated baseline plus those added sections, not the actual text percentage in this document.
@@ -22,88 +22,77 @@ The Research Blog & Project Discussion Board (RBPDB) Service is a backend servic
 
 ### Basic Structure Description
 **USER**
-Users are students, faculty members, or admins for the RBPDB. They have usernames and other identifying information, and they can create or modify Forums and Posts on the board. They are assigned one or more of three roles (Student, Faculty, and Admin) depending on their position within the university and can be organized into Groups as well, which can affect and restrict the Forums and Posts they are able to create and modify.
+Users are students, faculty members, or admins for the RBPDB. They have usernames and other identifying information, and they can create or modify Threads and Posts on the board. They are assigned one or more of three roles (Student, Faculty, and Admin) depending on their position within the university, affecting whether they are able to create certain types of Posts or moderate Threads.
 
-**USER GROUP**
-User Groups are a collection of users representing a project team, class, or similar academic group. Groups containing other groups can also be created.
-
-**FORUM**
-Forums are the basis of the board. They are how Posts are categorized, and can represent things like a class, project, or research topic. They have titles and descriptions, as well as optional categorizing tags to mark them as representing a class or project or similar.
+**THREAD**
+Threads are the basis of the board. They can be one of three types within a hierarchical structure:  a Project Thread representing an individual student project, a Course Thread encompassing multiple Project Threads, or a Lab Thread encompassing multiple Course Threads. Posts can be bound directly to any of these three types of Threads. They have titles and descriptions, as well as optional categorizing tags. Threads can also be tied to one or more Users to denote them as authors of a Project or attendees of a Course or Lab, which can affect and restrict the Threads and Posts they are able to create and comment on. Threads have three restriction levels as well: Open Threads allow Posts and Comments from any User, Restricted Threads allow Posts and Comments from any User tied to the Thread (or any Faculty or Admin User), and Closed Threads can only be modified by an Admin User.
 
 **POST**
-Posts are discussion threads within a Forum. They are authored by Users and have a title and content as well as optional categorizing tags. These can be used to share things such as announcements, updates, questions on the forum.
+Posts are either discussions or announcements within a Thread. They are authored by Users and have a title and content as well as optional categorizing tags. Announcement Posts are restricted to Users with the Faculty role, but Discussion posts can be made by any User depending on the restriction level of the Thread they are bound to. Posts have their own restriction levels dictating which Users can comment. This is inherited from its Thread's restriction level by default but can be changed for individual Posts if the author is a Faculty or Admin user. Posts can also be reported by any User and hidden by any Faculty or Admin User after being reported.
 
 **COMMENT**
-Comments are used to reply to a post or another comment. They are similar to Posts, with the key difference being that they must have a parent Post or Comment they are replying to. They also may have differences in content, such as not having titles.
-
-**FORUM AND POST GROUPS**
-Forums and Posts can also be grouped as needed. For example, all Forums for classes belonging to a specific college within a university or all Posts in a Forum that are updates published by faculty can be grouped as Users see fit. Groups containing other Groups can also be created.
+Comments are used to reply to a Post or another Comment. They are similar to Posts, with a few key differences: they contain a simple message string without titles or tags or an announcement/discussion distinction, they must have a parent Post or Comment they are replying to, and they use the restriction level of the parent Post instead of having their own.
 
 ---
 ## Database Entities and Relationships
 ```mermaid
 erDiagram
-  USERS {
-    int user_id PK
-    string user_type "user/group"
-    timestamp created_at
-    timestamp updated_at
-  }
   USER {
     int user_id PK, FK
     string username UK
     string email UK
     string display_name
-  }
-  USERGROUP {
-    int user_id PK, FK
-    string name
-    string description
+    timestamp created_at
+    timestamp updated_at
   }
   ROLE {
     int role_id PK
     string role_name UK "student/faculty/admin"
-    string description
   }
   USER_ROLE {
     int user_role_id PK
     int user_id FK
     int role_id FK
   }
-  FORUMS {
-    int forum_id PK
-    string forum_type "forum/group"
+  THREADS {
+    int thread_id PK
+    int user_id FK
+    string thread_type "lab/course/project"
+    string restriction_level "open/restricted/closed"
     timestamp created_at
     timestamp updated_at
   }
-  FORUM {
-    int forum_id PK, FK
-    int user_id FK "author"
-    string title
-    string description
-  }
-  FORUMGROUP {
-    int forum_id PK, FK
+  PROJECT {
+    int thread_id PK, FK
     string name
     string description
   }
-  POSTS {
-    int post_id PK
-    string post_type "post/group"
-    int forum_id FK
-    timestamp created_at
-    timestamp updated_at
+  COURSE {
+    int thread_id PK, FK
+    string name
+    string description
+  }
+  LAB {
+    int thread_id PK, FK
+    string name
+    string description
+  }
+  USER_THREADS {
+    int user_thread_id PK
+    int user_id FK
+    int thread_id FK
   }
   POST {
-    int post_id PK, FK
+    int post_id PK
+    string post_type "announcement/discussion"
     int user_id FK "author"
+    int thread_id FK "root project/course/lab"
     string title
-    string content
-  }
-  POSTGROUP {
-    int post_id PK, FK
-    string name
-    string description
+    text content
+    string restriction_level "inherited/open/restricted/closed"
+    string mod_status "active/reported/hidden_by_moderator"
+    timestamp created_at
+    timestamp updated_at
   }
   COMMENT {
     int comment_id PK
@@ -111,6 +100,7 @@ erDiagram
     int post_id FK "parent post"
     int p_comment_id FK "parent comment if applicable"
     string content
+    string mod_status "active/reported/hidden_by_moderator"
     timestamp created_at
     timestamp updated_at
   }
@@ -118,60 +108,42 @@ erDiagram
     int tag_id PK
     string tag UK
   }
-  USERS_GROUP {
-    int user_group_id PK
-    int p_user_id FK "user id of parent group"
-    int c_user_id FK "user id of child user or group"
+  THREADS_GROUP {
+    int thread_group_id PK
+    int p_thread_id FK "thread id of parent course or lab"
+    int c_thread_id FK "thread id of child project or course"
   }
-  FORUMS_GROUP {
-    int forum_group_id PK
-    int p_forum_id FK "forum id of parent group"
-    int c_forum_id FK "forum id of child forum or group"
-  }
-  POSTS_GROUP {
-    int post_group_id PK
-    int p_post_id FK "post id of parent group"
-    int c_post_id FK "post id of child post or group"
-  }
-  USERS_TAG {
-    int user_tag_id PK
-    int user_id FK
+  THREADS_TAG {
+    int thread_tag_id PK
+    int thread_id FK
     int tag_id FK
   }
-  FORUMS_TAG {
-    int forum_tag_id PK
-    int forum_id FK
-    int tag_id FK
-  }
-  POSTS_TAG {
+  POST_TAG {
     int post_tag_id PK
     int post_id FK
     int tag_id FK
   }
-  USERS ||--o| USER : "is a"
-  USERS ||--o| USERGROUP : "is a"
-  USERS ||--o{ USERS_GROUP : "contains or is part of"
-  USER ||--o{ FORUM : "creates"
+  USER ||--o{ THREADS : "creates"
   USER ||--o{ POST : "creates"
   USER ||--o{ COMMENT : "creates"
   USER ||--o{ USER_ROLE : "has"
   ROLE ||--o{ USER_ROLE : "describes"
-  FORUMS ||--o| FORUM : "is a"
-  FORUMS ||--o| FORUMGROUP : "is a"
-  FORUMS ||--o{ FORUMS_GROUP : "contains or is part of"
-  FORUM ||--o{ POSTS : "contains"
-  POSTS ||--o| POST : "is a"
-  POSTS ||--o| POSTGROUP : "is a"
-  POSTS ||--o{ POSTS_GROUP : "contains or is part of"
+  THREADS ||--o| PROJECT : "is a"
+  THREADS ||--o| COURSE : "is a"
+  THREADS ||--o| LAB : "is a"
+  THREADS ||--o{ THREADS_GROUP : "contains or is part of"
+  USER ||--o{ USER_THREADS : "belongs to"
+  THREADS ||--o{ USER_THREADS : "includes"
+  THREADS ||--o{ POST : "contains"
   POST ||--o{ COMMENT : "has"
-  USERS ||--o{ USERS_TAG : "has"
-  TAG ||--o{ USERS_TAG : "describes"
-  FORUMS ||--o{ FORUMS_TAG : "has"
-  TAG ||--o{ FORUMS_TAG : "describes"
-  POSTS ||--o{ POSTS_TAG : "has"
-  TAG ||--o{ POSTS_TAG : "describes"
+  THREADS ||--o{ THREADS_TAG : "has"
+  TAG ||--o{ THREADS_TAG : "describes"
+  POST ||--o{ POST_TAG : "has"
+  TAG ||--o{ POST_TAG : "describes"
 ```
-Note: The USERS, FORUMS and POSTS tables are structured to facilitate grouping of both individuals and subgroups. USERS is a base entity with a USER subtype for individuals and a USERGROUP subtype for groups. The USER_GROUP table then acts as a junction table that specifies a p_user_id representing the parent user group and c_user_id representing the child user or user group the parent user group contains. The FORUMS and POSTS tables follow this design pattern as well.
+Notes: 
+- The THREADS_GROUP table facilitates the hierarchical structure of LABS containing COURSES and COURSES containing PROJECTS.
+- The PROJECT, COURSE, and LAB tables have identical fields as of right now, but are separate tables in the database to accommodate needed fields unique to each type of thread in the future.
 
 ---
 ## API Endpoints

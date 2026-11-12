@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": ".ai_logs/AI_agent_log.md",
+                "file": "spec.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "AI_agent_log"
+              "title": "spec"
             }
           }
         ]
@@ -83,7 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "8709a0b2bbdefe07",
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": ".ai_logs/AI_agent_log.md",
+                "file": "spec.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": ".ai_logs/AI_agent_log.md",
+                "file": "spec.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": ".ai_logs/AI_agent_log.md",
+                "file": "spec.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,20 +190,20 @@
   },
   "active": "873803ccf2e34510",
   "lastOpenFiles": [
-    ".ai_logs/AI_external_log.md",
     ".ai_logs/conceptual_journal.md",
     "Agent_environment.md",
+    ".ai_logs/assignment_1/Prompt_test_log_assignment1.md",
+    ".ai_logs/assignment_1/AI_log_assignment1.md",
+    ".ai_logs/AI_agent_log.md",
+    ".ai_logs/AI_external_log.md",
     ".obsidian/community-plugins.json",
     ".obsidian/plugins/unhide/styles.css",
     ".obsidian/plugins/unhide/manifest.json",
     ".obsidian/plugins/unhide/main.js",
-    ".ai_logs/assignment_1/Prompt_test_log_assignment1.md",
-    ".ai_logs/assignment_1/AI_log_assignment1.md",
     ".obsidian/plugins/unhide",
     ".github/workflows/devsecops.yml",
     ".obsidian/plugins/unhide/data.json",
     ".ai_logs/assignment_1",
-    ".ai_logs/AI_agent_log.md",
     ".obsidian/workspace.json",
     ".obsidian/plugins",
     "README.md",
