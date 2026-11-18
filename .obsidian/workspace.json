@@ -192,10 +192,11 @@
   "lastOpenFiles": [
     ".ai_logs/conceptual_journal.md",
     "Agent_environment.md",
+    "spec.md",
+    ".ai_logs/AI_external_log.md",
+    ".ai_logs/AI_agent_log.md",
     ".ai_logs/assignment_1/Prompt_test_log_assignment1.md",
     ".ai_logs/assignment_1/AI_log_assignment1.md",
-    ".ai_logs/AI_agent_log.md",
-    ".ai_logs/AI_external_log.md",
     ".obsidian/community-plugins.json",
     ".obsidian/plugins/unhide/styles.css",
     ".obsidian/plugins/unhide/manifest.json",
@@ -206,7 +207,6 @@
     ".ai_logs/assignment_1",
     ".obsidian/workspace.json",
     ".obsidian/plugins",
-    "README.md",
-    "spec.md"
+    "README.md"
   ]
 }

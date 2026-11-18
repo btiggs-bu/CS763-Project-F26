@@ -1,4 +1,4 @@
-#### AI Contribution Weight: [35%] AI Generated / [65%] Human Written
+#### AI Contribution Weight: [40%] AI Generated / [60%] Human Written
 
 
 # Design Specifications
@@ -6,9 +6,15 @@ Project Portal Research Blog & Project Discussion Board Service
 Version 2.0
 
 #### Notes
+##### Version 1 
 I used Copilot to help generate initial ideas and a baseline to start from, but this document is originally largely written by hand. The first draft did not include the constraints section or mock data and only included create operations for JSON schemas, so those portions and the remainder of the JSON schemas were generated using that first draft and then edited. The AI contribution percentage above is a rough estimate representing the contribution of the initial generated baseline plus those added sections, not the actual text percentage in this document.
 
 The log of the conversation is lengthy, so I have included it as a separate AI log file in this repo.
+
+##### Version 2
+ERD restructured manually to match new project specifications for release 2. Updated API endpoints, field details and constraints, and JSON schemas created with AI assistance and adjusted manually as needed. 
+
+AI description included in conceptual_journal.md, full AI log included in AI_external_log.md.
 
 ---
 ## Overview
@@ -147,15 +153,16 @@ Notes:
 
 ---
 ## API Endpoints
-**Base Path:**
-/rbpdb-api/v1
+
+**Base Path:** `/api/v1`
+
 ### Users
 
 **GET /users**
 Return all users.
 Optional Query Parameters:
-- role_id - Return all users with a specific role
-- tag_id - Return all users with a specific tag
+- `role_id` - Return all users with a specific role
+- `thread_id` - Return all users associated with a thread for a project, course, or lab
 
 **GET /users/{user_id}**
 Return single user.
@@ -169,211 +176,253 @@ Update user.
 **DELETE /users/{user_id}**
 Delete user.
 
-#### User Groups
+### Threads
 
-**GET /usergroups**
-Return all user groups.
+#### Collection and Creation
+
+**GET /discussions/threads**  
+Return all threads.
+
 Optional Query Parameters:
-- user_id - Return all user groups containing a specific user or user group
-- tag_id - Return all user groups with a specific tag
 
-**GET /usergroups/{user_id}**
-Return single user group.
+- `user_id` - Return threads created by a specific user
+- `thread_type` - Return only lab, course, or project threads
+- `restriction_level` - Return only threads with a specified restriction level
+- `tag_id` - Return threads with a specific tag
+- `parent_thread_id` - Return child threads belonging to a specific parent thread
 
-**POST /usergroups**
-Create user group.
+**POST /discussions/threads**  
+Create a new lab, course, or project thread.
 
-**PUT /usergroups/{user_id}**
-Update user group.
+#### Single Thread Operations
 
-**DELETE /usergroups/{user_id}**
-Delete user group.
+**GET /discussions/threads/{thread_id}**  
+Return a specific thread.
 
-**POST /usergroups/{user_id}/users**
-Add user or subgroup of users to user group.
+**PUT /discussions/threads/{thread_id}**  
+Update a specific thread.
 
-**DELETE /usergroups/{user_id}/users/{user_id}**
-Remove user or subgroup of users from user group.
-
-### Forums
-
-**GET /forums**
-Return all forums.
-Optional Query Parameters:
-- user_id - Return all forums created by a specific user
-- tag_id - Return all forums with a specific tag
-
-**GET /forums/{forum_id}**
-Return specific forum.
-
-**POST /forums**
-Create forum.
-
-**PUT /forums/{forum_id}**
-Update forum.
-
-**DELETE /forums/{forum_id}**
-Delete forum.
-#### Forum Groups
-
-**GET /forumgroups**
-Return all forum groups.
-Optional Query Parameters:
-- forum_id - Return all forum groups containing a specific forum or forum group
-- tag_id - Return all forum groups with a specific tag
-
-**GET /forumgroups/{forum_id}**
-Return single forum group.
-
-**POST /forumgroups**
-Create forum group.
-
-**PUT /forumgroups/{forum_id}**
-Update forum group.
-
-**DELETE /forumgroups/{forum_id}**
-Delete forum group.
-
-**POST /forumgroups/{forum_id}/forums**
-Add forum or subgroup of forums to forum group.
-
-**DELETE /forumgroups/{forum_id}/forums/{forum_id}**
-Remove forum or subgroup of forums from forum group.
+**DELETE /discussions/threads/{thread_id}**  
+Delete a specific thread.
 
 ### Posts
 
-**GET /posts**
-Return all posts.
+#### Collection and Creation
+
+**GET /discussions/posts**  
+Return all discussion posts and announcements.
+
 Optional Query Parameters:
-- forum_id - Return all posts within a specific forum
-- user_id - Return all posts created by a specific user
-- tag_id - Return all posts with a specific tag
 
-**GET /posts/{post_id}**
-Return specific post.
+- `keyword` - Full-text search against post title and content
+- `thread_id` - Return posts associated with a specific thread for a project, course, or lab
+- `user_id` - Return posts created by a specific user
+- `post_type` - Return only announcement or discussion posts
+- `tag_id` - Return posts with a specific tag
+- `mod_status` - Filter by active, reported, or hidden posts
 
-**POST /posts**
-Create post.
+**POST /discussions/posts**  
+Create a new announcement or discussion post.
 
-**PUT /posts/{post_id}**
-Update post.
+#### Single Post Operations
 
-**DELETE /posts/{post_id}**
-Delete post.
-#### Post Groups
+**GET /discussions/posts/{post_id}**  
+Return a specific post.
 
-**GET /postgroups**
-Return all post groups.
-Optional Query Parameters:
-- post_id - Return all post groups containing a specific post
-- tag_id - Return all post groups with a specific tag
+**PUT /discussions/posts/{post_id}**  
+Update a specific post.
 
-**GET /postgroups/{post_id}**
-Return specific post group.
+**DELETE /discussions/posts/{post_id}**  
+Delete a specific post.
 
-**POST /postgroups**
-Create post group.
+### Timeline View
 
-**PUT /postgroups/{post_id}**
-Update post group.
+**GET /discussions/scopes/{thread_type}/{thread_id}/timeline**  
+Return a chronological timeline of announcements and discussion posts associated with a specific thread. The {thread_type} accepts values restricted strictly to projects, courses, or labs to load the appropriate multi-project feed.
 
-**DELETE /postgroups/{post_id}**
-Delete post group.
-
-**POST /postgroups/{post_id}/posts**
-Add post or subgroup of posts to post group.
-
-**DELETE /postgroups/{post_id}/posts/{post_id}**
-Remove post or subgroup of posts from post group.
 
 ### Comments
 
-**GET /comments**
-Return all comments.
+#### Collection and Creation
+
+**GET /discussions/posts/{post_id}/comments**  
+Return all comments associated with a specific post.
+
 Optional Query Parameters:
-- user_id - Return all comments created by specific user
-- post_id - Return all comments replying to specific post
-- p_comment_id - Return all comments replying to specific parent comment
 
-**GET /comments/{comment_id}**
-Return specific comment.
+- `keyword` - Full-text search comment content
+- `user_id` - Return comments created by a specific user
+- `mod_status` - Filter by active, reported, or hidden comments
+- `format` - Return comments as `json` or downloadable `txt` archive
 
-**POST /comments**
-Create comment.
+**POST /discussions/posts/{post_id}/comments**  
+Create a new comment on a post.
 
-**PUT /comments/{comment_id}**
-Update comment.
+Request Body Notes:
 
-**DELETE /comments/{comment_id}**
-Delete comment.
+- `p_comment_id` may be provided to create a reply to another comment.
+- If omitted, the comment is a direct reply to the post.
+
+#### Single Comment Operations
+
+**GET /discussions/posts/{post_id}/comments/{comment_id}**  
+Return a specific comment.
+
+**PUT /discussions/posts/{post_id}/comments/{comment_id}**  
+Update a specific comment.
+
+**DELETE /discussions/posts/{post_id}/comments/{comment_id}**  
+Delete a specific comment.
+
+### Moderation Functions
+
+The PUT function for Posts and Comments should only be used by their authors, so separate PUT functions to allow all Users to report them and Faculty/Admin users to moderate them have been included as well.
+#### Post Moderation
+
+**PUT /discussions/posts/{post_id}/report**  
+Report a post for moderator review. This updates the moderation status of a post to Reported.
+
+**PUT /discussions/posts/{post_id}/moderation**  
+Update moderation status of a post.
+
+#### Comment Moderation
+
+**PUT /discussions/posts/{post_id}/comments/{comment_id}/report**  
+Report a comment for moderator review. This updates the moderation status of a comment to Reported.
+
+**PUT /discussions/posts/{post_id}/comments/{comment_id}/moderation**  
+Update moderation status of a comment.
 
 ---
 ## Field Details and Constraints
 
 ### User
 
-| Field        | Required | Constraints                        |
-| ------------ | -------- | ---------------------------------- |
-| username     | Yes      | 3-50 chars, unique                 |
-| email        | Yes      | Valid email, max 254 chars, unique |
-| display_name | Yes      | 1-100 chars                        |
-| roles        | Yes      | Minimum 1 value                    |
-
-### User Group
+| Field        | Required | Constraints                                |
+| ------------ | -------- | ------------------------------------------ |
+| username     | Yes      | 3-50 chars, unique                         |
+| email        | Yes      | Valid email address, max 254 chars, unique |
+| display_name | Yes      | 1-100 chars                                |
+### Role
 
 |Field|Required|Constraints|
 |---|---|---|
-|name|Yes|1-100 chars|
-|description|No|Max 1000 chars|
-|users|No|Array of valid user IDs|
-|tags|No|Max 25 tags|
-
-### Forum
+|role_name|Yes|Unique value; must be student, faculty, or admin|
+### User Role
 
 |Field|Required|Constraints|
 |---|---|---|
 |user_id|Yes|Existing user|
-|title|Yes|1-200 chars|
-|description|No|Max 5000 chars|
-|tags|No|Max 25 tags|
+|role_id|Yes|Existing role|
+#### Additional Constraints
+- Duplicate user-role assignments are not allowed.
+- A user must have at least one role.
 
-### Forum Group
+---
+### Thread
+
+| Field             | Required | Constraints                         |
+| ----------------- | -------- | ----------------------------------- |
+| user_id           | Yes      | Existing user; creator of thread    |
+| thread_type       | Yes      | Must be lab, course, or project     |
+| restriction_level | Yes      | Must be open, restricted, or closed |
+### Project
 
 |Field|Required|Constraints|
 |---|---|---|
+|thread_id|Yes|Existing thread with thread_type = project|
 |name|Yes|1-200 chars|
-|description|No|Max 5000 chars|
-|forums|No|Array of forum IDs|
-|tags|No|Max 25 tags|
+|description|No|Maximum 5000 chars|
+### Course
 
+|Field|Required|Constraints|
+|---|---|---|
+|thread_id|Yes|Existing thread with thread_type = course|
+|name|Yes|1-200 chars|
+|description|No|Maximum 5000 chars|
+### Lab
+
+|Field|Required|Constraints|
+|---|---|---|
+|thread_id|Yes|Existing thread with thread_type = lab|
+|name|Yes|1-200 chars|
+|description|No|Maximum 5000 chars|
+### User Thread
+
+|Field|Required|Constraints|
+|---|---|---|
+|user_id|Yes|Existing user|
+|thread_id|Yes|Existing thread|
+#### Additional Constraints
+- Duplicate user-thread assignments are not allowed.
+
+### Thread Group
+
+|Field|Required|Constraints|
+|---|---|---|
+|p_thread_id|Yes|Existing parent thread|
+|c_thread_id|Yes|Existing child thread|
+#### Additional Constraints
+- A Lab thread may contain only Course threads.
+- A Course thread may contain only Project threads.
+- A Project thread may not contain child threads.
+- A thread cannot reference itself as parent.
+- Duplicate parent-child relationships are not allowed.
+
+---
 ### Post
 
-|Field|Required|Constraints|
-|---|---|---|
-|user_id|Yes|Existing user|
-|forum_id|Yes|Existing forum|
-|title|Yes|1-200 chars|
-|content|Yes|1-10000 chars|
-|tags|No|Max 25 tags|
-
-### Post Group
-
-|Field|Required|Constraints|
-|---|---|---|
-|forum_id|Yes|Existing forum|
-|name|Yes|1-200 chars|
-|description|No|Max 5000 chars|
-|posts|No|Array of post IDs|
-|tags|No|Max 25 tags|
+| Field             | Required | Constraints                                      |
+| ----------------- | -------- | ------------------------------------------------ |
+| post_type         | Yes      | Must be announcement or discussion               |
+| user_id           | Yes      | Existing user; author of post                    |
+| thread_id         | Yes      | Existing thread                                  |
+| title             | Yes      | 1-200 chars                                      |
+| content           | Yes      | 1-10000 chars                                    |
+| restriction_level | Yes      | Must be inherited, open, restricted, or closed   |
+| mod_status        | Yes      | Must be active, reported, or hidden_by_moderator |
+#### Additional Constraints
+- Announcement posts may only be created by users with Faculty or Admin roles.
+- New posts default to `mod_status = active`.
+- New posts default to `restriction_level = inherited` unless explicitly overridden by authorized users.
 
 ### Comment
 
 |Field|Required|Constraints|
 |---|---|---|
-|user_id|Yes|Existing user|
+|user_id|Yes|Existing user; author of comment|
 |post_id|Yes|Existing post|
 |p_comment_id|No|Existing comment|
 |content|Yes|1-5000 chars|
+|mod_status|Yes|Must be active, reported, or hidden_by_moderator|
+#### Additional Constraints
+- A comment must reference a valid post.
+- If provided, `p_comment_id` must reference an existing comment.
+- New comments default to `mod_status = active`.
+
+---
+### Tag
+
+|Field|Required|Constraints|
+|---|---|---|
+|tag|Yes|1-50 chars, unique|
+## Thread Tag
+
+| Field     | Required | Constraints     |
+| --------- | -------- | --------------- |
+| thread_id | Yes      | Existing thread |
+| tag_id    | Yes      | Existing tag    |
+#### Additional Constraints
+- Duplicate thread-tag relationships are not allowed.
+
+### Post Tag
+
+|Field|Required|Constraints|
+|---|---|---|
+|post_id|Yes|Existing post|
+|tag_id|Yes|Existing tag|
+#### Additional Constraints
+- Duplicate post-tag relationships are not allowed.
 
 ---
 ## JSON Schemas
@@ -381,65 +430,58 @@ Delete comment.
 ### Users
 
 #### GET /users/{user_id}
+
 **Response**
+
 ```json
 {
-  "user_id": 123,
-  "user_type": "user",
-  "username": "jdoe",
-  "email": "jdoe@university.edu",
-  "display_name": "John Doe",
-  "roles": [
-    "student"
-  ],
-  "tags": [
-    "Undergraduate",
-    "METCS"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
+  "user_id": 123,
+  "username": "jdoe",
+  "email": "jdoe@university.edu",
+  "display_name": "John Doe",
+  "roles": [
+    "student"
+  ],
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-05T15:22:11.947651Z"
 }
 ```
 
 #### POST /users
+
 **Request**
+
 ```json
 {
-  "username": "jdoe",
-  "email": "jdoe@university.edu",
-  "display_name": "John Doe",
-  "roles": [
-    "student"
-  ],
-  "tags": [
-    "Undergraduate",
-    "METCS"
-  ]
- }
+  "username": "jdoe",
+  "email": "jdoe@university.edu",
+  "display_name": "John Doe",
+  "roles": [
+    "student"
+  ]
+}
 ```
 
 **Response**
+
 ```json
 {
-  "user_id": 123,
-  "user_type": "user",
-  "username": "jdoe",
-  "email": "jdoe@university.edu",
-  "display_name": "John Doe",
-  "roles": [
-    "student"
-  ],
-  "tags": [
-    "Undergraduate",
-    "METCS"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
+  "user_id": 123,
+  "username": "jdoe",
+  "email": "jdoe@university.edu",
+  "display_name": "John Doe",
+  "roles": [
+    "student"
+  ],
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-05T15:22:11.947651Z"
 }
 ```
 
 #### PUT /users/{user_id}
+
 **Request**
+
 ```json
 {
   "email": "newemail@university.edu",
@@ -448,668 +490,497 @@ Delete comment.
     "student",
     "admin"
   ]
- }
+}
 ```
 
 **Response**
+
+```json
+{
+  "user_id": 123,
+  "username": "jdoe",
+  "email": "newemail@university.edu",
+  "display_name": "John A. Doe",
+  "roles": [
+    "student",
+    "admin"
+  ],
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+}
+```
+
+#### DELETE /users/{user_id}
+
+**Response**
+
+```json
+{
+  "user_id": 123,
+  "message": "Deletion successful."
+}
+```
+
+---
+
+### Threads
+
+#### GET /discussions/threads/{thread_id}
+
+**Response**
+
+```json
+{
+  "thread_id": 1001,
+  "user_id": 123,
+  "thread_type": "course",
+  "name": "CS763 Secure Software Development",
+  "description": "Fall 2026 course workspace",
+  "restriction_level": "restricted",
+  "parent_thread_id": 500,
+  "tags": [
+    "METCS",
+    "Fall2026"
+  ],
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+}
+```
+
+#### POST /discussions/threads
+
+**Request**
+
 ```json
 {
   "user_id": 123,
-  "user_type": "user",
-  "username": "jdoe",
-  "email": "newemail@university.edu",
-  "display_name": "John A. Doe",
-  "roles": [
-    "student",
-    "admin"
-  ],
+  "thread_type": "course",
+  "name": "CS763 Secure Software Development",
+  "description": "Fall 2026 course workspace",
+  "restriction_level": "restricted",
+  "parent_thread_id": 500,
   "tags": [
-    "Undergraduate",
-    "METCS"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-17T15:22:11.947651Z"
-}
-```
-
-### User Groups
-
-#### GET /usergroups/{user_id}
-**Response**
-```json
-{
-  "user_id": 12345,
-  "user_type": "group",
-  "name": "CS763 Students (Fall 26)",
-  "description": "Fall 26 Students enrolled in CS763: Secure Software Development",
-  "users": [
-    123,
-    234,
-    345,
-    456
-  ],
-  "tags": [
-    "Student Group",
-    "Fall 2026"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### POST /usergroups
-**Request**
-```json
-{
-  "name": "CS763 Students (Fall 26)",
-  "description": "Fall 26 Students enrolled in CS763: Secure Software Development",
-  "users": [
-    123,
-    234,
-    345,
-    456
-  ],
-  "tags": [
-    "Student Group",
-    "Fall 2026"
-  ]
-}
-```
-  
-**Response**
-```json
-{
-  "user_id": 12345,
-  "user_type": "group",
-  "name": "CS763 Students (Fall 26)",
-  "description": "Fall 26 Students enrolled in CS763: Secure Software Development",
-  "users": [
-    123,
-    234,
-    345,
-    456
-  ],
-  "tags": [
-    "Student Group",
-    "Fall 2026"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-  
-#### PUT /usergroups/{user_id}
-**Request**
-```json
-{
-  "name": "CS763 Students (Fall 2026)",
-  "description": "Updated description",
-  "users": [
-    123,
-    234,
-    345
-  ],
-  "tags": [
-    "Student Group",
-    "Graduate"
-  ]
-}
-```
-  
-
-**Response**
-```json
-{
-  "user_id": 12345,
-  "user_type": "group",
-  "name": "CS763 Students (Fall 2026)",
-  "description": "Updated description",
-  "users": [
-    123,
-    234,
-    345
-  ],
-  "tags": [
-    "Student Group",
-    "Graduate"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-17T15:22:11.947651Z"
-}
-```
-### Forums
-
-#### GET /forums/{forum_id}
-**Response**
-```json
-{
-  "forum_id": 874368,
-  "forum_type": "forum",
-  "user_id": 987,
-  "title": "CS763 O2 Secure Software Development (Fall 26)",
-  "description": "Forum for all topics pertaining to CS763, Fall 2026",
-  "tags": [
-    "Class Forum",
     "METCS",
-    "Fall 2026"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### POST /forums
-**Request**
-```json
-{
-  "user_id": 987,
-  "title": "CS763 O2 Secure Software Development (Fall 26)",
-  "description": "Forum for all topics pertaining to CS763, Fall 2026",
-  "tags": [
-    "Class Forum",
-    "METCS",
-    "Fall 2026"
-  ]
-}
-```
-  
-**Response**
-```json
-{
-  "forum_id": 874368,
-  "forum_type": "forum",
-  "user_id": 987,
-  "title": "CS763 O2 Secure Software Development (Fall 26)",
-  "description": "Forum for all topics pertaining to CS763, Fall 2026",
-  "tags": [
-    "Class Forum",
-    "METCS",
-    "Fall 2026"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### PUT /forums/{forum_id}
-
-**Request**
-```json
-{
-  "title": "CS763 O2 Secure Software Development",
-  "description": "Updated forum description",
-  "tags": [
-    "Class Forum",
-    "Graduate Course"
+    "Fall2026"
   ]
 }
 ```
 
 **Response**
+
 ```json
 {
-  "forum_id": 874368,
-  "forum_type": "forum",
-  "user_id": 987,
-  "title": "CS763 O2 Secure Software Development",
-  "description": "Updated forum description",
+  "thread_id": 1001,
+  "user_id": 123,
+  "thread_type": "course",
+  "name": "CS763 Secure Software Development",
+  "description": "Fall 2026 course workspace",
+  "restriction_level": "restricted",
+  "parent_thread_id": 500,
   "tags": [
-    "Class Forum",
-    "Graduate Course"
+    "METCS",
+    "Fall2026"
+  ],
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-02T11:06:07.235541Z"
+}
+```
+
+#### PUT /discussions/threads/{thread_id}
+
+**Request**
+
+```json
+{
+  "name": "CS763 Secure Software Development",
+  "description": "Updated course information and schedule",
+  "restriction_level": "open",
+  "tags": [
+    "METCS",
+    "Fall2026",
+    "Security"
+  ]
+}
+```
+
+**Response**
+
+```json
+{
+  "thread_id": 1001,
+  "user_id": 123,
+  "thread_type": "course",
+  "name": "CS763 Secure Software Development",
+  "description": "Updated course information and schedule",
+  "restriction_level": "open",
+  "parent_thread_id": 500,
+  "tags": [
+    "METCS",
+    "Fall2026",
+    "Security"
   ],
   "created_at": "2026-11-02T11:06:07.235541Z",
   "updated_at": "2026-11-17T15:22:11.947651Z"
 }
 ```
-
-### Forum Groups
-
-#### GET /forumgroups/{forum_id}
-**Response**
-```json
-{
-  "forum_id": 56789,
-  "forum_type": "group",
-  "name": "METCS Class Forums (Fall 26)",
-  "description": "Forums for all METCS classes offered in Fall 2026 Semester",
-  "forums": [
-    123,
-    234,
-    345,
-    456
-  ],
-  "tags": [
-    "Class Forum",
-    "METCS",
-    "Fall 2026"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### POST /forumgroups
-**Request**
-```json
-{
-  "name": "METCS Class Forums (Fall 26)",
-  "description": "Forums for all METCS classes offered in Fall 2026 Semester",
-  "forums": [
-    123,
-    234,
-    345,
-    456
-  ],
-  "tags": [
-    "Class Forum",
-    "METCS",
-    "Fall 2026"
-  ]
-}
-```
-
-**Response**
-```json
-{
-  "forum_id": 56789,
-  "forum_type": "group",
-  "name": "METCS Class Forums (Fall 26)",
-  "description": "Forums for all METCS classes offered in Fall 2026 Semester",
-  "forums": [
-    123,
-    234,
-    345,
-    456
-  ],
-  "tags": [
-    "Class Forum",
-    "METCS",
-    "Fall 2026"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### PUT /forumgroups/{forum_id}
-**Request**
-```json
-{
-  "name": "METCS Graduate Forums",
-  "description": "Updated description",
-  "forums": [
-    123,
-    234,
-    345
-  ],
-  "tags": [
-    "Graduate",
-    "METCS"
-  ]
-}
-```
-
-**Response**
-```json
-{
-  "forum_id": 56789,
-  "forum_type": "group",
-  "name": "METCS Graduate Forums",
-  "description": "Updated description",
-  "forums": [
-    123,
-    234,
-    345
-  ],
-  "tags": [
-    "Graduate",
-    "METCS"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-17T15:22:11.947651Z"
-}
-```
-
-### Posts
-
-#### GET /posts/{post_id}
-**Response**
-```json
-{
-  "post_id": 64368473,
-  "post_type": "post",
-  "user_id": 987,
-  "forum_id": 874368,
-  "title": "Lab 1 Q&A",
-  "content": "Please comment with any questions on Lab 1.",
-  "tags": [
-    "Lab",
-    "Q&A",
-    "Instructor Post"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### POST /posts
-**Request**
-```json
-{
-  "user_id": 987,
-  "forum_id": 874368,
-  "title": "Lab 1 Q&A",
-  "content": "Please comment with any questions on Lab 1.",
-  "tags": [
-    "Lab",
-    "Q&A",
-    "Instructor Post"
-  ]
-}
-```
-
-**Response**
-```json
-{
-  "post_id": 64368473,
-  "post_type": "post",
-  "user_id": 987,
-  "forum_id": 874368,
-  "title": "Lab 1 Q&A",
-  "content": "Please comment with any questions on Lab 1.",
-  "tags": [
-    "Lab",
-    "Q&A",
-    "Instructor Post"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### PUT /posts/{post_id}
-**Request**
-```json
-{
-  "title": "Lab 1 Questions and Answers",
-  "content": "Please post any questions related to Lab 1 here.",
-  "tags": [
-    "Lab",
-    "Q&A"
-  ]
-}
-```
-
-**Response**
-```json
-{
-  "post_id": 64368473,
-  "post_type": "post",
-  "user_id": 987,
-  "forum_id": 874368,
-  "title": "Lab 1 Questions and Answers",
-  "content": "Please post any questions related to Lab 1 here.",
-  "tags": [
-    "Lab",
-    "Q&A"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-17T15:22:11.947651Z"
-}
-```
-
-### Post Groups
-
-#### GET /postgroups/{post_id}
-**Response**
-```json
-{
-  "post_id": 56735,
-  "post_type": "group",
-  "forum_id": 874368,
-  "name": "Lab Q&A Threads",
-  "description": "All CS763 Lab Q&A Threads for Final Exam reference.",
-  "posts": [
-    64368473,
-    78932643,
-    87364832,
-    89723648
-  ],
-  "tags": [
-    "Final Review"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```  
-#### POST /postgroups
-**Request**
-```json
-{
-  "forum_id": 874368,
-  "name": "Lab Q&A Threads",
-  "description": "All CS763 Lab Q&A Threads for Final Exam reference.",
-  "posts": [
-    64368473,
-    78932643,
-    87364832,
-    89723648
-  ],
-  "tags": [
-    "Final Review"
-  ]
-}
-```
-
-**Response**
-```json
-{
-  "post_id": 56735,
-  "post_type": "group",
-  "forum_id": 874368,
-  "name": "Lab Q&A Threads",
-  "description": "All CS763 Lab Q&A Threads for Final Exam reference.",
-  "posts": [
-    64368473,
-    78932643,
-    87364832,
-    89723648
-  ],
-  "tags": [
-    "Final Review"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### PUT /postgroups/{post_id}
-**Request**
-```json
-{
-  "name": "Lab and Exam Review Threads",
-  "description": "Updated collection of review discussions.",
-  "posts": [
-    64368473,
-    78932643
-  ],
-  "tags": [
-    "Review",
-    "Exam Prep"
-  ]
-}
-```
-
-**Response**
-```json
-{
-  "post_id": 56735,
-  "post_type": "group",
-  "forum_id": 874368,
-  "name": "Lab and Exam Review Threads",
-  "description": "Updated collection of review discussions.",
-  "posts": [
-    64368473,
-    78932643
-  ],
-  "tags": [
-    "Review",
-    "Exam Prep"
-  ],
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-17T15:22:11.947651Z"
-}
-```
-
-### Comments
-
-#### GET /comments/{comment_id}
-**Response**
-```json
-{
-  "comment_id": 50413740,
-  "user_id": 413,
-  "post_id": 78932643,
-  "p_comment_id": 56532,
-  "content": "thanks, that's really helpful :)",
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### POST /comments
-**Request**
-```json
-{
-  "user_id": 413,
-  "post_id": 78932643,
-  "p_comment_id": 56532,
-  "content": "thanks, that's really helpful :)"
-}
-```
-
-**Response**
-```json
-{
-  "comment_id": 50413740,
-  "user_id": 413,
-  "post_id": 78932643,
-  "p_comment_id": 56532,
-  "content": "thanks, that's really helpful :)",
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
-}
-```
-
-#### PUT /comments/{comment_id}
-**Request**
-```json
-{
-  "content": "Thank you, that's really helpful."
-}
-```
+#### DELETE /discussions/threads/{thread_id}
 
 **Response**
 
 ```json
 {
-  "comment_id": 50413740,
-  "user_id": 413,
-  "post_id": 78932643,
-  "p_comment_id": 56532,
-  "content": "Thank you, that's really helpful.",
-  "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-17T15:22:11.947651Z"
+  "thread_id": 1001,
+  "message": "Deletion successful."
 }
 ```
 
-### List Response Schema
-To be used consistently for all collection endpoints.
-#### List Wrapper
-```json
-{
-  "count": 0,
-  "results": [
+### Timeline View
 
-  ]
-}
-```
+#### GET /discussions/scopes/{thread_type}/{thread_id}/timeline  
 
-#### GET /users (Example)
+**Response**
+
 ```json
 {
   "count": 2,
   "results": [
-	{
-	  "user_id": 123,
-	  "user_type": "user",
-	  "username": "jdoe",
-	  "email": "jdoe@university.edu",
-	  "display_name": "John Doe",
-	  "roles": [
-	    "student"
-	  ],
-	  "tags": [
-	    "Undergraduate",
-	    "METCS"
-	  ],
-	  "created_at": "2026-11-02T11:06:07.235541Z",
-	  "updated_at": "2026-11-05T15:22:11.947651Z"
-	},
-	{
-	  "user_id": 234,
-	  "user_type": "user",
-	  "username": "scarp",
-	  "email": "scarp@university.edu",
-	  "display_name": "Sabrina Carp",
-	  "roles": [
-	    "student"
-	  ],
-	  "tags": [
-	    "Undergraduate",
-	    "METCS"
-	  ],
-	  "created_at": "2026-12-02T11:06:07.235541Z",
-	  "updated_at": "2026-12-05T15:22:11.947651Z"
-	},
+    {
+      "post_id": 64368473,
+      "post_type": "announcement",
+      "user_id": 987,
+      "thread_id": 1001,
+      "title": "Sprint 2 Status Update",
+      "content": "Please submit all Sprint 2 deliverables by Friday.",
+      "restriction_level": "inherited",
+      "mod_status": "active",
+      "created_at": "2026-11-02T11:06:07.235541Z",
+      "updated_at": "2026-11-05T15:22:11.947651Z"
+    },
+    {
+      "post_id": 64368474,
+      "post_type": "discussion",
+      "user_id": 413,
+      "thread_id": 1001,
+      "title": "Question About Sprint 2",
+      "content": "Can we use FastAPI dependency injection here?",
+      "restriction_level": "inherited",
+      "mod_status": "active",
+      "created_at": "2026-11-03T10:01:02.100000Z",
+      "updated_at": "2026-11-03T10:01:02.100000Z"
+    }
   ]
+}
+```
+
+---
+
+### Posts
+
+#### GET /discussions/posts/{post_id}
+
+**Response**
+
+```json
+{
+  "post_id": 64368473,
+  "post_type": "announcement",
+  "user_id": 987,
+  "thread_id": 1001,
+  "title": "Sprint 2 Status Update",
+  "content": "Please submit all Sprint 2 deliverables by Friday.",
+  "restriction_level": "inherited",
+  "mod_status": "active",
+  "tags": [
+    "Sprint",
+    "Announcement"
+  ],
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+}
+```
+
+#### POST /discussions/posts
+
+**Request**
+
+```json
+{
+  "post_type": "announcement",
+  "user_id": 987,
+  "thread_id": 1001,
+  "title": "Sprint 2 Status Update",
+  "content": "Please submit all Sprint 2 deliverables by Friday.",
+  "restriction_level": "inherited",
+  "tags": [
+    "Sprint",
+    "Announcement"
+  ]
+}
+```
+
+**Response**
+
+```json
+{
+  "post_id": 64368473,
+  "post_type": "announcement",
+  "user_id": 987,
+  "thread_id": 1001,
+  "title": "Sprint 2 Status Update",
+  "content": "Please submit all Sprint 2 deliverables by Friday.",
+  "restriction_level": "inherited",
+  "mod_status": "active",
+  "tags": [
+    "Sprint",
+    "Announcement"
+  ],
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-02T11:06:07.235541Z"
+}
+```
+#### PUT /discussions/posts/{post_id}
+
+**Request**
+
+```json
+{
+  "title": "Sprint 2 Deadline Reminder",
+  "content": "Updated announcement content.",
+  "restriction_level": "restricted"
+}
+```
+
+**Response**
+
+```json
+{
+  "post_id": 64368473,
+  "post_type": "announcement",
+  "user_id": 987,
+  "thread_id": 1001,
+  "title": "Sprint 2 Deadline Reminder",
+  "content": "Updated announcement content.",
+  "restriction_level": "restricted",
+  "mod_status": "active",
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+}
+```
+
+#### DELETE /discussions/posts/{post_id}
+
+**Response**
+
+```json
+{
+  "post_id": 64368473,
+  "message": "Deletion successful."
+}
+```
+
+
+
+---
+
+### Comments
+
+#### GET /discussions/posts/{post_id}/comments/{comment_id}
+
+**Response**
+
+```json
+{
+  "comment_id": 50413740,
+  "user_id": 413,
+  "post_id": 64368473,
+  "p_comment_id": 56532,
+  "content": "Thanks, that's really helpful.",
+  "mod_status": "active",
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-05T15:22:11.947651Z"
+}
+```
+
+#### POST /discussions/posts/{post_id}/comments
+
+**Request**
+
+```json
+{
+  "user_id": 413,
+  "post_id": 64368473,
+  "p_comment_id": 56532,
+  "content": "Thanks, that's really helpful."
+}
+```
+
+**Response**
+
+```json
+{
+  "comment_id": 50413740,
+  "user_id": 413,
+  "post_id": 64368473,
+  "p_comment_id": 56532,
+  "content": "Thanks, that's really helpful.",
+  "mod_status": "active",
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-02T11:06:07.235541Z"
+}
+```
+#### PUT /discussions/posts/{post_id}/comments/{comment_id}
+
+**Request**
+
+```json
+{
+  "content": "Thank you, that's really helpful."
+}
+```
+
+**Response**
+
+```json
+{
+  "comment_id": 50413740,
+  "user_id": 413,
+  "post_id": 64368473,
+  "p_comment_id": 56532,
+  "content": "Thank you, that's really helpful.",
+  "mod_status": "active",
+  "created_at": "2026-11-02T11:06:07.235541Z",
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+}
+```
+
+#### DELETE /discussions/posts/{post_id}/comments/{comment_id}
+
+**Response**
+
+```json
+{
+  "comment_id": 50413740,
+  "message": "Deletion successful."
+}
+```
+
+---
+
+### Moderation
+
+#### PUT /discussions/posts/{post_id}/report
+
+**Response**
+
+```json
+{
+  "post_id": 64368473,
+  "mod_status": "reported",
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+}
+```
+
+#### PUT /discussions/posts/{post_id}/moderation
+
+**Request**
+
+```json
+{
+  "mod_status": "hidden_by_moderator"
+}
+```
+
+**Response**
+
+```json
+{
+  "post_id": 64368473,
+  "mod_status": "hidden_by_moderator",
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+}
+```
+
+#### PUT /discussions/posts/{post_id}/comments/{comment_id}/report
+
+**Response**
+
+```json
+{
+"comment_id": 50413740,
+"mod_status": "reported",
+"updated_at": "2026-11-17T15:22:11.947651Z"
+}
+```
+
+#### PUT /discussions/posts/{post_id}/comments/{comment_id}/moderation
+
+**Request**
+
+```json
+{
+  "mod_status": "hidden_by_moderator"
+}
+```
+
+**Response**
+
+```json
+{
+  "comment_id": 50413740,
+  "mod_status": "hidden_by_moderator",
+  "updated_at": "2026-11-17T15:22:11.947651Z"
+}
+```
+
+---
+
+### List Response Schema
+
+#### List Wrapper
+
+```json
+{
+  "count": 0,
+  "results": []
 }
 ```
 
 ### Status Codes
 #### GET
 
-|Status|Meaning|
-|---|---|
-|200|Success|
-|400|Invalid query parameter|
-|401|Unauthorized|
-|403|Forbidden|
-|404|Resource not found|
-|500|Internal server error|
+| Status | Meaning                 |
+| ------ | ----------------------- |
+| 200    | Success                 |
+| 400    | Invalid query parameter |
+| 401    | Unauthorized            |
+| 403    | Forbidden               |
+| 404    | Resource not found      |
+| 500    | Internal server error   |
 
 #### POST
 
-|Status|Meaning|
-|---|---|
-|201|Created|
-|400|Validation error|
-|401|Unauthorized|
-|403|Forbidden|
-|409|Duplicate resource|
-|500|Internal server error|
+| Status | Meaning               |
+| ------ | --------------------- |
+| 201    | Created               |
+| 400    | Validation error      |
+| 401    | Unauthorized          |
+| 403    | Forbidden             |
+| 409    | Duplicate resource    |
+| 422    | Unprocessable Content |
+| 500    | Internal server error |
 
 #### PUT
 
-|Status|Meaning|
-|---|---|
-|200|Updated|
-|400|Validation error|
-|401|Unauthorized|
-|403|Forbidden|
-|404|Resource not found|
-|409|Conflict|
-|500|Internal server error|
+| Status | Meaning               |
+| ------ | --------------------- |
+| 200    | Updated               |
+| 400    | Validation error      |
+| 401    | Unauthorized          |
+| 403    | Forbidden             |
+| 404    | Resource not found    |
+| 409    | Conflict              |
+| 422    | Unprocessable Content |
+| 500    | Internal server error |
 
 #### DELETE
 
@@ -1143,13 +1014,16 @@ To be used consistently for all collection endpoints.
 #### Error Codes
 
 VALIDATION_ERROR
+INVALID_QUERY_PARAMETER
 UNAUTHORIZED
 FORBIDDEN
 RESOURCE_NOT_FOUND
-RESOURCE_CONFLICT
 DUPLICATE_RESOURCE
+RESOURCE_CONFLICT
+UNPROCESSABLE_CONTENT
+RESTRICTED
 INTERNAL_SERVER_ERROR
 
 ## Static Mock Data
 
-Currently, my design for this service does not require any external resources. Any information hosted externally such as class details or project documentation could be shared as hyperlinks to their source within the descriptions or content of forums, posts and comments. If future design iterations depend on external data, mock data will be added here for testing purposes.
+My design for this service does not require external resources. There are entities such as Users and Threads for classes and research labs that could refer to external entities, but I have modeled them as self-contained for the purposes of this project. I believe I have done so in a way that satisfies the project's requirements, but if I am informed that is not the case, static mock data will be stored here.
