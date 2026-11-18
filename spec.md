@@ -14,7 +14,7 @@ The log of the conversation is lengthy, so I have included it as a separate AI l
 ##### Version 2
 ERD restructured manually to match new project specifications for release 2. Updated API endpoints, field details and constraints, and JSON schemas created with AI assistance and adjusted manually as needed. 
 
-AI description included in conceptual_journal.md, full AI log included in AI_external_log.md.
+AI description included in conceptual_journal.md, full AI log included in AI_external_log_spec.md.
 
 ---
 ## Overview

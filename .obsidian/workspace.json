@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "spec.md",
+                "file": ".ai_logs/AI_external_log_build.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "spec"
+              "title": "AI_external_log_build"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "spec.md",
+                "file": ".ai_logs/AI_external_log_build.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "spec.md",
+                "file": ".ai_logs/AI_external_log_build.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "spec.md",
+                "file": ".ai_logs/AI_external_log_build.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,23 +190,26 @@
   },
   "active": "873803ccf2e34510",
   "lastOpenFiles": [
+    ".ai_logs/AI_agent_history",
+    "functional-codebase",
+    "assignment_1_code/requirements.txt",
+    "assignment_1_code/Dockerfile",
+    "assignment_1_code/docker-compose.yml",
+    "assignment_1_code/Agent_environment.md",
+    "assignment_1_code/tests/test_health.py",
+    "assignment_1_code/tests",
+    "assignment_1_code/app/__init__.py",
+    "assignment_1_code/app/main.py",
+    "assignment_1_code/app",
+    "assignment_1_code",
+    ".ai_logs/AI_external_log_spec.md",
+    ".ai_logs/AI_external_log_build.md",
+    "spec.md",
     ".ai_logs/conceptual_journal.md",
     "Agent_environment.md",
-    "spec.md",
-    ".ai_logs/AI_external_log.md",
     ".ai_logs/AI_agent_log.md",
     ".ai_logs/assignment_1/Prompt_test_log_assignment1.md",
     ".ai_logs/assignment_1/AI_log_assignment1.md",
-    ".obsidian/community-plugins.json",
-    ".obsidian/plugins/unhide/styles.css",
-    ".obsidian/plugins/unhide/manifest.json",
-    ".obsidian/plugins/unhide/main.js",
-    ".obsidian/plugins/unhide",
-    ".github/workflows/devsecops.yml",
-    ".obsidian/plugins/unhide/data.json",
-    ".ai_logs/assignment_1",
-    ".obsidian/workspace.json",
-    ".obsidian/plugins",
     "README.md"
   ]
 }
