@@ -51,18 +51,18 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r functional-codebase/requirements.txt
+          pip install -r functional_codebase/requirements.txt
 
       - name: Install Ruff
         run: python -m pip install ruff
 
       - name: Run Ruff
-        run: python -m ruff check functional-codebase/
+        run: python -m ruff check functional_codebase/
         continue-on-error: true
 
       - name: Verify Application Imports
         run: |
-          python -c "from functional-codebase.app.main import app"
+          python -c "from functional_codebase.app.main import app"
       
       - name: Verify PostgreSQL Connectivity
         run: |
@@ -92,7 +92,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
       - name: Run Semgrep Scan
-        run: semgrep scan --config auto /functional-codebase --sarif --output=semgrep.sarif
+        run: semgrep scan --config auto /functional_codebase --sarif --output=semgrep.sarif
 
       - name: Upload SARIF file for GitHub Advanced Security
         uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066 #v4.39.3
@@ -139,7 +139,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t rbpdb /functional-codebase
+          docker build -t rbpdb /functional_codebase
 
       - name: Run Trivy Scan
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 #v0.36.0
