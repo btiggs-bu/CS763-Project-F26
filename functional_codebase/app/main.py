@@ -1,3 +1,11 @@
 from fastapi import FastAPI
 
-app = FastAPI(title="Research Blog & Project Discussion Board")
+from app.api.health import router as health_router
+from app.core.exceptions import register_exception_handlers
+
+app = FastAPI(
+    title="Research Blog & Project Discussion Board (RBPDB)",
+    version="0.1.0",
+)
+register_exception_handlers(app)
+app.include_router(health_router)

@@ -13,6 +13,9 @@
 - [Request 5](#request-5): Configure SQLAlchemy for the FastAPI project.
 - [Request 6](#request-6): Configure Alembic migrations for the FastAPI application.
 - [Request 7](#request-7): Using the configured Alembic environment, create an initial migration that ve...
+- [Request 8](#request-8): Create the FastAPI application entry point.
+- [Request 9](#request-9): Create health-check endpoints for the FastAPI application.
+- [Request 10](#request-10): Implement centralized exception handling for the FastAPI application.
 
 ---
 
@@ -427,7 +430,7 @@ There are no models or tables yet, so autogeneration currently finds no schema c
 ---
 
 <a name="request-7"></a>
-## Request 7 [^](#table-of-contents) [<](#request-6) >
+## Request 7 [^](#table-of-contents) [<](#request-6) [>](#request-8)
 
 ### Participant
 
@@ -501,4 +504,238 @@ alembic downgrade -1
 The two `revision` commands are alternatives. When adding models, import them so they register with `Base.metadata` before using `--autogenerate`. The configured [Alembic environment](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/alembic/env.py>) reads the database URL through the existing settings.
 
 > *Response time: 102.71 seconds*
+> <br>*Model: agent-host-copilotcli:auto*
+
+---
+
+<a name="request-8"></a>
+## Request 8 [^](#table-of-contents) [<](#request-7) [>](#request-9)
+
+### Participant
+
+Create the FastAPI application entry point.
+
+Requirements:
+
+Update:
+
+- app/main.py
+
+Implement:
+
+- FastAPI application initialization
+- API title
+- Version information
+- Basic application startup configuration
+
+Do not add business routes.
+
+Provide the command to run the application both:
+
+1. Locally
+2. Through Docker
+
+### Assistant
+
+<details>
+  <summary>Read **main.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\main.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **Dockerfile**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\Dockerfile"
+}</p>
+</details>
+
+<details>
+  <summary>Read **docker-compose.yml**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\docker-compose.yml"
+}</p>
+</details>
+
+<details>
+  <summary>Read **requirements.txt**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\requirements.txt"
+}</p>
+</details>
+
+Updated [main.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py>) with FastAPI initialization, the RBPDB API title, and version `0.1.0`. No business routes were added. Metadata and the empty OpenAPI paths were validated.
+
+Run from `functional-codebase`:
+
+```powershell
+# Locally
+uvicorn app.main:app --reload
+
+# Through Docker Compose
+docker compose up --build
+```
+
+> *Response time: 29.10 seconds*
+> <br>*Model: agent-host-copilotcli:auto*
+
+---
+
+<a name="request-9"></a>
+## Request 9 [^](#table-of-contents) [<](#request-8) [>](#request-10)
+
+### Participant
+
+Create health-check endpoints for the FastAPI application.
+
+Requirements:
+
+Implement:
+
+GET /health
+
+Response:
+
+{
+
+  "status": "healthy"
+
+}
+
+Implement:
+
+GET /health/db
+
+Requirements:
+
+- Open a database session
+- Execute a simple database query
+- Return success or failure
+
+Provide complete router implementation and explain how these endpoints verify application health.
+
+### Assistant
+
+<details>
+  <summary>Read **main.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\main.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **database.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\db\\database.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **__init__.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\api\\__init__.py"
+}</p>
+</details>
+
+Added the complete health router in [health.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py>) and registered it in [main.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py>).
+
+- `GET /health` returns `{"status": "healthy"}` as a basic application liveness check.
+- `GET /health/db` opens a session through `get_db`, runs `SELECT 1`, and returns healthy on success. A SQLAlchemy error is logged and returns HTTP 503 with a database-unavailable detail.
+
+Validated both routes, the successful query path, and the 503 failure path.
+
+> *Response time: 55.17 seconds*
+> <br>*Model: agent-host-copilotcli:auto*
+
+---
+
+<a name="request-10"></a>
+## Request 10 [^](#table-of-contents) [<](#request-9) >
+
+### Participant
+
+Implement centralized exception handling for the FastAPI application.
+
+Requirements:
+
+Create handlers for:
+
+- Request validation errors
+- SQLAlchemy/database errors
+- Unexpected server errors
+
+Use a consistent error response format:
+
+{
+
+  "error": {
+
+    "code": "ERROR_CODE",
+
+    "message": "Human readable message"
+
+  },
+
+  "timestamp": "...",
+
+  "request_id": "..."
+
+}
+
+Integrate exception handling into the FastAPI application startup process.
+
+Provide examples of responses for each error type.
+
+### Assistant
+
+I’ll add reusable error-envelope handlers and request-ID middleware, then register them when the FastAPI app is created. I’ll preserve the existing health-check 503 behavior while formatting its `HTTPException` response consistently with the other errors.
+
+<details>
+  <summary>Read **exceptions.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\core\\exceptions.py"
+}</p>
+</details>
+
+Added centralized handlers in [exceptions.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py>) and registered them during app setup in [main.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py>). Each response includes an ISO-8601 timestamp and generated request ID; the ID is also returned in the `X-Request-ID` header. Database and unexpected errors are logged without exposing exception details to clients. HTTP errors, including the database health check’s 503 response, use the same envelope.
+
+Example responses:
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Request validation failed"
+  },
+  "timestamp": "2026-11-20T20:37:40+00:00",
+  "request_id": "a1b2c3d4-..."
+}
+```
+
+```json
+{
+  "error": {
+    "code": "DATABASE_ERROR",
+    "message": "A database error occurred"
+  },
+  "timestamp": "2026-11-20T20:37:40+00:00",
+  "request_id": "a1b2c3d4-..."
+}
+```
+
+```json
+{
+  "error": {
+    "code": "INTERNAL_SERVER_ERROR",
+    "message": "An unexpected server error occurred"
+  },
+  "timestamp": "2026-11-20T20:37:40+00:00",
+  "request_id": "a1b2c3d4-..."
+}
+```
+
+Validated handler status codes and response envelopes, including request-ID propagation.
+
+> *Response time: 132.28 seconds*
 > <br>*Model: agent-host-copilotcli:auto*

@@ -5744,6 +5744,2152 @@
       "sessionCopilotCredits": 4.769082,
       "sessionCopilotCreditsStatus": "complete",
       "elapsedMs": 59014
+    },
+    {
+      "requestId": "request_7c8c31f2-ed12-4a05-b07e-feb0f8576eeb",
+      "message": {
+        "parts": [
+          {
+            "range": {
+              "start": 0,
+              "endExclusive": 337
+            },
+            "editorRange": {
+              "startLineNumber": 1,
+              "startColumn": 1,
+              "endLineNumber": 21,
+              "endColumn": 18
+            },
+            "text": "Create the FastAPI application entry point.\r\n\r\nRequirements:\r\n\r\nUpdate:\r\n\r\n- app/main.py\r\n\r\nImplement:\r\n\r\n- FastAPI application initialization\r\n- API title\r\n- Version information\r\n- Basic application startup configuration\r\n\r\nDo not add business routes.\r\n\r\nProvide the command to run the application both:\r\n\r\n1. Locally\r\n2. Through Docker",
+            "kind": "text"
+          }
+        ],
+        "text": "Create the FastAPI application entry point.\r\n\r\nRequirements:\r\n\r\nUpdate:\r\n\r\n- app/main.py\r\n\r\nImplement:\r\n\r\n- FastAPI application initialization\r\n- API title\r\n- Version information\r\n- Basic application startup configuration\r\n\r\nDo not add business routes.\r\n\r\nProvide the command to run the application both:\r\n\r\n1. Locally\r\n2. Through Docker"
+      },
+      "variableData": {
+        "variables": []
+      },
+      "response": [
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"path\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\\\\functional_codebase\\\\app\\\\main.py\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "\ndiff --git a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py\nindex 0000000..0000000 100644\n--- a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py\n+++ b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py\n@@ -1,4 +1,4 @@\n from fastapi import FastAPI\n \n app = FastAPI(title=\"Research Blog & Project Discussion Board\")\n \n",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_317cb6dfcb3b4c7eb704a921ba47f981",
+          "toolId": "view",
+          "summary": {
+            "kind": "read",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "path": "/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795224809475,
+          "completedAt": 1795224809653
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/Dockerfile)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/Dockerfile)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"path\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\\\\functional_codebase\\\\Dockerfile\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "\ndiff --git a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/Dockerfile b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/Dockerfile\nindex 0000000..0000000 100644\n--- a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/Dockerfile\n+++ b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/Dockerfile\n@@ -1,15 +1,15 @@\n FROM python:3.12-slim\n \n WORKDIR /app\n \n COPY requirements.txt .\n RUN pip install --no-cache-dir -r requirements.txt\n \n COPY app/ ./app/\n COPY alembic/ ./alembic/\n COPY alembic.ini .\n \n EXPOSE 8000\n \n CMD [\"uvicorn\", \"app.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]\n \n",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_8d37c7a704f24668927d213d18a53b16",
+          "toolId": "view",
+          "summary": {
+            "kind": "read",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "path": "/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/Dockerfile",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795224809496,
+          "completedAt": 1795224809643
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/docker-compose.yml)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/docker-compose.yml)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"path\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\\\\functional_codebase\\\\docker-compose.yml\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "\ndiff --git a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/docker-compose.yml b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/docker-compose.yml\nindex 0000000..0000000 100644\n--- a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/docker-compose.yml\n+++ b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/docker-compose.yml\n@@ -1,49 +1,49 @@\n services:\n   app:\n     build:\n       context: .\n       dockerfile: Dockerfile\n     env_file:\n       - .env\n     ports:\n       - \"8000:8000\"\n     environment:\n       POSTGRES_DB: ${POSTGRES_DB:-rbpdb}\n       POSTGRES_USER: ${POSTGRES_USER:-rbpdb}\n       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-rbpdb}\n       DB_HOST: db\n       DB_PORT: 5432\n       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-rbpdb}:${POSTGRES_PASSWORD:-rbpdb}@db:5432/${POSTGRES_DB:-rbpdb}\n     depends_on:\n       db:\n         condition: service_healthy\n     networks:\n       - backend\n     restart: unless-stopped\n \n   db:\n     image: postgres:16\n     environment:\n       POSTGRES_DB: ${POSTGRES_DB:-rbpdb}\n       POSTGRES_USER: ${POSTGRES_USER:-rbpdb}\n       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-rbpdb}\n     ports:\n       - \"5432:5432\"\n     volumes:\n       - postgres_data:/var/lib/postgresql/data\n     healthcheck:\n       test: [\"CMD-SHELL\", \"pg_isready -U \\\"$${POSTGRES_USER}\\\" -d \\\"$${POSTGRES_DB}\\\"\"]\n       interval: 5s\n       timeout: 5s\n       retries: 5\n     networks:\n       - backend\n     restart: unless-stopped\n \n volumes:\n   postgres_data:\n \n networks:\n   backend:\n     driver: bridge\n \n",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_e74903d936cb4d2cb6b0f54b136ded0d",
+          "toolId": "view",
+          "summary": {
+            "kind": "read",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "path": "/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/docker-compose.yml",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795224809498,
+          "completedAt": 1795224809667
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/requirements.txt)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/requirements.txt)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"path\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\\\\functional_codebase\\\\requirements.txt\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "\ndiff --git a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/requirements.txt b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/requirements.txt\nindex 0000000..0000000 100644\n--- a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/requirements.txt\n+++ b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/requirements.txt\n@@ -1,9 +1,9 @@\n fastapi>=0.115,<1.0\n uvicorn[standard]>=0.30,<1.0\n pydantic>=2.0,<3.0\n pydantic-settings>=2.0,<3.0\n python-dotenv>=1.0,<2.0\n SQLAlchemy>=2.0,<3.0\n psycopg[binary]>=3.2,<4.0\n alembic>=1.13,<2.0\n \n",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_79d7852e511d446cb350aab4d656da71",
+          "toolId": "view",
+          "summary": {
+            "kind": "read",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "path": "/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/requirements.txt",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795224809500,
+          "completedAt": 1795224809657
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Running `git status --short; Get-ChildItem -Force .\\functional_codebase\\app`",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "git status --short; Get-ChildItem -Force .\\functional_codebase\\app"
+            },
+            "editable": false,
+            "intention": "Inspect entry point and workspace state",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_a9b73998c70c4fb393ac47b265715375?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_a9b73998c70c4fb393ac47b265715375%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_a9b73998c70c4fb393ac47b265715375",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_a9b73998c70c4fb393ac47b265715375\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "\r\n\r\n    Directory: D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\r\n\r\n\r\nMode                 LastWriteTime         Length Name                                                                 \r\n----                 -------------         ------ ----                                                                 \r\nd-----        11/18/2026   6:58 PM                api                                                                  \r\nd-----        11/20/2026   8:29 PM                core                                                                 \r\nd-----        11/20/2026   8:29 PM                db                                                                   \r\nd-----        11/18/2026   6:58 PM                models                                                               \r\nd-----        11/18/2026   6:58 PM                repositories                                                         \r\nd-----        11/18/2026   6:58 PM                schemas                                                              \r\nd-----        11/18/2026   6:58 PM                services                                                             \r\nd-----        11/18/2026   6:58 PM                tests                                                                \r\n-a----        11/18/2026   6:58 PM             96 main.py                                                              \r\n-a----        11/18/2026   6:58 PM              0 __init__.py                                                          \r\n\r\n\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_a9b73998c70c4fb393ac47b265715375",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795224809501,
+          "completedAt": 1795224810025
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "presentation": "hidden",
+          "invocationMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolCallId": "custom_call_d44e3f4ce0334c43adb072f7d11620fd",
+          "toolId": "apply_patch",
+          "summary": {
+            "kind": "edit",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+                  "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795224813837,
+          "completedAt": 1795224814557
+        },
+        {
+          "kind": "externalEdit",
+          "uri": {
+            "$mid": 1,
+            "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "scheme": "file"
+          },
+          "editKind": "edit",
+          "beforeContentUri": {
+            "$mid": 1,
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9kNDRlM2Y0Y2UwMzM0YzQzYWRiMDcyZjdkMTE2MjBmZFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxtYWluLnB5XCIsXCJwYXJ0XCI6XCJiZWZvcmVcIn0iLCJjb250ZW50UmVmIjp0cnVlLCJmaWxlVXJpIjoiZmlsZTovLy9kJTNBL0Rvd25sb2Fkc19EL0dyYWQlMjBTdHVmZi9DUzc2MyUyMCUyOFNlY3VyZSUyMFNvZnR3YXJlJTIwRGV2JTI5L0dpdEh1Yi9DUzc2My1Qcm9qZWN0LUYyNi9mdW5jdGlvbmFsX2NvZGViYXNlL2FwcC9tYWluLnB5In0"
+          },
+          "afterContentUri": {
+            "$mid": 1,
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9kNDRlM2Y0Y2UwMzM0YzQzYWRiMDcyZjdkMTE2MjBmZFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxtYWluLnB5XCIsXCJwYXJ0XCI6XCJhZnRlclwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL21haW4ucHkifQ"
+          },
+          "diff": {
+            "added": 4,
+            "removed": 1
+          },
+          "undoStopId": "custom_call_d44e3f4ce0334c43adb072f7d11620fd"
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "pylance mcp server: pylanceFileSyntaxErrors",
+          "pastTenseMessage": "pylanceFileSyntaxErrors",
+          "originMessage": "pylance mcp server (MCP Server)",
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"fileUri\": \"file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py\",\n  \"workspaceRoot\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "No syntax errors found in 'file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py'",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_027d25e4c433485cb4cb3a02c0482931",
+          "toolId": "pylance-mcp-server-pylanceFileSyntaxErrors",
+          "summary": {
+            "kind": "unknown"
+          },
+          "startedAt": 1795224820687,
+          "completedAt": 1795224821208
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "Validate FastAPI metadata and absence of business routes",
+          "isConfirmed": {
+            "type": 4,
+            "selectedButton": "allow-once",
+            "selectedButtonKind": "approve"
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "Push-Location .\\functional_codebase; @'\nfrom app.main import app\n\nschema = app.openapi()\nassert app.title == \"Research Blog & Project Discussion Board (RBPDB)\"\nassert app.version == \"0.1.0\"\nassert schema[\"info\"][\"title\"] == app.title\nassert schema[\"info\"][\"version\"] == app.version\nassert schema[\"paths\"] == {}\nprint(\"FastAPI metadata validated; no business routes registered\")\n'@ | python; $result = $LASTEXITCODE; Pop-Location; exit $result"
+            },
+            "editable": false,
+            "intention": "Validate FastAPI metadata and absence of business routes",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_d8f0ff83eb6547b698c2774a2ce506a2?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_d8f0ff83eb6547b698c2774a2ce506a2%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_d8f0ff83eb6547b698c2774a2ce506a2",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_d8f0ff83eb6547b698c2774a2ce506a2\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "FastAPI metadata validated; no business routes registered\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_d8f0ff83eb6547b698c2774a2ce506a2",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795224820717,
+          "completedAt": 1795224827718
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Running `git diff --check; git status --short; git diff -- .\\functional_codebase\\app\\m...`",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "git diff --check; git status --short; git diff -- .\\functional_codebase\\app\\main.py"
+            },
+            "editable": false,
+            "intention": "Review entry point changes",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_d1a73f74eab04b9e9596136d7205974a?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_d1a73f74eab04b9e9596136d7205974a%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_d1a73f74eab04b9e9596136d7205974a",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_d1a73f74eab04b9e9596136d7205974a\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": " M functional_codebase/app/main.py\r\ndiff --git a/functional_codebase/app/main.py b/functional_codebase/app/main.py\r\nindex a70247d..d2c8e6f 100644\r\n--- a/functional_codebase/app/main.py\r\n+++ b/functional_codebase/app/main.py\r\n@@ -1,3 +1,6 @@\r\n from fastapi import FastAPI\r\n \r\n-app = FastAPI(title=\"Research Blog & Project Discussion Board\")\r\n+app = FastAPI(\r\n+    title=\"Research Blog & Project Discussion Board (RBPDB)\",\r\n+    version=\"0.1.0\",\r\n+)\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_d1a73f74eab04b9e9596136d7205974a",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795224820719,
+          "completedAt": 1795224821191
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "Clean generated Python cache and confirm entry point diff",
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "Remove-Item .\\functional_codebase\\app\\__pycache__ -Recurse -Force -ErrorAction SilentlyContinue; git diff --check; git status --short"
+            },
+            "editable": false,
+            "intention": "Clean generated Python cache and confirm entry point diff",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_db6b3837de0b48f0970ac42072868528?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_db6b3837de0b48f0970ac42072868528%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_db6b3837de0b48f0970ac42072868528",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_db6b3837de0b48f0970ac42072868528\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "warning: in the working copy of '.obsidian/workspace.json', LF will be replaced by CRLF the next time Git touches it\r\n M .obsidian/workspace.json\r\n M functional_codebase/app/main.py\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_db6b3837de0b48f0970ac42072868528",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795224828696,
+          "completedAt": 1795224829552
+        },
+        {
+          "value": "Updated [main.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py>) with FastAPI initialization, the RBPDB API title, and version `0.1.0`. No business routes were added. Metadata and the empty OpenAPI paths were validated.\n\nRun from `functional-codebase`:\n\n```powershell\n# Locally\nuvicorn app.main:app --reload\n\n# Through Docker Compose\ndocker compose up --build\n```",
+          "isTrusted": false,
+          "supportThemeIcons": false,
+          "supportHtml": false
+        }
+      ],
+      "agent": {
+        "id": "agent-host-copilotcli",
+        "name": "agent-host-copilotcli",
+        "fullName": "Copilot",
+        "description": "Copilot SDK agent running in the local agent host process",
+        "extensionId": {
+          "value": "vscode.agent-host",
+          "_lower": "vscode.agent-host"
+        },
+        "extensionPublisherId": "vscode",
+        "extensionDisplayName": "Agent Host",
+        "isDefault": false,
+        "isDynamic": true,
+        "isCore": true,
+        "metadata": {
+          "themeIcon": {
+            "id": "copilot"
+          }
+        },
+        "slashCommands": [],
+        "locations": [
+          "panel"
+        ],
+        "modes": [
+          "agent",
+          "ask"
+        ],
+        "disambiguation": []
+      },
+      "timestamp": 1795224803180,
+      "modelId": "agent-host-copilotcli:auto",
+      "modelConfiguration": {
+        "tier": "balance",
+        "vscode.modelConfiguration.tier.source": "default"
+      },
+      "modeInfo": {
+        "kind": "agent",
+        "isBuiltin": true,
+        "telemetryModeId": "agent",
+        "telemetryModeName": "agent",
+        "permissionLevel": "default"
+      },
+      "responseId": "response_c693d484-d4ff-4865-b985-2bd77d0132ce",
+      "result": {
+        "timings": {
+          "firstProgress": 6205,
+          "totalElapsed": 29099
+        },
+        "details": "Copilot Fusion (gpt-6-luna) • 0.5 credits"
+      },
+      "responseMarkdownInfo": [
+        {
+          "suggestionId": "sgt-fa3b7b88-b004-4172-a785-51ceaf6cd6a9"
+        }
+      ],
+      "followups": [],
+      "modelState": {
+        "value": 1,
+        "completedAt": 1795224832370
+      },
+      "contentReferences": [],
+      "codeCitations": [],
+      "responseTimestamp": 1795224803180,
+      "timeSpentWaiting": 5105,
+      "promptTokens": 75024,
+      "completionTokens": 2124,
+      "lastCallCompletionTokens": 250,
+      "copilotCredits": 0.522186,
+      "modelTotals": [
+        {
+          "model": "gpt-6-luna",
+          "inputTokens": 369345,
+          "cachedTokens": 365286,
+          "outputTokens": 2124
+        }
+      ],
+      "sessionCopilotCredits": 5.3277945,
+      "sessionCopilotCreditsStatus": "complete",
+      "elapsedMs": 24085
+    },
+    {
+      "requestId": "request_ff8958cf-c683-4d62-80a6-93674a3b991f",
+      "message": {
+        "parts": [
+          {
+            "range": {
+              "start": 0,
+              "endExclusive": 395
+            },
+            "editorRange": {
+              "startLineNumber": 1,
+              "startColumn": 1,
+              "endLineNumber": 27,
+              "endColumn": 98
+            },
+            "text": "Create health-check endpoints for the FastAPI application.\r\n\r\nRequirements:\r\n\r\nImplement:\r\n\r\nGET /health\r\n\r\nResponse:\r\n\r\n{\r\n\r\n  \"status\": \"healthy\"\r\n\r\n}\r\n\r\nImplement:\r\n\r\nGET /health/db\r\n\r\nRequirements:\r\n\r\n- Open a database session\r\n- Execute a simple database query\r\n- Return success or failure\r\n\r\nProvide complete router implementation and explain how these endpoints verify application health.",
+            "kind": "text"
+          }
+        ],
+        "text": "Create health-check endpoints for the FastAPI application.\r\n\r\nRequirements:\r\n\r\nImplement:\r\n\r\nGET /health\r\n\r\nResponse:\r\n\r\n{\r\n\r\n  \"status\": \"healthy\"\r\n\r\n}\r\n\r\nImplement:\r\n\r\nGET /health/db\r\n\r\nRequirements:\r\n\r\n- Open a database session\r\n- Execute a simple database query\r\n- Return success or failure\r\n\r\nProvide complete router implementation and explain how these endpoints verify application health."
+      },
+      "variableData": {
+        "variables": []
+      },
+      "response": [
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"path\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\\\\functional_codebase\\\\app\\\\main.py\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "\ndiff --git a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py\nindex 0000000..0000000 100644\n--- a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py\n+++ b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py\n@@ -1,7 +1,7 @@\n from fastapi import FastAPI\n \n app = FastAPI(\n     title=\"Research Blog & Project Discussion Board (RBPDB)\",\n     version=\"0.1.0\",\n )\n \n",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_b0748444c2dd4bd89539669d761cc771",
+          "toolId": "view",
+          "summary": {
+            "kind": "read",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "path": "/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795224920184,
+          "completedAt": 1795224920466
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/db/database.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/db/database.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"path\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\\\\functional_codebase\\\\app\\\\db\\\\database.py\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "\ndiff --git a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/db/database.py b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/db/database.py\nindex 0000000..0000000 100644\n--- a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/db/database.py\n+++ b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/db/database.py\n@@ -1,28 +1,28 @@\n from collections.abc import Generator\n \n from sqlalchemy import create_engine\n from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker\n \n from app.core.config import settings\n \n engine = create_engine(settings.database_url, pool_pre_ping=True)\n \n \n class Base(DeclarativeBase):\n     pass\n \n \n SessionLocal = sessionmaker(\n     autocommit=False,\n     autoflush=False,\n     bind=engine,\n )\n \n \n def get_db() -> Generator[Session, None, None]:\n     db = SessionLocal()\n     try:\n         yield db\n     finally:\n         db.close()\n \n",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_0e7ef58192d94005a303d6ae1cb7e360",
+          "toolId": "view",
+          "summary": {
+            "kind": "read",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "path": "/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/db/database.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795224920192,
+          "completedAt": 1795224920469
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/api/__init__.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/api/__init__.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"path\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\\\\functional_codebase\\\\app\\\\api\\\\__init__.py\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "\ndiff --git a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/__init__.py b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/__init__.py\nindex 0000000..0000000 100644\n--- a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/__init__.py\n+++ b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/__init__.py\n@@ -1,0 +1,0 @@\n\n",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_92873c53c41f4fd39b3ccca2991f84db",
+          "toolId": "view",
+          "summary": {
+            "kind": "read",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "path": "/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/__init__.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795224920194,
+          "completedAt": 1795224920473
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Running `Get-ChildItem -Force .\\functional_codebase\\app\\tests; git status --short; Get...`",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "Get-ChildItem -Force .\\functional_codebase\\app\\tests; git status --short; Get-Content .\\functional_codebase\\requirements.txt"
+            },
+            "editable": false,
+            "intention": "Inspect test layout, current changes, and dependencies",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_25c7bb2f1fa94aabbcb76c2fc97da3c4?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_25c7bb2f1fa94aabbcb76c2fc97da3c4%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_25c7bb2f1fa94aabbcb76c2fc97da3c4",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_25c7bb2f1fa94aabbcb76c2fc97da3c4\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "\r\n\r\n    Directory: D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software \r\n    Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\tests\r\n\r\n\r\nMode                 LastWriteTime         Length Name                                                                 \r\n----                 -------------         ------ ----                                                                 \r\n-a----        11/18/2026   6:58 PM              0 __init__.py                                                          \r\n M .obsidian/workspace.json\r\n M functional_codebase/app/main.py\r\nfastapi>=0.115,<1.0\r\nuvicorn[standard]>=0.30,<1.0\r\npydantic>=2.0,<3.0\r\npydantic-settings>=2.0,<3.0\r\npython-dotenv>=1.0,<2.0\r\nSQLAlchemy>=2.0,<3.0\r\npsycopg[binary]>=3.2,<4.0\r\nalembic>=1.13,<2.0\r\n\r\n\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_25c7bb2f1fa94aabbcb76c2fc97da3c4",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795224920195,
+          "completedAt": 1795224920763
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Search for `TestClient|pytest|health_check|include_router`",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "search"
+          },
+          "toolCallId": "call_9b0df8c263c24f8eb2d5e0001166d3bf",
+          "toolId": "rg",
+          "summary": {
+            "kind": "search",
+            "queries": [
+              "TestClient|pytest|health_check|include_router"
+            ],
+            "searchKind": "text"
+          },
+          "startedAt": 1795224920196,
+          "completedAt": 1795224920507
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "presentation": "hidden",
+          "invocationMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py), [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolCallId": "custom_call_d35117b410dd4e64bb221f3612b0d297",
+          "toolId": "apply_patch",
+          "summary": {
+            "kind": "edit",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py",
+                  "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py",
+                  "scheme": "file"
+                }
+              },
+              {
+                "uri": {
+                  "$mid": 1,
+                  "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+                  "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795224927167,
+          "completedAt": 1795224929119
+        },
+        {
+          "kind": "externalEdit",
+          "uri": {
+            "$mid": 1,
+            "fsPath": "d:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\api\\health.py",
+            "_sep": 1,
+            "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py",
+            "scheme": "file"
+          },
+          "editKind": "edit",
+          "beforeContentUri": {
+            "$mid": 1,
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9kMzUxMTdiNDEwZGQ0ZTY0YmIyMjFmMzYxMmIwZDI5N1wiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxhcGlcXFxcaGVhbHRoLnB5XCIsXCJwYXJ0XCI6XCJiZWZvcmVcIn0iLCJjb250ZW50UmVmIjp0cnVlLCJmaWxlVXJpIjoiZmlsZTovLy9kJTNBL0Rvd25sb2Fkc19EL0dyYWQlMjBTdHVmZi9DUzc2MyUyMCUyOFNlY3VyZSUyMFNvZnR3YXJlJTIwRGV2JTI5L0dpdEh1Yi9DUzc2My1Qcm9qZWN0LUYyNi9mdW5jdGlvbmFsX2NvZGViYXNlL2FwcC9hcGkvaGVhbHRoLnB5In0"
+          },
+          "afterContentUri": {
+            "$mid": 1,
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9kMzUxMTdiNDEwZGQ0ZTY0YmIyMjFmMzYxMmIwZDI5N1wiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxhcGlcXFxcaGVhbHRoLnB5XCIsXCJwYXJ0XCI6XCJhZnRlclwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL2FwaS9oZWFsdGgucHkifQ"
+          },
+          "diff": {
+            "added": 32,
+            "removed": 0
+          },
+          "undoStopId": "custom_call_d35117b410dd4e64bb221f3612b0d297"
+        },
+        {
+          "kind": "externalEdit",
+          "uri": {
+            "$mid": 1,
+            "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "scheme": "file"
+          },
+          "editKind": "edit",
+          "beforeContentUri": {
+            "$mid": 1,
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9kMzUxMTdiNDEwZGQ0ZTY0YmIyMjFmMzYxMmIwZDI5N1wiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxtYWluLnB5XCIsXCJwYXJ0XCI6XCJiZWZvcmVcIn0iLCJjb250ZW50UmVmIjp0cnVlLCJmaWxlVXJpIjoiZmlsZTovLy9kJTNBL0Rvd25sb2Fkc19EL0dyYWQlMjBTdHVmZi9DUzc2MyUyMCUyOFNlY3VyZSUyMFNvZnR3YXJlJTIwRGV2JTI5L0dpdEh1Yi9DUzc2My1Qcm9qZWN0LUYyNi9mdW5jdGlvbmFsX2NvZGViYXNlL2FwcC9tYWluLnB5In0"
+          },
+          "afterContentUri": {
+            "$mid": 1,
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9kMzUxMTdiNDEwZGQ0ZTY0YmIyMjFmMzYxMmIwZDI5N1wiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxtYWluLnB5XCIsXCJwYXJ0XCI6XCJhZnRlclwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL21haW4ucHkifQ"
+          },
+          "diff": {
+            "added": 3,
+            "removed": 0
+          },
+          "undoStopId": "custom_call_d35117b410dd4e64bb221f3612b0d297"
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "pylance mcp server: pylanceFileSyntaxErrors",
+          "pastTenseMessage": "pylanceFileSyntaxErrors",
+          "originMessage": "pylance mcp server (MCP Server)",
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"fileUri\": \"file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py\",\n  \"workspaceRoot\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "No syntax errors found in 'file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py'",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_c6881fe0a0c548c8a2801c0ee21660b0",
+          "toolId": "pylance-mcp-server-pylanceFileSyntaxErrors",
+          "summary": {
+            "kind": "unknown"
+          },
+          "startedAt": 1795224936701,
+          "completedAt": 1795224937230
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "pylance mcp server: pylanceFileSyntaxErrors",
+          "pastTenseMessage": "pylanceFileSyntaxErrors",
+          "originMessage": "pylance mcp server (MCP Server)",
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"fileUri\": \"file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py\",\n  \"workspaceRoot\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "No syntax errors found in 'file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py'",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_626a0e4baf9d4942a3a2677120805593",
+          "toolId": "pylance-mcp-server-pylanceFileSyntaxErrors",
+          "summary": {
+            "kind": "unknown"
+          },
+          "startedAt": 1795224936720,
+          "completedAt": 1795224937228
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "Test health routes with SQLite and a simulated database failure",
+          "isConfirmed": {
+            "type": 4,
+            "selectedButton": "allow-once",
+            "selectedButtonKind": "approve"
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "Push-Location .\\functional_codebase; @'\nfrom fastapi import HTTPException\nfrom sqlalchemy import create_engine\nfrom sqlalchemy.exc import SQLAlchemyError\nfrom sqlalchemy.orm import Session\nfrom unittest.mock import Mock\n\nfrom app.api.health import database_health_check, health_check\nfrom app.main import app\n\nassert health_check() == {\"status\": \"healthy\"}\npaths = app.openapi()[\"paths\"]\nassert set(paths) == {\"/health\", \"/health/db\"}\nassert set(paths[\"/health\"]) == {\"get\"}\nassert set(paths[\"/health/db\"]) == {\"get\"}\n\nengine = create_engine(\"sqlite://\")\nwith Session(engine) as session:\n    assert database_health_check(session) == {\"status\": \"healthy\"}\nengine.dispose()\n\nfailing_session = Mock()\nfailing_session.execute.side_effect = SQLAlchemyError(\"simulated database failure\")\ntry:\n    database_health_check(failing_session)\nexcept HTTPException as error:\n    assert error.status_code == 503\n    assert error.detail == \"Database unavailable\"\nelse:\n    raise AssertionError(\"Database failure should return HTTP 503\")\nprint(\"Health routes, SELECT 1 success, and HTTP 503 database failure validated\")\n'@ | python; $result = $LASTEXITCODE; Pop-Location; exit $result"
+            },
+            "editable": false,
+            "intention": "Test health routes with SQLite and a simulated database failure",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_9e5e2ae743934f4987d79968059cef92?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_9e5e2ae743934f4987d79968059cef92%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_9e5e2ae743934f4987d79968059cef92",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_9e5e2ae743934f4987d79968059cef92\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "Database health check failed\r\nTraceback (most recent call last):\r\n  File \"D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\api\\health.py\", line 23, in database_health_check\r\n    db.execute(text(\"SELECT 1\")).scalar_one()\r\n  File \"C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\unittest\\mock.py\", line 1114, in __call__\r\n    return self._mock_call(*args, **kwargs)\r\n  File \"C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\unittest\\mock.py\", line 1118, in _mock_call\r\n    return self._execute_mock_call(*args, **kwargs)\r\n  File \"C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\unittest\\mock.py\", line 1173, in _execute_mock_call\r\n    raise effect\r\nsqlalchemy.exc.SQLAlchemyError: simulated database failure\r\nHealth routes, SELECT 1 success, and HTTP 503 database failure validated\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_9e5e2ae743934f4987d79968059cef92",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795224936721,
+          "completedAt": 1795224946266
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Running `git diff --check; git status --short; git diff -- .\\functional-codebase\\app\\m...`",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "git diff --check; git status --short; git diff -- .\\functional-codebase\\app\\main.py"
+            },
+            "editable": false,
+            "intention": "Review health endpoint changes",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_06b608b2720045e9a0dc3de5c89bc63e?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_06b608b2720045e9a0dc3de5c89bc63e%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_06b608b2720045e9a0dc3de5c89bc63e",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_06b608b2720045e9a0dc3de5c89bc63e\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "warning: in the working copy of '.obsidian/workspace.json', LF will be replaced by CRLF the next time Git touches it\r\n M .obsidian/workspace.json\r\n M functional_codebase/app/main.py\r\n?? functional_codebase/app/api/health.py\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_06b608b2720045e9a0dc3de5c89bc63e",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795224936723,
+          "completedAt": 1795224937200
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "Clean generated Python caches and verify final endpoint changes",
+          "isConfirmed": {
+            "type": 4,
+            "selectedButton": "allow-once",
+            "selectedButtonKind": "approve"
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "Remove-Item .\\functional_codebase\\app\\__pycache__, .\\functional_codebase\\app\\api\\__pycache__, .\\functional_codebase\\app\\core\\__pycache__, .\\functional_codebase\\app\\db\\__pycache__ -Recurse -Force -ErrorAction SilentlyContinue; git diff --check; git status --short"
+            },
+            "editable": false,
+            "intention": "Clean generated Python caches and verify final endpoint changes",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_d5156438bcce41ddb96bff8b31fe967a?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_d5156438bcce41ddb96bff8b31fe967a%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_d5156438bcce41ddb96bff8b31fe967a",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_d5156438bcce41ddb96bff8b31fe967a\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "warning: in the working copy of '.obsidian/workspace.json', LF will be replaced by CRLF the next time Git touches it\r\n M .obsidian/workspace.json\r\n M functional_codebase/app/main.py\r\n?? functional_codebase/app/api/health.py\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_d5156438bcce41ddb96bff8b31fe967a",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795224954146,
+          "completedAt": 1795224957649
+        },
+        {
+          "value": "Added the complete health router in [health.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/health.py>) and registered it in [main.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py>).\n\n- `GET /health` returns `{\"status\": \"healthy\"}` as a basic application liveness check.\n- `GET /health/db` opens a session through `get_db`, runs `SELECT 1`, and returns healthy on success. A SQLAlchemy error is logged and returns HTTP 503 with a database-unavailable detail.\n\nValidated both routes, the successful query path, and the 503 failure path.",
+          "isTrusted": false,
+          "supportThemeIcons": false,
+          "supportHtml": false
+        }
+      ],
+      "agent": {
+        "id": "agent-host-copilotcli",
+        "name": "agent-host-copilotcli",
+        "fullName": "Copilot",
+        "description": "Copilot SDK agent running in the local agent host process",
+        "extensionId": {
+          "value": "vscode.agent-host",
+          "_lower": "vscode.agent-host"
+        },
+        "extensionPublisherId": "vscode",
+        "extensionDisplayName": "Agent Host",
+        "isDefault": false,
+        "isDynamic": true,
+        "isCore": true,
+        "metadata": {
+          "themeIcon": {
+            "id": "copilot"
+          }
+        },
+        "slashCommands": [],
+        "locations": [
+          "panel"
+        ],
+        "modes": [
+          "agent",
+          "ask"
+        ],
+        "disambiguation": []
+      },
+      "timestamp": 1795224905025,
+      "modelId": "agent-host-copilotcli:auto",
+      "modelConfiguration": {
+        "tier": "balance",
+        "vscode.modelConfiguration.tier.source": "default"
+      },
+      "modeInfo": {
+        "kind": "agent",
+        "isBuiltin": true,
+        "telemetryModeId": "agent",
+        "telemetryModeName": "agent",
+        "permissionLevel": "default"
+      },
+      "responseId": "response_735db430-52ec-47b4-855a-3e226e6155f7",
+      "result": {
+        "timings": {
+          "firstProgress": 15099,
+          "totalElapsed": 55173
+        },
+        "details": "Copilot Fusion (gpt-6-luna) • 0.7 credits"
+      },
+      "responseMarkdownInfo": [],
+      "followups": [],
+      "modelState": {
+        "value": 1,
+        "completedAt": 1795224960259
+      },
+      "contentReferences": [],
+      "codeCitations": [],
+      "responseTimestamp": 1795224905025,
+      "timeSpentWaiting": 10266,
+      "promptTokens": 81460,
+      "completionTokens": 5121,
+      "lastCallCompletionTokens": 213,
+      "copilotCredits": 0.724064,
+      "modelTotals": [
+        {
+          "model": "gpt-6-luna",
+          "inputTokens": 393865,
+          "cachedTokens": 387414,
+          "outputTokens": 5121
+        }
+      ],
+      "sessionCopilotCredits": 6.036612,
+      "sessionCopilotCreditsStatus": "complete",
+      "elapsedMs": 44968
+    },
+    {
+      "requestId": "request_26bbe6d6-5e6f-4354-bf8f-35e795452764",
+      "message": {
+        "parts": [
+          {
+            "range": {
+              "start": 0,
+              "endExclusive": 530
+            },
+            "editorRange": {
+              "startLineNumber": 1,
+              "startColumn": 1,
+              "endLineNumber": 31,
+              "endColumn": 51
+            },
+            "text": "Implement centralized exception handling for the FastAPI application.\r\n\r\nRequirements:\r\n\r\nCreate handlers for:\r\n\r\n- Request validation errors\r\n- SQLAlchemy/database errors\r\n- Unexpected server errors\r\n\r\nUse a consistent error response format:\r\n\r\n{\r\n\r\n  \"error\": {\r\n\r\n    \"code\": \"ERROR_CODE\",\r\n\r\n    \"message\": \"Human readable message\"\r\n\r\n  },\r\n\r\n  \"timestamp\": \"...\",\r\n\r\n  \"request_id\": \"...\"\r\n\r\n}\r\n\r\nIntegrate exception handling into the FastAPI application startup process.\r\n\r\nProvide examples of responses for each error type.",
+            "kind": "text"
+          }
+        ],
+        "text": "Implement centralized exception handling for the FastAPI application.\r\n\r\nRequirements:\r\n\r\nCreate handlers for:\r\n\r\n- Request validation errors\r\n- SQLAlchemy/database errors\r\n- Unexpected server errors\r\n\r\nUse a consistent error response format:\r\n\r\n{\r\n\r\n  \"error\": {\r\n\r\n    \"code\": \"ERROR_CODE\",\r\n\r\n    \"message\": \"Human readable message\"\r\n\r\n  },\r\n\r\n  \"timestamp\": \"...\",\r\n\r\n  \"request_id\": \"...\"\r\n\r\n}\r\n\r\nIntegrate exception handling into the FastAPI application startup process.\r\n\r\nProvide examples of responses for each error type."
+      },
+      "variableData": {
+        "variables": []
+      },
+      "response": [
+        {
+          "value": "I’ll add reusable error-envelope handlers and request-ID middleware, then register them when the FastAPI app is created. I’ll preserve the existing health-check 503 behavior while formatting its `HTTPException` response consistently with the other errors.",
+          "isTrusted": false,
+          "supportThemeIcons": false,
+          "supportHtml": false
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "presentation": "hidden",
+          "invocationMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py), [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolCallId": "custom_call_e4b8132bac85447188e4c8c267bb268a",
+          "toolId": "apply_patch",
+          "summary": {
+            "kind": "edit",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+                  "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+                  "scheme": "file"
+                }
+              },
+              {
+                "uri": {
+                  "$mid": 1,
+                  "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+                  "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795225102175,
+          "completedAt": 1795225107548
+        },
+        {
+          "kind": "externalEdit",
+          "uri": {
+            "$mid": 1,
+            "fsPath": "d:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\core\\exceptions.py",
+            "_sep": 1,
+            "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "file"
+          },
+          "editKind": "edit",
+          "beforeContentUri": {
+            "$mid": 1,
+            "external": "vscode-agent-host://local/d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py?_ah%3DeyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNGI4MTMyYmFjODU0NDcxODhlNGM4YzI2N2JiMjY4YVwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImJlZm9yZVwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL2NvcmUvZXhjZXB0aW9ucy5weSJ9",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNGI4MTMyYmFjODU0NDcxODhlNGM4YzI2N2JiMjY4YVwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImJlZm9yZVwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL2NvcmUvZXhjZXB0aW9ucy5weSJ9"
+          },
+          "afterContentUri": {
+            "$mid": 1,
+            "external": "vscode-agent-host://local/d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py?_ah%3DeyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNGI4MTMyYmFjODU0NDcxODhlNGM4YzI2N2JiMjY4YVwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImFmdGVyXCJ9IiwiY29udGVudFJlZiI6dHJ1ZSwiZmlsZVVyaSI6ImZpbGU6Ly8vZCUzQS9Eb3dubG9hZHNfRC9HcmFkJTIwU3R1ZmYvQ1M3NjMlMjAlMjhTZWN1cmUlMjBTb2Z0d2FyZSUyMERldiUyOS9HaXRIdWIvQ1M3NjMtUHJvamVjdC1GMjYvZnVuY3Rpb25hbF9jb2RlYmFzZS9hcHAvY29yZS9leGNlcHRpb25zLnB5In0",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNGI4MTMyYmFjODU0NDcxODhlNGM4YzI2N2JiMjY4YVwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImFmdGVyXCJ9IiwiY29udGVudFJlZiI6dHJ1ZSwiZmlsZVVyaSI6ImZpbGU6Ly8vZCUzQS9Eb3dubG9hZHNfRC9HcmFkJTIwU3R1ZmYvQ1M3NjMlMjAlMjhTZWN1cmUlMjBTb2Z0d2FyZSUyMERldiUyOS9HaXRIdWIvQ1M3NjMtUHJvamVjdC1GMjYvZnVuY3Rpb25hbF9jb2RlYmFzZS9hcHAvY29yZS9leGNlcHRpb25zLnB5In0"
+          },
+          "diff": {
+            "added": 110,
+            "removed": 0
+          },
+          "undoStopId": "custom_call_e4b8132bac85447188e4c8c267bb268a"
+        },
+        {
+          "kind": "externalEdit",
+          "uri": {
+            "$mid": 1,
+            "fsPath": "d:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\main.py",
+            "_sep": 1,
+            "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "scheme": "file"
+          },
+          "editKind": "edit",
+          "beforeContentUri": {
+            "$mid": 1,
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNGI4MTMyYmFjODU0NDcxODhlNGM4YzI2N2JiMjY4YVwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxtYWluLnB5XCIsXCJwYXJ0XCI6XCJiZWZvcmVcIn0iLCJjb250ZW50UmVmIjp0cnVlLCJmaWxlVXJpIjoiZmlsZTovLy9kJTNBL0Rvd25sb2Fkc19EL0dyYWQlMjBTdHVmZi9DUzc2MyUyMCUyOFNlY3VyZSUyMFNvZnR3YXJlJTIwRGV2JTI5L0dpdEh1Yi9DUzc2My1Qcm9qZWN0LUYyNi9mdW5jdGlvbmFsX2NvZGViYXNlL2FwcC9tYWluLnB5In0"
+          },
+          "afterContentUri": {
+            "$mid": 1,
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNGI4MTMyYmFjODU0NDcxODhlNGM4YzI2N2JiMjY4YVwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxtYWluLnB5XCIsXCJwYXJ0XCI6XCJhZnRlclwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL21haW4ucHkifQ"
+          },
+          "diff": {
+            "added": 2,
+            "removed": 0
+          },
+          "undoStopId": "custom_call_e4b8132bac85447188e4c8c267bb268a"
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "presentation": "hidden",
+          "invocationMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolCallId": "custom_call_1800384d89d44dbfabf123755975d330",
+          "toolId": "apply_patch",
+          "summary": {
+            "kind": "edit",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+                  "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795225125663,
+          "completedAt": 1795225128537
+        },
+        {
+          "kind": "externalEdit",
+          "uri": {
+            "$mid": 1,
+            "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "file"
+          },
+          "editKind": "edit",
+          "beforeContentUri": {
+            "$mid": 1,
+            "external": "vscode-agent-host://local/d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py?_ah%3DeyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF8xODAwMzg0ZDg5ZDQ0ZGJmYWJmMTIzNzU1OTc1ZDMzMFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImJlZm9yZVwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL2NvcmUvZXhjZXB0aW9ucy5weSJ9",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF8xODAwMzg0ZDg5ZDQ0ZGJmYWJmMTIzNzU1OTc1ZDMzMFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImJlZm9yZVwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL2NvcmUvZXhjZXB0aW9ucy5weSJ9"
+          },
+          "afterContentUri": {
+            "$mid": 1,
+            "external": "vscode-agent-host://local/d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py?_ah%3DeyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF8xODAwMzg0ZDg5ZDQ0ZGJmYWJmMTIzNzU1OTc1ZDMzMFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImFmdGVyXCJ9IiwiY29udGVudFJlZiI6dHJ1ZSwiZmlsZVVyaSI6ImZpbGU6Ly8vZCUzQS9Eb3dubG9hZHNfRC9HcmFkJTIwU3R1ZmYvQ1M3NjMlMjAlMjhTZWN1cmUlMjBTb2Z0d2FyZSUyMERldiUyOS9HaXRIdWIvQ1M3NjMtUHJvamVjdC1GMjYvZnVuY3Rpb25hbF9jb2RlYmFzZS9hcHAvY29yZS9leGNlcHRpb25zLnB5In0",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF8xODAwMzg0ZDg5ZDQ0ZGJmYWJmMTIzNzU1OTc1ZDMzMFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImFmdGVyXCJ9IiwiY29udGVudFJlZiI6dHJ1ZSwiZmlsZVVyaSI6ImZpbGU6Ly8vZCUzQS9Eb3dubG9hZHNfRC9HcmFkJTIwU3R1ZmYvQ1M3NjMlMjAlMjhTZWN1cmUlMjBTb2Z0d2FyZSUyMERldiUyOS9HaXRIdWIvQ1M3NjMtUHJvamVjdC1GMjYvZnVuY3Rpb25hbF9jb2RlYmFzZS9hcHAvY29yZS9leGNlcHRpb25zLnB5In0"
+          },
+          "diff": {
+            "added": 20,
+            "removed": 8
+          },
+          "undoStopId": "custom_call_1800384d89d44dbfabf123755975d330"
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "presentation": "hidden",
+          "invocationMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolCallId": "custom_call_3d7a4ccc045d44bb8874944cbcd5287c",
+          "toolId": "apply_patch",
+          "summary": {
+            "kind": "edit",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+                  "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795225129679,
+          "completedAt": 1795225130307
+        },
+        {
+          "kind": "externalEdit",
+          "uri": {
+            "$mid": 1,
+            "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "file"
+          },
+          "editKind": "edit",
+          "beforeContentUri": {
+            "$mid": 1,
+            "external": "vscode-agent-host://local/d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py?_ah%3DeyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF8zZDdhNGNjYzA0NWQ0NGJiODg3NDk0NGNiY2Q1Mjg3Y1wiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImJlZm9yZVwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL2NvcmUvZXhjZXB0aW9ucy5weSJ9",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF8zZDdhNGNjYzA0NWQ0NGJiODg3NDk0NGNiY2Q1Mjg3Y1wiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImJlZm9yZVwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL2NvcmUvZXhjZXB0aW9ucy5weSJ9"
+          },
+          "afterContentUri": {
+            "$mid": 1,
+            "external": "vscode-agent-host://local/d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py?_ah%3DeyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF8zZDdhNGNjYzA0NWQ0NGJiODg3NDk0NGNiY2Q1Mjg3Y1wiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImFmdGVyXCJ9IiwiY29udGVudFJlZiI6dHJ1ZSwiZmlsZVVyaSI6ImZpbGU6Ly8vZCUzQS9Eb3dubG9hZHNfRC9HcmFkJTIwU3R1ZmYvQ1M3NjMlMjAlMjhTZWN1cmUlMjBTb2Z0d2FyZSUyMERldiUyOS9HaXRIdWIvQ1M3NjMtUHJvamVjdC1GMjYvZnVuY3Rpb25hbF9jb2RlYmFzZS9hcHAvY29yZS9leGNlcHRpb25zLnB5In0",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF8zZDdhNGNjYzA0NWQ0NGJiODg3NDk0NGNiY2Q1Mjg3Y1wiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImFmdGVyXCJ9IiwiY29udGVudFJlZiI6dHJ1ZSwiZmlsZVVyaSI6ImZpbGU6Ly8vZCUzQS9Eb3dubG9hZHNfRC9HcmFkJTIwU3R1ZmYvQ1M3NjMlMjAlMjhTZWN1cmUlMjBTb2Z0d2FyZSUyMERldiUyOS9HaXRIdWIvQ1M3NjMtUHJvamVjdC1GMjYvZnVuY3Rpb25hbF9jb2RlYmFzZS9hcHAvY29yZS9leGNlcHRpb25zLnB5In0"
+          },
+          "diff": {
+            "added": 0,
+            "removed": 1
+          },
+          "undoStopId": "custom_call_3d7a4ccc045d44bb8874944cbcd5287c"
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Read [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"path\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\\\\functional_codebase\\\\app\\\\core\\\\exceptions.py\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "\ndiff --git a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py\nindex 0000000..0000000 100644\n--- a/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py\n+++ b/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py\n@@ -1,121 +1,121 @@\n import logging\n from datetime import datetime, timezone\n from uuid import uuid4\n \n from fastapi import FastAPI, HTTPException, Request, Response, status\n from fastapi.exceptions import RequestValidationError\n from fastapi.responses import JSONResponse\n from sqlalchemy.exc import SQLAlchemyError\n from starlette.middleware.base import RequestResponseEndpoint\n \n logger = logging.getLogger(__name__)\n \n \n def _request_id(request: Request) -> str:\n     request_id = getattr(request.state, \"request_id\", None)\n     if request_id is None:\n         request_id = str(uuid4())\n         request.state.request_id = request_id\n     return request_id\n \n \n def _error_response(\n     request: Request,\n     status_code: int,\n     code: str,\n     message: str,\n     headers: dict[str, str] | None = None,\n ) -> JSONResponse:\n     request_id = _request_id(request)\n     response_headers = dict(headers or {})\n     response_headers[\"X-Request-ID\"] = request_id\n \n     return JSONResponse(\n         status_code=status_code,\n         content={\n             \"error\": {\n                 \"code\": code,\n                 \"message\": message,\n             },\n             \"timestamp\": datetime.now(timezone.utc).isoformat(),\n             \"request_id\": request_id,\n         },\n         headers=response_headers,\n     )\n \n \n async def validation_exception_handler(\n     request: Request,\n     exc: RequestValidationError,\n ) -> JSONResponse:\n     return _error_response(\n         request,\n         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,\n         code=\"VALIDATION_ERROR\",\n         message=\"Request validation failed\",\n     )\n \n \n async def http_exception_handler(\n     request: Request,\n     exc: HTTPException,\n ) -> JSONResponse:\n     message = (\n         exc.detail\n         if isinstance(exc.detail, str)\n         else \"The request could not be completed\"\n     )\n     return _error_response(\n         request,\n         status_code=exc.status_code,\n         code=\"HTTP_ERROR\",\n         message=message,\n         headers=exc.headers,\n     )\n \n \n async def database_exception_handler(\n     request: Request,\n     exc: SQLAlchemyError,\n ) -> JSONResponse:\n     request_id = _request_id(request)\n     logger.exception(\"Database error for request_id=%s\", request_id)\n     return _error_response(\n         request,\n         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,\n         code=\"DATABASE_ERROR\",\n         message=\"A database error occurred\",\n     )\n \n \n async def unexpected_exception_handler(\n     request: Request,\n     exc: Exception,\n ) -> JSONResponse:\n     request_id = _request_id(request)\n     logger.exception(\"Unexpected server error for request_id=%s\", request_id)\n     return _error_response(\n         request,\n         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,\n         code=\"INTERNAL_SERVER_ERROR\",\n         message=\"An unexpected server error occurred\",\n     )\n \n \n def register_exception_handlers(app: FastAPI) -> None:\n     @app.middleware(\"http\")\n     async def add_request_id(\n         request: Request,\n         call_next: RequestResponseEndpoint,\n     ) -> Response:\n         request_id = str(uuid4())\n         request.state.request_id = request_id\n         response = await call_next(request)\n         response.headers[\"X-Request-ID\"] = request_id\n         return response\n \n     app.add_exception_handler(RequestValidationError, validation_exception_handler)\n     app.add_exception_handler(HTTPException, http_exception_handler)\n     app.add_exception_handler(SQLAlchemyError, database_exception_handler)\n     app.add_exception_handler(Exception, unexpected_exception_handler)\n \n",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_91092cf72f494793a01b068f6fa8f350",
+          "toolId": "view",
+          "summary": {
+            "kind": "read",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "path": "/D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795225131394,
+          "completedAt": 1795225131795
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "pylance mcp server: pylanceFileSyntaxErrors",
+          "pastTenseMessage": "pylanceFileSyntaxErrors",
+          "originMessage": "pylance mcp server (MCP Server)",
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"fileUri\": \"file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py\",\n  \"workspaceRoot\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "No syntax errors found in 'file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py'",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_cbda8e98e06847d3b7461ab2a14f4985",
+          "toolId": "pylance-mcp-server-pylanceFileSyntaxErrors",
+          "summary": {
+            "kind": "unknown"
+          },
+          "startedAt": 1795225142456,
+          "completedAt": 1795225142959
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "pylance mcp server: pylanceFileSyntaxErrors",
+          "pastTenseMessage": "pylanceFileSyntaxErrors",
+          "originMessage": "pylance mcp server (MCP Server)",
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"fileUri\": \"file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py\",\n  \"workspaceRoot\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "No syntax errors found in 'file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py'",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_8ac0cfb7f22443779d4c6d1893cc835f",
+          "toolId": "pylance-mcp-server-pylanceFileSyntaxErrors",
+          "summary": {
+            "kind": "unknown"
+          },
+          "startedAt": 1795225142468,
+          "completedAt": 1795225142981
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "Validate centralized error handlers and response envelopes",
+          "isConfirmed": {
+            "type": 4,
+            "selectedButton": "allow-once",
+            "selectedButtonKind": "approve"
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "Push-Location .\\functional_codebase; @'\nimport asyncio\nimport json\nfrom datetime import datetime\nfrom unittest.mock import Mock\nfrom uuid import UUID\n\nfrom fastapi import HTTPException\nfrom fastapi.exceptions import RequestValidationError\nfrom sqlalchemy.exc import SQLAlchemyError\nfrom starlette.requests import Request\n\nfrom app.core.exceptions import (\n    database_exception_handler,\n    http_exception_handler,\n    unexpected_exception_handler,\n    validation_exception_handler,\n)\nfrom app.main import app\n\nscope = {\n    \"type\": \"http\", \"asgi\": {\"version\": \"3.0\"}, \"http_version\": \"1.1\",\n    \"method\": \"GET\", \"scheme\": \"http\", \"path\": \"/\", \"raw_path\": b\"/\",\n    \"query_string\": b\"\", \"headers\": [], \"client\": (\"test\", 1),\n    \"server\": (\"test\", 80), \"state\": {\"request_id\": \"test-request-id\"},\n}\nrequest = Request(scope)\n\nasync def validate_handler(handler, exception, code, message, status_code):\n    response = await handler(request, exception)\n    payload = json.loads(response.body)\n    assert response.status_code == status_code\n    assert payload[\"error\"] == {\"code\": code, \"message\": message}\n    assert payload[\"request_id\"] == \"test-request-id\"\n    assert response.headers[\"x-request-id\"] == \"test-request-id\"\n    datetime.fromisoformat(payload[\"timestamp\"])\n\nasync def main():\n    await validate_handler(validation_exception_handler, RequestValidationError([]), \"VALIDATION_ERROR\", \"Request validation failed\", 422)\n    await validate_handler(database_exception_handler, SQLAlchemyError(\"secret\"), \"DATABASE_ERROR\", \"A database error occurred\", 500)\n    await validate_handler(unexpected_exception_handler, RuntimeError(\"secret\"), \"INTERNAL_SERVER_ERROR\", \"An unexpected server error occurred\", 500)\n    await validate_handler(http_exception_handler, HTTPException(status_code=503, detail=\"Database unavailable\"), \"HTTP_ERROR\", \"Database unavailable\", 503)\n\nasyncio.run(main())\nassert RequestValidationError in app.exception_handlers\nassert SQLAlchemyError in app.exception_handlers\nassert Exception in app.exception_handlers\nassert any(m.cls.__name__ == \"BaseHTTPMiddleware\" for m in app.user_middleware)\nprint(\"Error handlers, response envelopes, timestamps, request IDs, and app registration validated\")\n'@ | python; $result = $LASTEXITCODE; Pop-Location; exit $result"
+            },
+            "editable": false,
+            "intention": "Validate centralized error handlers and response envelopes",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_30adc566ae034923bf0465eef42a4542?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_30adc566ae034923bf0465eef42a4542%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_30adc566ae034923bf0465eef42a4542",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_30adc566ae034923bf0465eef42a4542\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "<stdin>:29: StarletteDeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.\r\nDatabase error for request_id=test-request-id\r\nNoneType: None\r\nUnexpected server error for request_id=test-request-id\r\nNoneType: None\r\nError handlers, response envelopes, timestamps, request IDs, and app registration validated\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_30adc566ae034923bf0465eef42a4542",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795225142469,
+          "completedAt": 1795225153424
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Running `git diff --check; git status --short; git diff -- .\\functional_codebase\\app\\m...`",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "git diff --check; git status --short; git diff -- .\\functional_codebase\\app\\main.py"
+            },
+            "editable": false,
+            "intention": "Review exception handling integration",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_e755857f624a4adcae3a7636bd9606ed?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_e755857f624a4adcae3a7636bd9606ed%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_e755857f624a4adcae3a7636bd9606ed",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_e755857f624a4adcae3a7636bd9606ed\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "warning: in the working copy of '.obsidian/workspace.json', LF will be replaced by CRLF the next time Git touches it\r\n M .obsidian/workspace.json\r\n M functional_codebase/app/main.py\r\n?? functional_codebase/app/api/health.py\r\n?? functional_codebase/app/core/exceptions.py\r\ndiff --git a/functional_codebase/app/main.py b/functional_codebase/app/main.py\r\nindex a70247d..0294f4c 100644\r\n--- a/functional_codebase/app/main.py\r\n+++ b/functional_codebase/app/main.py\r\n@@ -1,3 +1,11 @@\r\n from fastapi import FastAPI\r\n \r\n-app = FastAPI(title=\"Research Blog & Project Discussion Board\")\r\n+from app.api.health import router as health_router\r\n+from app.core.exceptions import register_exception_handlers\r\n+\r\n+app = FastAPI(\r\n+    title=\"Research Blog & Project Discussion Board (RBPDB)\",\r\n+    version=\"0.1.0\",\r\n+)\r\n+register_exception_handlers(app)\r\n+app.include_router(health_router)\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_e755857f624a4adcae3a7636bd9606ed",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795225142476,
+          "completedAt": 1795225143016
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "presentation": "hidden",
+          "invocationMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "pastTenseMessage": {
+            "value": "Edit [](file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py)",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolCallId": "custom_call_e723d719ad1e42ebb58a21bb6f19b9fd",
+          "toolId": "apply_patch",
+          "summary": {
+            "kind": "edit",
+            "resources": [
+              {
+                "uri": {
+                  "$mid": 1,
+                  "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+                  "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+                  "scheme": "file"
+                }
+              }
+            ]
+          },
+          "startedAt": 1795225168801,
+          "completedAt": 1795225169472
+        },
+        {
+          "kind": "externalEdit",
+          "uri": {
+            "$mid": 1,
+            "external": "file:///d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "file"
+          },
+          "editKind": "edit",
+          "beforeContentUri": {
+            "$mid": 1,
+            "external": "vscode-agent-host://local/d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py?_ah%3DeyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNzIzZDcxOWFkMWU0MmViYjU4YTIxYmI2ZjE5YjlmZFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImJlZm9yZVwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL2NvcmUvZXhjZXB0aW9ucy5weSJ9",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNzIzZDcxOWFkMWU0MmViYjU4YTIxYmI2ZjE5YjlmZFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImJlZm9yZVwifSIsImNvbnRlbnRSZWYiOnRydWUsImZpbGVVcmkiOiJmaWxlOi8vL2QlM0EvRG93bmxvYWRzX0QvR3JhZCUyMFN0dWZmL0NTNzYzJTIwJTI4U2VjdXJlJTIwU29mdHdhcmUlMjBEZXYlMjkvR2l0SHViL0NTNzYzLVByb2plY3QtRjI2L2Z1bmN0aW9uYWxfY29kZWJhc2UvYXBwL2NvcmUvZXhjZXB0aW9ucy5weSJ9"
+          },
+          "afterContentUri": {
+            "$mid": 1,
+            "external": "vscode-agent-host://local/d%3A/Downloads_D/Grad%20Stuff/CS763%20%28Secure%20Software%20Dev%29/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py?_ah%3DeyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNzIzZDcxOWFkMWU0MmViYjU4YTIxYmI2ZjE5YjlmZFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImFmdGVyXCJ9IiwiY29udGVudFJlZiI6dHJ1ZSwiZmlsZVVyaSI6ImZpbGU6Ly8vZCUzQS9Eb3dubG9hZHNfRC9HcmFkJTIwU3R1ZmYvQ1M3NjMlMjAlMjhTZWN1cmUlMjBTb2Z0d2FyZSUyMERldiUyOS9HaXRIdWIvQ1M3NjMtUHJvamVjdC1GMjYvZnVuY3Rpb25hbF9jb2RlYmFzZS9hcHAvY29yZS9leGNlcHRpb25zLnB5In0",
+            "path": "/d:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py",
+            "scheme": "vscode-agent-host",
+            "authority": "local",
+            "query": "_ah=eyJzY2hlbWUiOiJzZXNzaW9uLWRiIiwicXVlcnkiOiJ7XCJzZXNzaW9uVXJpXCI6XCJhaHAtc2Vzc2lvbjovNzllNTIxODYtZmQ0OS00Yjg4LTg1NmYtZmI5ODFhNzNhZDc2XCIsXCJ0b29sQ2FsbElkXCI6XCJjdXN0b21fY2FsbF9lNzIzZDcxOWFkMWU0MmViYjU4YTIxYmI2ZjE5YjlmZFwiLFwiZmlsZVBhdGhcIjpcImQ6XFxcXERvd25sb2Fkc19EXFxcXEdyYWQgU3R1ZmZcXFxcQ1M3NjMgKFNlY3VyZSBTb2Z0d2FyZSBEZXYpXFxcXEdpdEh1YlxcXFxDUzc2My1Qcm9qZWN0LUYyNlxcXFxmdW5jdGlvbmFsX2NvZGViYXNlXFxcXGFwcFxcXFxjb3JlXFxcXGV4Y2VwdGlvbnMucHlcIixcInBhcnRcIjpcImFmdGVyXCJ9IiwiY29udGVudFJlZiI6dHJ1ZSwiZmlsZVVyaSI6ImZpbGU6Ly8vZCUzQS9Eb3dubG9hZHNfRC9HcmFkJTIwU3R1ZmYvQ1M3NjMlMjAlMjhTZWN1cmUlMjBTb2Z0d2FyZSUyMERldiUyOS9HaXRIdWIvQ1M3NjMtUHJvamVjdC1GMjYvZnVuY3Rpb25hbF9jb2RlYmFzZS9hcHAvY29yZS9leGNlcHRpb25zLnB5In0"
+          },
+          "diff": {
+            "added": 1,
+            "removed": 1
+          },
+          "undoStopId": "custom_call_e723d719ad1e42ebb58a21bb6f19b9fd"
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "pylance mcp server: pylanceFileSyntaxErrors",
+          "pastTenseMessage": "pylanceFileSyntaxErrors",
+          "originMessage": "pylance mcp server (MCP Server)",
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "resultDetails": {
+            "input": "{\n  \"fileUri\": \"file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py\",\n  \"workspaceRoot\": \"D:\\\\Downloads_D\\\\Grad Stuff\\\\CS763 (Secure Software Dev)\\\\GitHub\\\\CS763-Project-F26\"\n}",
+            "inputLanguage": "json",
+            "output": [
+              {
+                "type": "embed",
+                "value": "No syntax errors found in 'file:///D:/Downloads_D/Grad%20Stuff/CS763%20(Secure%20Software%20Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py'",
+                "isText": true,
+                "mimeType": "text/plain"
+              }
+            ],
+            "isError": false
+          },
+          "toolCallId": "call_9307ce051c9746e682674b70f6efd37c",
+          "toolId": "pylance-mcp-server-pylanceFileSyntaxErrors",
+          "summary": {
+            "kind": "unknown"
+          },
+          "startedAt": 1795225176215,
+          "completedAt": 1795225176753
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "Recheck error response codes and request-ID headers",
+          "isConfirmed": {
+            "type": 4,
+            "selectedButton": "allow-once",
+            "selectedButtonKind": "approve"
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "Push-Location .\\functional_codebase; @'\nimport asyncio\nimport json\nimport logging\nfrom fastapi import HTTPException\nfrom fastapi.exceptions import RequestValidationError\nfrom sqlalchemy.exc import SQLAlchemyError\nfrom starlette.requests import Request\nfrom app.core.exceptions import validation_exception_handler, http_exception_handler, database_exception_handler, unexpected_exception_handler\n\nlogging.disable(logging.CRITICAL)\nrequest = Request({\"type\":\"http\", \"asgi\":{\"version\":\"3.0\"}, \"http_version\":\"1.1\", \"method\":\"GET\", \"scheme\":\"http\", \"path\":\"/\", \"raw_path\":b\"/\", \"query_string\":b\"\", \"headers\":[], \"client\":(\"test\",1), \"server\":(\"test\",80), \"state\":{\"request_id\":\"req-1\"}})\nasync def check(handler, exc, code, message, status_code):\n    response = await handler(request, exc)\n    payload = json.loads(response.body)\n    assert response.status_code == status_code\n    assert payload[\"error\"] == {\"code\":code, \"message\":message}\n    assert payload[\"request_id\"] == \"req-1\"\n    assert response.headers[\"x-request-id\"] == \"req-1\"\nasync def main():\n    await check(validation_exception_handler, RequestValidationError([]), \"VALIDATION_ERROR\", \"Request validation failed\", 422)\n    await check(database_exception_handler, SQLAlchemyError(\"secret\"), \"DATABASE_ERROR\", \"A database error occurred\", 500)\n    await check(unexpected_exception_handler, RuntimeError(\"secret\"), \"INTERNAL_SERVER_ERROR\", \"An unexpected server error occurred\", 500)\n    await check(http_exception_handler, HTTPException(status_code=503, detail=\"Database unavailable\"), \"HTTP_ERROR\", \"Database unavailable\", 503)\nasyncio.run(main())\nprint(\"Error envelope and status checks passed\")\n'@ | python; $result = $LASTEXITCODE; Pop-Location; exit $result"
+            },
+            "editable": false,
+            "intention": "Recheck error response codes and request-ID headers",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_15514eddea7441ae937cc0a5cd34dc90?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_15514eddea7441ae937cc0a5cd34dc90%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_15514eddea7441ae937cc0a5cd34dc90",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_15514eddea7441ae937cc0a5cd34dc90\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "Error envelope and status checks passed\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_15514eddea7441ae937cc0a5cd34dc90",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795225176233,
+          "completedAt": 1795225181410
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": {
+            "value": "Running `git diff --check; git status --short; git diff -- .\\functional-codebase\\app\\m...`",
+            "isTrusted": false,
+            "supportThemeIcons": false,
+            "supportHtml": false,
+            "supportAlertSyntax": false
+          },
+          "isConfirmed": {
+            "type": 1
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "git diff --check; git status --short; git diff -- .\\functional-codebase\\app\\main.py"
+            },
+            "editable": false,
+            "intention": "Review final exception handler changes",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_d5c7c1353be6435bbfe6c2b9c34824db?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_d5c7c1353be6435bbfe6c2b9c34824db%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_d5c7c1353be6435bbfe6c2b9c34824db",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_d5c7c1353be6435bbfe6c2b9c34824db\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "warning: in the working copy of '.obsidian/workspace.json', LF will be replaced by CRLF the next time Git touches it\r\n M .obsidian/workspace.json\r\n M functional_codebase/app/main.py\r\n?? functional_codebase/app/__pycache__/\r\n?? functional_codebase/app/api/__pycache__/\r\n?? functional_codebase/app/api/health.py\r\n?? functional_codebase/app/core/__pycache__/\r\n?? functional_codebase/app/core/exceptions.py\r\n?? functional_codebase/app/db/__pycache__/\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_d5c7c1353be6435bbfe6c2b9c34824db",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795225176235,
+          "completedAt": 1795225176709
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "invocationMessage": "Clean generated Python caches and verify worktree",
+          "isConfirmed": {
+            "type": 4,
+            "selectedButton": "allow-once",
+            "selectedButtonKind": "approve"
+          },
+          "isComplete": true,
+          "source": {
+            "type": "internal",
+            "label": "Built-In"
+          },
+          "toolSpecificData": {
+            "kind": "terminal",
+            "commandLine": {
+              "original": "Remove-Item .\\functional_codebase\\app\\__pycache__, .\\functional_codebase\\app\\api\\__pycache__, .\\functional_codebase\\app\\core\\__pycache__, .\\functional_codebase\\app\\db\\__pycache__ -Recurse -Force -ErrorAction SilentlyContinue; git diff --check; git status --short"
+            },
+            "editable": false,
+            "intention": "Clean generated Python caches and verify worktree",
+            "language": "shellscript",
+            "terminalToolSessionId": "{\"terminal\":\"agenthost-terminal://shell/79e52186-fd49-4b88-856f-fb981a73ad76/call_605fb8848933408ab73d4f4584f7d6e7?%7B%22storage%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22session%22%3A%22ahp-session%3A%2F79e52186-fd49-4b88-856f-fb981a73ad76%22%2C%22chat%22%3A%22ahp-chat%3A%2F70722470-03ee-4031-9976-77d93cdc5526%22%2C%22toolCallId%22%3A%22call_605fb8848933408ab73d4f4584f7d6e7%22%7D\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\"}",
+            "terminalCommandUri": {
+              "$mid": 1,
+              "path": "/79e52186-fd49-4b88-856f-fb981a73ad76/call_605fb8848933408ab73d4f4584f7d6e7",
+              "scheme": "agenthost-terminal",
+              "authority": "shell",
+              "query": "{\"storage\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"session\":\"ahp-session:/79e52186-fd49-4b88-856f-fb981a73ad76\",\"chat\":\"ahp-chat:/70722470-03ee-4031-9976-77d93cdc5526\",\"toolCallId\":\"call_605fb8848933408ab73d4f4584f7d6e7\"}"
+            },
+            "isPty": false,
+            "terminalCommandOutput": {
+              "text": "warning: in the working copy of '.obsidian/workspace.json', LF will be replaced by CRLF the next time Git touches it\r\n M .obsidian/workspace.json\r\n M functional_codebase/app/main.py\r\n?? functional_codebase/app/api/health.py\r\n?? functional_codebase/app/core/exceptions.py\r\n"
+            },
+            "terminalCommandState": {
+              "exitCode": 0
+            }
+          },
+          "toolCallId": "call_605fb8848933408ab73d4f4584f7d6e7",
+          "toolId": "powershell",
+          "summary": {
+            "kind": "command"
+          },
+          "startedAt": 1795225183489,
+          "completedAt": 1795225187045
+        },
+        {
+          "value": "Added centralized handlers in [exceptions.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/core/exceptions.py>) and registered them during app setup in [main.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py>). Each response includes an ISO-8601 timestamp and generated request ID; the ID is also returned in the `X-Request-ID` header. Database and unexpected errors are logged without exposing exception details to clients. HTTP errors, including the database health check’s 503 response, use the same envelope.\n\nExample responses:\n\n```json\n{\n  \"error\": {\n    \"code\": \"VALIDATION_ERROR\",\n    \"message\": \"Request validation failed\"\n  },\n  \"timestamp\": \"2026-11-20T20:37:40+00:00\",\n  \"request_id\": \"a1b2c3d4-...\"\n}\n```\n\n```json\n{\n  \"error\": {\n    \"code\": \"DATABASE_ERROR\",\n    \"message\": \"A database error occurred\"\n  },\n  \"timestamp\": \"2026-11-20T20:37:40+00:00\",\n  \"request_id\": \"a1b2c3d4-...\"\n}\n```\n\n```json\n{\n  \"error\": {\n    \"code\": \"INTERNAL_SERVER_ERROR\",\n    \"message\": \"An unexpected server error occurred\"\n  },\n  \"timestamp\": \"2026-11-20T20:37:40+00:00\",\n  \"request_id\": \"a1b2c3d4-...\"\n}\n```\n\nValidated handler status codes and response envelopes, including request-ID propagation.",
+          "isTrusted": false,
+          "supportThemeIcons": false,
+          "supportHtml": false
+        }
+      ],
+      "agent": {
+        "id": "agent-host-copilotcli",
+        "name": "agent-host-copilotcli",
+        "fullName": "Copilot",
+        "description": "Copilot SDK agent running in the local agent host process",
+        "extensionId": {
+          "value": "vscode.agent-host",
+          "_lower": "vscode.agent-host"
+        },
+        "extensionPublisherId": "vscode",
+        "extensionDisplayName": "Agent Host",
+        "isDefault": false,
+        "isDynamic": true,
+        "isCore": true,
+        "metadata": {
+          "themeIcon": {
+            "id": "copilot"
+          }
+        },
+        "slashCommands": [],
+        "locations": [
+          "panel"
+        ],
+        "modes": [
+          "agent",
+          "ask"
+        ],
+        "disambiguation": []
+      },
+      "timestamp": 1795225059638,
+      "modelId": "agent-host-copilotcli:auto",
+      "modelConfiguration": {
+        "tier": "balance",
+        "vscode.modelConfiguration.tier.source": "default"
+      },
+      "modeInfo": {
+        "kind": "agent",
+        "isBuiltin": true,
+        "telemetryModeId": "agent",
+        "telemetryModeName": "agent",
+        "permissionLevel": "default"
+      },
+      "responseId": "response_99763436-fd41-4135-be95-7b16f221577f",
+      "result": {
+        "timings": {
+          "firstProgress": 42055,
+          "totalElapsed": 132277
+        },
+        "details": "Copilot Fusion (gpt-6-luna) • 1.7 credits"
+      },
+      "responseMarkdownInfo": [
+        {
+          "suggestionId": "sgt-d68e9d40-f851-4364-a08f-53e099c9ed64"
+        },
+        {
+          "suggestionId": "sgt-73081cfb-f97e-4601-9d94-1abd11244b96"
+        },
+        {
+          "suggestionId": "sgt-bad74919-26f6-4db6-a887-54f5b0c18a5e"
+        }
+      ],
+      "followups": [],
+      "modelState": {
+        "value": 1,
+        "completedAt": 1795225191990
+      },
+      "contentReferences": [],
+      "codeCitations": [],
+      "responseTimestamp": 1795225059638,
+      "timeSpentWaiting": 15951,
+      "promptTokens": 96996,
+      "completionTokens": 13908,
+      "lastCallCompletionTokens": 554,
+      "copilotCredits": 1.700425,
+      "modelTotals": [
+        {
+          "model": "gpt-6-luna",
+          "inputTokens": 826118,
+          "cachedTokens": 810555,
+          "outputTokens": 13908
+        }
+      ],
+      "sessionCopilotCredits": 7.713835,
+      "sessionCopilotCreditsStatus": "complete",
+      "elapsedMs": 116401
     }
   ]
 }
