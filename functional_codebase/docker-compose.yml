@@ -6,6 +6,11 @@ services:
     ports:
       - "8000:8000"
     environment:
+      POSTGRES_DB: ${POSTGRES_DB:-rbpdb}
+      POSTGRES_USER: ${POSTGRES_USER:-rbpdb}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-rbpdb}
+      DB_HOST: db
+      DB_PORT: 5432
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-rbpdb}:${POSTGRES_PASSWORD:-rbpdb}@db:5432/${POSTGRES_DB:-rbpdb}
     depends_on:
       - db
