@@ -61,8 +61,9 @@ jobs:
         continue-on-error: true
 
       - name: Verify Application Imports
+        working-directory: functional_codebase
         run: |
-          python -c "from functional_codebase.app.main import app"
+          python -c "from app.main import app"
       
       - name: Verify PostgreSQL Connectivity
         run: |
