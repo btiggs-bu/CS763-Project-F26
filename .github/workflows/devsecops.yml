@@ -36,7 +36,7 @@ jobs:
           --health-retries=5
 
     env:
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/rbpdb
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/rbpdb
     
     steps:
 
