@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "spec.md",
+                "file": ".ai_logs/AI_external_log_build.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "spec"
+              "title": "AI_external_log_build"
             }
           }
         ]
@@ -190,22 +190,23 @@
   },
   "active": "873803ccf2e34510",
   "lastOpenFiles": [
-    "AI_ref/ERD.md",
+    "functional_codebase/app/models/__pycache__/user.cpython-310.pyc",
+    "functional_codebase/app/models/__pycache__/thread.cpython-310.pyc",
+    "functional_codebase/app/models/__pycache__/tag.cpython-310.pyc",
+    "functional_codebase/app/models/__pycache__/mixins.cpython-310.pyc",
+    "functional_codebase/app/models/__pycache__/enums.cpython-310.pyc",
+    "functional_codebase/app/models/__pycache__/content.cpython-310.pyc",
+    "functional_codebase/app/models/__pycache__/__init__.cpython-310.pyc",
+    "functional_codebase/app/models/__pycache__",
+    "functional_codebase/app/models/tag.py",
+    "functional_codebase/app/models/content.py",
+    "functional_codebase/app/models/thread.py",
     "spec.md",
+    "AI_ref/ERD.md",
     "AI_ref/Database_Schema_Plan.md",
     ".ai_logs/AI_external_log_build.md",
-    "AI_ref",
     ".ai_logs/AI_agent_history/agent_log_manual.md",
     ".ai_logs/conceptual_journal.md",
-    "functional_codebase/app/core/__pycache__/config.cpython-310.pyc",
-    "functional_codebase/app/db/__pycache__/__init__.cpython-310.pyc",
-    "functional_codebase/app/db/__pycache__/database.cpython-310.pyc",
-    "functional_codebase/app/db/__pycache__",
-    "functional_codebase/app/api/__pycache__/__init__.cpython-310.pyc",
-    "functional_codebase/app/api/__pycache__/health.cpython-310.pyc",
-    "functional_codebase/app/api/__pycache__",
-    "functional_codebase/app/core/__pycache__/__init__.cpython-310.pyc",
-    "functional_codebase/app/core/__pycache__/exceptions.cpython-310.pyc",
     ".ai_logs/AI_agent_history/copilot-2026-11-21-untitled_session.md",
     ".ai_logs/AI_agent_history/chat.md",
     ".ai_logs/AI_agent_history/copilot-2026-11-19-untitled_session.md",
