@@ -98,8 +98,7 @@ class Role(Base):
 
     user_assignments: Mapped[list["UserRole"]] = relationship(
         back_populates="role",
-        cascade="all, delete-orphan",
-        passive_deletes=True,
+        passive_deletes="all",
     )
     users: Mapped[list[User]] = relationship(
         secondary="user_roles",
@@ -121,7 +120,7 @@ class UserRole(Base):
         nullable=False,
     )
     role_id: Mapped[int] = mapped_column(
-        ForeignKey("roles.role_id", ondelete="CASCADE"),
+        ForeignKey("roles.role_id", ondelete="RESTRICT"),
         nullable=False,
     )
 
