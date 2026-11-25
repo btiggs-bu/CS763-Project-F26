@@ -1734,3 +1734,372 @@ Provide a checklist showing what has been completed and identify any missing ite
 11. Final verification
 
 Each prompt has a narrow scope and produces a verifiable deliverable before the next layer is added. This approach typically produces much cleaner results from autonomous coding agents than a single large "build the entire milestone" prompt.
+
+Prompt
+
+The next milestone is to implement the database schema from the ERD. How should I prompt the AI agent to do so and why?
+
+Response
+
+For the **Database Schema** milestone, I would again avoid giving the AI agent a single large prompt. Database design is foundational, and mistakes made here can cascade into every future milestone. Instead, have the agent progress through a series of prompts that move from understanding the ERD to implementing, validating, and testing the schema.
+
+The rationale is simple:
+
+1. **Understand the ERD first** before generating code.
+2. **Design models second** before generating migrations.
+3. **Review relationships and constraints** before creating tables.
+4. **Generate migrations only after the schema is validated.**
+5. **Verify the resulting database structure** before building APIs.
+
+This significantly reduces the chance that the agent incorrectly interprets the ERD and forces major rewrites later.
+
+---
+
+# Prompt 1: Analyze the ERD and Create a Schema Plan
+
+Review the provided ERD and project specification.
+
+Do not generate implementation code yet.
+
+Produce a database schema implementation plan that includes:
+
+For each table:
+
+- Table name
+
+- Purpose
+
+- Primary key
+
+- Foreign keys
+
+- Columns
+
+- Data types
+
+- Nullability
+
+- Unique constraints
+
+For each relationship:
+
+- Relationship type
+
+  - One-to-one
+
+  - One-to-many
+
+  - Many-to-many
+
+- Parent table
+
+- Child table
+
+- Required foreign keys
+
+Identify:
+
+- Join tables
+
+- Lookup/reference tables
+
+- Enumerated values that should become Python enums
+
+- Recommended indexes
+
+Highlight any assumptions or ambiguities in the ERD before implementation begins.
+
+No SQLAlchemy models or migrations should be generated yet.
+
+---
+
+# Prompt 2: Create SQLAlchemy Model Design
+
+Using the approved database schema plan, design the SQLAlchemy ORM models for all entities.
+
+Do not generate migration files yet.
+
+For each model provide:
+
+- Class name
+
+- Table name
+
+- Columns
+
+- Data types
+
+- Constraints
+
+- Relationships
+
+Implement models for:
+
+- USER
+
+- ROLE
+
+- USER_ROLE
+
+- THREADS
+
+- PROJECT
+
+- COURSE
+
+- LAB
+
+- THREADS_GROUP
+
+- USER_THREADS
+
+- POST
+
+- COMMENT
+
+- TAG
+
+- THREADS_TAG
+
+- POST_TAG
+
+Use SQLAlchemy 2.x style.
+
+Provide a complete review of relationships before generating implementation code.
+
+---
+
+# Prompt 3: Create Python Enums
+
+Identify all fields in the ERD and specification that should be represented as Python enums.
+
+Create enum definitions for all applicable values.
+
+Examples may include:
+
+- RoleType
+
+- ThreadType
+
+- RestrictionLevel
+
+- PostType
+
+- ModerationStatus
+
+For each enum:
+
+- Explain why an enum is appropriate.
+
+- Provide values.
+
+- Identify which database columns will use the enum.
+
+Follow SQLAlchemy and PostgreSQL best practices.
+
+---
+
+# Prompt 4: Implement SQLAlchemy Models
+
+Implement the SQLAlchemy models based on the approved schema design.
+
+Requirements:
+
+- Use SQLAlchemy 2.x declarative mappings.
+
+- Place models in the app/models directory.
+
+- Include primary keys.
+
+- Include foreign keys.
+
+- Include relationship definitions.
+
+- Use enums where appropriate.
+
+- Add indexes where beneficial.
+
+- Add uniqueness constraints defined in the ERD.
+
+Do not create Alembic migration files yet.
+
+Explain the purpose of each relationship and constraint implemented.
+
+---
+
+# Prompt 5: Review Schema Consistency
+
+Perform a complete schema review of all SQLAlchemy models.
+
+Validate:
+
+- All ERD entities are represented.
+
+- All relationships are represented.
+
+- Foreign keys are correct.
+
+- Cascade behavior is appropriate.
+
+- Naming conventions are consistent.
+
+- Constraints match the project specification.
+
+Provide a table showing:
+
+- Entity
+
+- Implemented
+
+- Relationships Verified
+
+- Constraints Verified
+
+Identify any discrepancies before migrations are created.
+
+---
+
+# Prompt 6: Configure Alembic Metadata Detection
+
+Update the Alembic configuration so all SQLAlchemy models are discoverable.
+
+Requirements:
+
+- Import all model metadata correctly.
+
+- Verify Alembic autogenerate can detect schema changes.
+
+- Verify target_metadata is configured properly.
+
+Demonstrate the configuration without generating migrations yet.
+
+Explain how Alembic discovers model changes from SQLAlchemy metadata.
+
+---
+
+# Prompt 7: Generate Initial Schema Migration
+
+Generate the initial Alembic migration from the SQLAlchemy models.
+
+Requirements:
+
+- Use Alembic autogenerate.
+
+- Produce a complete migration script.
+
+- Create all tables in dependency order.
+
+- Create indexes.
+
+- Create foreign key constraints.
+
+- Create uniqueness constraints.
+
+Review the generated migration and explain each section before applying it.
+
+---
+
+# Prompt 8: Apply Migration and Validate Database Structure
+
+Apply the initial migration to PostgreSQL.
+
+After migration:
+
+Verify:
+
+- All tables were created.
+
+- Primary keys exist.
+
+- Foreign keys exist.
+
+- Indexes exist.
+
+- Constraints exist.
+
+Provide a schema validation report showing:
+
+- Table names
+
+- Column counts
+
+- Primary keys
+
+- Foreign keys
+
+- Indexes
+
+Confirm the database structure matches the ERD exactly.
+
+---
+
+# Prompt 9: Create Seed Data Framework
+
+Create a seed-data framework that can populate the database with test data.
+
+Implement seed scripts for:
+
+- Roles
+
+- Users
+
+- Labs
+
+- Courses
+
+- Projects
+
+- Tags
+
+The goal is to support future API testing.
+
+Do not create large datasets.
+
+Provide instructions for running and resetting seed data.
+
+---
+
+# Prompt 10: Milestone Validation
+
+Review the database implementation and confirm Milestone 2 is complete.
+
+Validate:
+
+- All ERD entities exist.
+
+- SQLAlchemy models compile successfully.
+
+- All relationships function correctly.
+
+- Alembic detects schema changes.
+
+- Initial migration executes successfully.
+
+- PostgreSQL contains every required table.
+
+- Constraints match the ERD.
+
+- Indexes are implemented where appropriate.
+
+- Seed data framework works.
+
+Provide a checklist of completed items and identify any remaining concerns before API development begins.
+
+---
+
+# Why this sequence works
+
+The progression follows the dependency chain of database development:
+
+1. **Understand the ERD**
+2. **Design the schema**
+3. **Define enums and constraints**
+4. **Implement models**
+5. **Review accuracy**
+6. **Connect Alembic**
+7. **Generate migrations**
+8. **Create the database**
+9. **Seed test data**
+10. **Validate completion**
+
+A common mistake with AI coding agents is asking them to "implement the database" immediately. They often jump straight into SQLAlchemy code and migrations before carefully analyzing the ERD. Having the agent explicitly produce a schema plan and relationship review first gives you a chance to catch errors while changes are still cheap, before those mistakes become models, migrations, repositories, and API endpoints.

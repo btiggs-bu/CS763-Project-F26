@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": ".ai_logs/AI_external_log_build.md",
+                "file": "spec.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "AI_external_log_build"
+              "title": "spec"
             }
           }
         ]
@@ -190,6 +190,13 @@
   },
   "active": "873803ccf2e34510",
   "lastOpenFiles": [
+    "AI_ref/ERD.md",
+    "spec.md",
+    "AI_ref/Database_Schema_Plan.md",
+    ".ai_logs/AI_external_log_build.md",
+    "AI_ref",
+    ".ai_logs/AI_agent_history/agent_log_manual.md",
+    ".ai_logs/conceptual_journal.md",
     "functional_codebase/app/core/__pycache__/config.cpython-310.pyc",
     "functional_codebase/app/db/__pycache__/__init__.cpython-310.pyc",
     "functional_codebase/app/db/__pycache__/database.cpython-310.pyc",
@@ -199,20 +206,14 @@
     "functional_codebase/app/api/__pycache__",
     "functional_codebase/app/core/__pycache__/__init__.cpython-310.pyc",
     "functional_codebase/app/core/__pycache__/exceptions.cpython-310.pyc",
-    "functional_codebase/app/core/__pycache__",
-    "functional_codebase/app/__pycache__/main.cpython-310.pyc",
     ".ai_logs/AI_agent_history/copilot-2026-11-21-untitled_session.md",
     ".ai_logs/AI_agent_history/chat.md",
     ".ai_logs/AI_agent_history/copilot-2026-11-19-untitled_session.md",
     ".ai_logs/AI_agent_history/copilot_export_diagnostics_2026-11-19T01-19-07-942Z.md",
     "copilot_exports/copilot_export_diagnostics_2026-11-19T00-35-39-009Z.md",
     ".ai_logs/AI_agent_history/copilot_export_diagnostics_2026-11-19T00-28-34-963Z.md",
-    ".ai_logs/AI_agent_history/agent_log_manual.md",
     "assignment_1_code/Agent_environment.md",
     ".ai_logs/AI_external_log_spec.md",
-    ".ai_logs/AI_external_log_build.md",
-    "spec.md",
-    ".ai_logs/conceptual_journal.md",
     "Agent_environment.md",
     ".ai_logs/AI_agent_log.md",
     ".ai_logs/assignment_1/Prompt_test_log_assignment1.md",

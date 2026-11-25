@@ -44,10 +44,11 @@ Comments are used to reply to a Post or another Comment. They are similar to Pos
 ```mermaid
 erDiagram
   USER {
-    int user_id PK, FK
+    int user_id PK
     string username UK
     string email UK
     string display_name
+    timestamp deleted_at "nullable; soft delete"
     timestamp created_at
     timestamp updated_at
   }
@@ -104,8 +105,9 @@ erDiagram
     int comment_id PK
     int user_id FK "author"
     int post_id FK "parent post"
-    int p_comment_id FK "parent comment if applicable"
+    int p_comment_id FK "nullable; parent comment on same post"
     string content
+    string restriction_level "inherited/open/restricted/closed; default inherited"
     string mod_status "active/reported/hidden_by_moderator"
     timestamp created_at
     timestamp updated_at
@@ -117,7 +119,7 @@ erDiagram
   THREADS_GROUP {
     int thread_group_id PK
     int p_thread_id FK "thread id of parent course or lab"
-    int c_thread_id FK "thread id of child project or course"
+    int c_thread_id FK, UK "thread id of child project or course"
   }
   THREADS_TAG {
     int thread_tag_id PK
@@ -142,6 +144,7 @@ erDiagram
   THREADS ||--o{ USER_THREADS : "includes"
   THREADS ||--o{ POST : "contains"
   POST ||--o{ COMMENT : "has"
+  COMMENT ||--o{ COMMENT : "parent comment / replies"
   THREADS ||--o{ THREADS_TAG : "has"
   TAG ||--o{ THREADS_TAG : "describes"
   POST ||--o{ POST_TAG : "has"
