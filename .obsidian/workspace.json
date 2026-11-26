@@ -190,6 +190,7 @@
   },
   "active": "873803ccf2e34510",
   "lastOpenFiles": [
+    "AI_ref/Pydantic_Schema_Plan.md",
     "functional_codebase/.pytest_cache/v/cache/lastfailed",
     "functional_codebase/.pytest_cache/v/cache/nodeids",
     "functional_codebase/.pytest_cache/v/cache",
@@ -202,7 +203,6 @@
     "functional_codebase/app/tests/test_relationships_integration.py",
     "functional_codebase/app/tests/test_seed_integration.py",
     "functional_codebase/app/tests/test_schema_integration.py",
-    "functional_codebase/app/tests/conftest.py",
     "functional_codebase/SEEDING.md",
     "functional-codebase/SEEDING.md",
     "spec.md",

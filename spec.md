@@ -159,6 +159,10 @@ Notes:
 
 **Base Path:** `/api/v1`
 
+Authentication is not yet implemented; create requests therefore include
+client-supplied author `user_id` values. All DELETE endpoints return
+`204 No Content` with no response body.
+
 ### Users
 
 **GET /users**
@@ -173,11 +177,13 @@ Return single user.
 **POST /users**
 Create user.
 
-**PUT /users/{user_id}**
-Update user.
+**PATCH /users/{user_id}**
+
+Partially update a user.
 
 **DELETE /users/{user_id}**
-Delete user.
+Soft-delete the user; set `deleted_at` and close restrictions on their
+created threads, posts, and comments.
 
 ### Threads
 
@@ -195,18 +201,21 @@ Optional Query Parameters:
 - `parent_thread_id` - Return child threads belonging to a specific parent thread
 
 **POST /discussions/threads**  
-Create a new lab, course, or project thread.
+Create a new lab, course, or project thread. `parent_thread_id` is optional;
+when supplied, a course must reference a lab and a project must reference a
+course. A lab cannot have a parent.
 
 #### Single Thread Operations
 
 **GET /discussions/threads/{thread_id}**  
 Return a specific thread.
 
-**PUT /discussions/threads/{thread_id}**  
-Update a specific thread.
+**PATCH /discussions/threads/{thread_id}**
+
+Partially update a specific thread.
 
 **DELETE /discussions/threads/{thread_id}**  
-Delete a specific thread.
+Delete a specific thread and its dependent records.
 
 ### Posts
 
@@ -222,7 +231,7 @@ Optional Query Parameters:
 - `user_id` - Return posts created by a specific user
 - `post_type` - Return only announcement or discussion posts
 - `tag_id` - Return posts with a specific tag
-- `mod_status` - Filter by active, reported, or hidden posts
+- `mod_status` - Filter by `active`, `reported`, or `hidden_by_moderator` posts
 
 **POST /discussions/posts**  
 Create a new announcement or discussion post.
@@ -232,16 +241,19 @@ Create a new announcement or discussion post.
 **GET /discussions/posts/{post_id}**  
 Return a specific post.
 
-**PUT /discussions/posts/{post_id}**  
-Update a specific post.
+**PATCH /discussions/posts/{post_id}**
+
+Partially update a specific post.
 
 **DELETE /discussions/posts/{post_id}**  
-Delete a specific post.
+Delete a specific post and its comments.
 
 ### Timeline View
 
 **GET /discussions/scopes/{thread_type}/{thread_id}/timeline**  
-Return a chronological timeline of announcements and discussion posts associated with a specific thread. The {thread_type} accepts values restricted strictly to projects, courses, or labs to load the appropriate multi-project feed.
+Return a chronological timeline of announcements and discussion posts
+associated with a specific thread. `{thread_type}` accepts only `project`,
+`course`, or `lab`.
 
 
 ### Comments
@@ -255,7 +267,7 @@ Optional Query Parameters:
 
 - `keyword` - Full-text search comment content
 - `user_id` - Return comments created by a specific user
-- `mod_status` - Filter by active, reported, or hidden comments
+- `mod_status` - Filter by `active`, `reported`, or `hidden_by_moderator` comments
 - `format` - Return comments as `json` or downloadable `txt` archive
 
 **POST /discussions/posts/{post_id}/comments**  
@@ -263,6 +275,7 @@ Create a new comment on a post.
 
 Request Body Notes:
 
+- `post_id` is supplied by the URL and should not be repeated in the body.
 - `p_comment_id` may be provided to create a reply to another comment.
 - If omitted, the comment is a direct reply to the post.
 
@@ -271,29 +284,36 @@ Request Body Notes:
 **GET /discussions/posts/{post_id}/comments/{comment_id}**  
 Return a specific comment.
 
-**PUT /discussions/posts/{post_id}/comments/{comment_id}**  
-Update a specific comment.
+**PATCH /discussions/posts/{post_id}/comments/{comment_id}**
+
+Partially update a specific comment.
 
 **DELETE /discussions/posts/{post_id}/comments/{comment_id}**  
-Delete a specific comment.
+Delete a specific comment and its replies.
 
 ### Moderation Functions
 
-The PUT function for Posts and Comments should only be used by their authors, so separate PUT functions to allow all Users to report them and Faculty/Admin users to moderate them have been included as well.
+The PATCH functions for Posts and Comments should only be used by their
+authors, so separate PATCH functions to allow all Users to report them and
+Faculty/Admin users to moderate them have been included as well.
 #### Post Moderation
 
-**PUT /discussions/posts/{post_id}/report**  
+**PATCH /discussions/posts/{post_id}/report**
+
 Report a post for moderator review. This updates the moderation status of a post to Reported.
 
-**PUT /discussions/posts/{post_id}/moderation**  
+**PATCH /discussions/posts/{post_id}/moderation**
+
 Update moderation status of a post.
 
 #### Comment Moderation
 
-**PUT /discussions/posts/{post_id}/comments/{comment_id}/report**  
+**PATCH /discussions/posts/{post_id}/comments/{comment_id}/report**
+
 Report a comment for moderator review. This updates the moderation status of a comment to Reported.
 
-**PUT /discussions/posts/{post_id}/comments/{comment_id}/moderation**  
+**PATCH /discussions/posts/{post_id}/comments/{comment_id}/moderation**
+
 Update moderation status of a comment.
 
 ---
@@ -306,6 +326,7 @@ Update moderation status of a comment.
 | username     | Yes      | 3-50 chars, unique                         |
 | email        | Yes      | Valid email address, max 254 chars, unique |
 | display_name | Yes      | 1-100 chars                                |
+| deleted_at   | No       | Nullable response metadata; not client-settable |
 ### Role
 
 |Field|Required|Constraints|
@@ -320,6 +341,7 @@ Update moderation status of a comment.
 #### Additional Constraints
 - Duplicate user-role assignments are not allowed.
 - A user must have at least one role.
+- If no role is assigned at creation, the service assigns the `student` role.
 
 ---
 ### Thread
@@ -329,6 +351,10 @@ Update moderation status of a comment.
 | user_id           | Yes      | Existing user; creator of thread    |
 | thread_type       | Yes      | Must be lab, course, or project     |
 | restriction_level | Yes      | Must be open, restricted, or closed |
+
+`parent_thread_id` is an optional API relationship field backed by
+`THREADS_GROUP`. If present, its parent type must match the hierarchy rules
+below; it is not required for course or project threads.
 ### Project
 
 |Field|Required|Constraints|
@@ -397,11 +423,15 @@ Update moderation status of a comment.
 |post_id|Yes|Existing post|
 |p_comment_id|No|Existing comment|
 |content|Yes|1-5000 chars|
+| restriction_level | Yes | Must be inherited, open, restricted, or closed; defaults to inherited |
 |mod_status|Yes|Must be active, reported, or hidden_by_moderator|
 #### Additional Constraints
 - A comment must reference a valid post.
-- If provided, `p_comment_id` must reference an existing comment.
+- If provided, `p_comment_id` must reference an existing comment on the same
+  post.
 - New comments default to `mod_status = active`.
+- `restriction_level` is response metadata managed by the service; clients do
+  not set it when creating or updating comments.
 
 ---
 ### Tag
@@ -446,7 +476,8 @@ Update moderation status of a comment.
     "student"
   ],
   "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
+  "updated_at": "2026-11-05T15:22:11.947651Z",
+  "deleted_at": null
 }
 ```
 
@@ -477,11 +508,12 @@ Update moderation status of a comment.
     "student"
   ],
   "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-05T15:22:11.947651Z"
+  "updated_at": "2026-11-05T15:22:11.947651Z",
+  "deleted_at": null
 }
 ```
 
-#### PUT /users/{user_id}
+#### PATCH /users/{user_id}
 
 **Request**
 
@@ -509,20 +541,14 @@ Update moderation status of a comment.
     "admin"
   ],
   "created_at": "2026-11-02T11:06:07.235541Z",
-  "updated_at": "2026-11-17T15:22:11.947651Z"
+  "updated_at": "2026-11-17T15:22:11.947651Z",
+  "deleted_at": null
 }
 ```
 
 #### DELETE /users/{user_id}
 
-**Response**
-
-```json
-{
-  "user_id": 123,
-  "message": "Deletion successful."
-}
-```
+Returns `204 No Content`; no response body.
 
 ---
 
@@ -589,7 +615,7 @@ Update moderation status of a comment.
 }
 ```
 
-#### PUT /discussions/threads/{thread_id}
+#### PATCH /discussions/threads/{thread_id}
 
 **Request**
 
@@ -628,14 +654,7 @@ Update moderation status of a comment.
 ```
 #### DELETE /discussions/threads/{thread_id}
 
-**Response**
-
-```json
-{
-  "thread_id": 1001,
-  "message": "Deletion successful."
-}
-```
+  Returns `204 No Content`; no response body.
 
 ### Timeline View
 
@@ -741,7 +760,7 @@ Update moderation status of a comment.
   "updated_at": "2026-11-02T11:06:07.235541Z"
 }
 ```
-#### PUT /discussions/posts/{post_id}
+#### PATCH /discussions/posts/{post_id}
 
 **Request**
 
@@ -765,6 +784,10 @@ Update moderation status of a comment.
   "content": "Updated announcement content.",
   "restriction_level": "restricted",
   "mod_status": "active",
+  "tags": [
+    "Sprint",
+    "Announcement"
+  ],
   "created_at": "2026-11-02T11:06:07.235541Z",
   "updated_at": "2026-11-17T15:22:11.947651Z"
 }
@@ -772,14 +795,7 @@ Update moderation status of a comment.
 
 #### DELETE /discussions/posts/{post_id}
 
-**Response**
-
-```json
-{
-  "post_id": 64368473,
-  "message": "Deletion successful."
-}
-```
+Returns `204 No Content`; no response body.
 
 
 
@@ -798,6 +814,7 @@ Update moderation status of a comment.
   "post_id": 64368473,
   "p_comment_id": 56532,
   "content": "Thanks, that's really helpful.",
+  "restriction_level": "inherited",
   "mod_status": "active",
   "created_at": "2026-11-02T11:06:07.235541Z",
   "updated_at": "2026-11-05T15:22:11.947651Z"
@@ -811,7 +828,6 @@ Update moderation status of a comment.
 ```json
 {
   "user_id": 413,
-  "post_id": 64368473,
   "p_comment_id": 56532,
   "content": "Thanks, that's really helpful."
 }
@@ -826,12 +842,13 @@ Update moderation status of a comment.
   "post_id": 64368473,
   "p_comment_id": 56532,
   "content": "Thanks, that's really helpful.",
+  "restriction_level": "inherited",
   "mod_status": "active",
   "created_at": "2026-11-02T11:06:07.235541Z",
   "updated_at": "2026-11-02T11:06:07.235541Z"
 }
 ```
-#### PUT /discussions/posts/{post_id}/comments/{comment_id}
+#### PATCH /discussions/posts/{post_id}/comments/{comment_id}
 
 **Request**
 
@@ -850,6 +867,7 @@ Update moderation status of a comment.
   "post_id": 64368473,
   "p_comment_id": 56532,
   "content": "Thank you, that's really helpful.",
+  "restriction_level": "inherited",
   "mod_status": "active",
   "created_at": "2026-11-02T11:06:07.235541Z",
   "updated_at": "2026-11-17T15:22:11.947651Z"
@@ -858,20 +876,13 @@ Update moderation status of a comment.
 
 #### DELETE /discussions/posts/{post_id}/comments/{comment_id}
 
-**Response**
-
-```json
-{
-  "comment_id": 50413740,
-  "message": "Deletion successful."
-}
-```
+Returns `204 No Content`; no response body.
 
 ---
 
 ### Moderation
 
-#### PUT /discussions/posts/{post_id}/report
+#### PATCH /discussions/posts/{post_id}/report
 
 **Response**
 
@@ -883,7 +894,7 @@ Update moderation status of a comment.
 }
 ```
 
-#### PUT /discussions/posts/{post_id}/moderation
+#### PATCH /discussions/posts/{post_id}/moderation
 
 **Request**
 
@@ -903,7 +914,7 @@ Update moderation status of a comment.
 }
 ```
 
-#### PUT /discussions/posts/{post_id}/comments/{comment_id}/report
+#### PATCH /discussions/posts/{post_id}/comments/{comment_id}/report
 
 **Response**
 
@@ -915,7 +926,7 @@ Update moderation status of a comment.
 }
 ```
 
-#### PUT /discussions/posts/{post_id}/comments/{comment_id}/moderation
+#### PATCH /discussions/posts/{post_id}/comments/{comment_id}/moderation
 
 **Request**
 
@@ -954,7 +965,7 @@ Update moderation status of a comment.
 | Status | Meaning                 |
 | ------ | ----------------------- |
 | 200    | Success                 |
-| 400    | Invalid query parameter |
+| 422    | Request validation error |
 | 401    | Unauthorized            |
 | 403    | Forbidden               |
 | 404    | Resource not found      |
@@ -965,24 +976,22 @@ Update moderation status of a comment.
 | Status | Meaning               |
 | ------ | --------------------- |
 | 201    | Created               |
-| 400    | Validation error      |
 | 401    | Unauthorized          |
 | 403    | Forbidden             |
 | 409    | Duplicate resource    |
-| 422    | Unprocessable Content |
+| 422    | Request validation error |
 | 500    | Internal server error |
 
-#### PUT
+#### PATCH
 
 | Status | Meaning               |
 | ------ | --------------------- |
 | 200    | Updated               |
-| 400    | Validation error      |
 | 401    | Unauthorized          |
 | 403    | Forbidden             |
 | 404    | Resource not found    |
 | 409    | Conflict              |
-| 422    | Unprocessable Content |
+| 422    | Request validation error |
 | 500    | Internal server error |
 
 #### DELETE
@@ -996,36 +1005,31 @@ Update moderation status of a comment.
 | 500    | Internal server error |
 ### Standard Error Response
 
+The application returns this envelope for validation, HTTP, database, and
+unexpected server errors. Validation errors use HTTP 422; database and
+unexpected server errors use HTTP 500. HTTP exceptions retain their status
+code and use `HTTP_ERROR`. Its message is the HTTP exception's string detail
+when available, or a generic message otherwise.
+
 #### Error Response Schema
 ```json
 {
   "error": {
     "code": "VALIDATION_ERROR",
-    "message": "One or more fields failed validation.",
-    "details": [
-      {
-        "field": "email",
-        "message": "Email address is invalid."
-      }
-    ]
+    "message": "Request validation failed"
   },
-  "timestamp": "2026-11-02T11:06:07.235541Z",
+  "timestamp": "2026-11-02T11:06:07.235541+00:00",
   "request_id": "0f45ef7d-790a-4b82-b9fc-fd2c8afc8d5b"
 }
 ```
 
 #### Error Codes
 
-VALIDATION_ERROR
-INVALID_QUERY_PARAMETER
-UNAUTHORIZED
-FORBIDDEN
-RESOURCE_NOT_FOUND
-DUPLICATE_RESOURCE
-RESOURCE_CONFLICT
-UNPROCESSABLE_CONTENT
-RESTRICTED
-INTERNAL_SERVER_ERROR
+- `VALIDATION_ERROR` - Request validation failed.
+- `HTTP_ERROR` - An HTTP exception; the message uses its string detail when
+  available, or a generic message otherwise.
+- `DATABASE_ERROR` - A database error occurred.
+- `INTERNAL_SERVER_ERROR` - An unexpected server error occurred.
 
 ## Static Mock Data
 
