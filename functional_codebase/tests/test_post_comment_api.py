@@ -1,4 +1,6 @@
-from sqlalchemy import select
+from datetime import datetime, timezone
+
+from sqlalchemy import select, update
 
 from app.models.content import Comment, Post
 from app.models.tag import Tag
@@ -160,14 +162,60 @@ def test_post_comment_crud_filters_timeline_and_exports(api_context) -> None:
     assert post_list.json()["count"] == 1
     assert post_list.json()["results"][0]["post_id"] == post["post_id"]
 
+    second_post = client.post(
+        "/api/v1/discussions/posts",
+        json={
+            "post_type": "discussion",
+            "user_id": user["user_id"],
+            "thread_id": thread["thread_id"],
+            "title": "Second timeline item",
+            "content": "A later-created post.",
+        },
+    )
+    assert second_post.status_code == 201
+    second_post_id = second_post.json()["post_id"]
+    with session_factory.begin() as session:
+        session.execute(
+            update(Post)
+            .where(Post.post_id == post["post_id"])
+            .values(created_at=datetime(2026, 11, 2, tzinfo=timezone.utc))
+        )
+        session.execute(
+            update(Post)
+            .where(Post.post_id == second_post_id)
+            .values(created_at=datetime(2026, 11, 1, tzinfo=timezone.utc))
+        )
+
     timeline = client.get(
         f"/api/v1/discussions/scopes/lab/{thread['thread_id']}/timeline"
     )
     assert timeline.status_code == 200
-    assert timeline.json()["results"][0]["post_id"] == post["post_id"]
+    timeline_results = timeline.json()["results"]
+    assert timeline.json()["count"] == 2
+    assert [item["post_id"] for item in timeline_results] == [
+        second_post_id,
+        post["post_id"],
+    ]
+    assert [item["created_at"] for item in timeline_results] == sorted(
+        item["created_at"] for item in timeline_results
+    )
     assert client.get(
         f"/api/v1/discussions/scopes/course/{thread['thread_id']}/timeline"
     ).status_code == 404
+    assert client.get(
+        f"/api/v1/discussions/scopes/unknown/{thread['thread_id']}/timeline"
+    ).status_code == 422
+
+    foreign_comment = client.post(
+        f"/api/v1/discussions/posts/{second_post_id}/comments",
+        json={"user_id": user["user_id"], "content": "Scoped to another post."},
+    )
+    assert foreign_comment.status_code == 201
+    wrong_scope_report = client.patch(
+        f"/api/v1/discussions/posts/{post['post_id']}/comments/"
+        f"{foreign_comment.json()['comment_id']}/report"
+    )
+    assert wrong_scope_report.status_code == 404
 
     reported_comment = client.patch(
         f"/api/v1/discussions/posts/{post['post_id']}/comments/"
@@ -175,6 +223,12 @@ def test_post_comment_crud_filters_timeline_and_exports(api_context) -> None:
     )
     assert reported_comment.status_code == 200
     assert reported_comment.json()["mod_status"] == "reported"
+    assert set(reported_comment.json()) == {
+        "comment_id",
+        "mod_status",
+        "updated_at",
+    }
+    assert reported_comment.json()["updated_at"] != updated_comment.json()["updated_at"]
     moderated_comment = client.patch(
         f"/api/v1/discussions/posts/{post['post_id']}/comments/"
         f"{reply['comment_id']}/moderation",
@@ -200,12 +254,26 @@ def test_post_comment_crud_filters_timeline_and_exports(api_context) -> None:
     )
     assert reported_post.status_code == 200
     assert reported_post.json()["mod_status"] == "reported"
+    assert set(reported_post.json()) == {"post_id", "mod_status", "updated_at"}
+    assert reported_post.json()["updated_at"] != updated_post.json()["updated_at"]
     moderated_post = client.patch(
         f"/api/v1/discussions/posts/{post['post_id']}/moderation",
         json={"mod_status": "active"},
     )
     assert moderated_post.status_code == 200
     assert moderated_post.json()["mod_status"] == "active"
+    assert moderated_post.json()["updated_at"] != reported_post.json()["updated_at"]
+    assert client.patch(
+        "/api/v1/discussions/posts/99999/report"
+    ).status_code == 404
+    assert client.patch(
+        f"/api/v1/discussions/posts/{post['post_id']}/moderation",
+        json={"mod_status": "unknown"},
+    ).status_code == 422
+    assert client.patch(
+        f"/api/v1/discussions/posts/{post['post_id']}/comments/99999/moderation",
+        json={"mod_status": "hidden_by_moderator"},
+    ).status_code == 404
 
     deleted = client.delete(f"/api/v1/discussions/posts/{post['post_id']}")
     assert deleted.status_code == 204
@@ -224,6 +292,16 @@ def test_post_comment_crud_filters_timeline_and_exports(api_context) -> None:
     assert "text/plain" in openapi["paths"][comment_path]["get"]["responses"]["200"][
         "content"
     ]
+    moderation_paths = {
+        "/api/v1/discussions/posts/{post_id}/report": "patch",
+        "/api/v1/discussions/posts/{post_id}/moderation": "patch",
+        "/api/v1/discussions/posts/{post_id}/comments/{comment_id}/report": "patch",
+        "/api/v1/discussions/posts/{post_id}/comments/{comment_id}/moderation": "patch",
+        "/api/v1/discussions/scopes/{thread_type}/{thread_id}/timeline": "get",
+    }
+    for path, method in moderation_paths.items():
+        assert path in openapi["paths"]
+        assert "200" in openapi["paths"][path][method]["responses"]
 
 
 def test_post_and_comment_restrictions_and_announcement_role(api_context) -> None:

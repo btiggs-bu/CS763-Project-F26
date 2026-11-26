@@ -9,10 +9,10 @@ from sqlalchemy.engine import URL, make_url
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
+environment = dotenv_values(PROJECT_ROOT / ".env")
 
 
 def _configured_database_url():
-    environment = dotenv_values(PROJECT_ROOT / ".env")
     raw_url = os.environ.get("DATABASE_URL") or environment.get("DATABASE_URL")
     if raw_url:
         return make_url(raw_url)
@@ -40,7 +40,9 @@ def _same_database(first, second):
     return first.database == second.database
 
 
-raw_test_url = os.environ.get("TEST_DATABASE_URL")
+raw_test_url = os.environ.get("TEST_DATABASE_URL") or environment.get(
+    "TEST_DATABASE_URL"
+)
 if not raw_test_url:
     raise pytest.UsageError(
         "Set TEST_DATABASE_URL to a dedicated PostgreSQL database whose name "

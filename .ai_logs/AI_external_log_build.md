@@ -2900,3 +2900,391 @@ Provide recommended fixes before proceeding to the next milestone.
 **The implementation prompt** assumes the foundation is already complete and focuses exclusively on the Post and Comment domain. It explicitly scopes the work to CRUD operations, relationship validation, nested comments, and OpenAPI documentation while preventing the agent from drifting into authorization or permission logic that is out of scope for your project.
 
 **The validation prompt** treats the implementation as a completed deliverable and forces the agent to verify endpoint coverage, schema correctness, relationship integrity, database behavior, and test coverage. This catches issues with nested comments, foreign keys, and filtering before you move on to the final milestone (tags, moderation endpoints, timeline endpoint, testing, and documentation).
+
+Prompt
+
+I've finished the prompts for API endpoints. Please generate a maximum of 2 prompts for the final milestone of this implementation, keeping in mind that some tests and seed data have already been created: Add needed tests, seed data, and OpenAPI documentation
+
+Response
+
+Since you've already implemented the API endpoints and some tests/seed data exist, the final milestone should focus on **completing coverage, improving documentation, and preparing the project for demonstration and grading** rather than generating entirely new functionality.
+
+I would use **one implementation prompt** and **one validation/review prompt**.
+
+---
+
+# Prompt 1: Complete Testing, Seed Data, and OpenAPI Documentation
+
+Complete the final implementation work for the Research Blog & Project Discussion Board (RBPDB) backend project.
+
+The following components already exist:
+
+- FastAPI application
+
+- PostgreSQL integration
+
+- SQLAlchemy models
+
+- Alembic migrations
+
+- Pydantic schemas
+
+- User, Role, Thread, Post, and Comment CRUD endpoints
+
+- Existing tests
+
+- Existing seed data
+
+Your task is to identify gaps and complete the remaining work related to testing, seed data, and API documentation.
+
+Testing
+
+-------
+
+Review all existing tests and add any missing tests needed to achieve comprehensive coverage of implemented functionality.
+
+Cover at minimum:
+
+Users
+
+- Create
+
+- Retrieve
+
+- Update
+
+- Delete
+
+- List
+
+Roles
+
+- Create
+
+- Retrieve
+
+- Update
+
+- Delete
+
+- List
+
+Threads
+
+- Create
+
+- Retrieve
+
+- Update
+
+- Delete
+
+- Parent-child relationship validation
+
+Posts
+
+- Create
+
+- Retrieve
+
+- Update
+
+- Delete
+
+- Thread associations
+
+Comments
+
+- Create
+
+- Retrieve
+
+- Update
+
+- Delete
+
+- Nested comment relationships
+
+Include:
+
+- Unit tests
+
+- API integration tests
+
+- Validation error tests
+
+- Not-found scenarios
+
+- Foreign key validation scenarios
+
+Seed Data
+
+---------
+
+Review the existing seed data and expand it as needed to adequately demonstrate the application.
+
+Create realistic sample records for:
+
+- Roles
+
+- Users
+
+- Labs
+
+- Courses
+
+- Projects
+
+- Threads
+
+- Tags
+
+- Posts
+
+- Comments
+
+Ensure the seed data demonstrates:
+
+- Parent-child thread relationships
+
+- Multiple users
+
+- Multiple posts
+
+- Nested comments
+
+Provide a repeatable process for:
+
+- Seeding the database
+
+- Resetting seed data
+
+OpenAPI Documentation
+
+---------------------
+
+Review and improve the generated OpenAPI documentation.
+
+For every endpoint:
+
+- Add summaries
+
+- Add descriptions
+
+- Add response descriptions
+
+- Add request examples
+
+- Add response examples
+
+Ensure schemas display properly in Swagger UI.
+
+README Updates
+
+--------------
+
+Update README.md with:
+
+- Project overview
+
+- Architecture overview
+
+- Prerequisites
+
+- Environment configuration
+
+- Docker setup
+
+- Migration commands
+
+- Seed-data commands
+
+- Running tests
+
+- Accessing Swagger/OpenAPI documentation
+
+Deliverables
+
+------------
+
+Provide:
+
+- All newly created files
+
+- All modified files
+
+- Test coverage summary
+
+- Seed data summary
+
+- OpenAPI documentation summary
+
+- README changes
+
+---
+
+# Prompt 2: Final Project Validation and Readiness Review
+
+Perform a complete final review of the RBPDB backend project and verify implementation readiness.
+
+Review the entire codebase against:
+
+- Project specification
+
+- ERD
+
+- API requirements
+
+- Database design
+
+- Implemented functionality
+
+Architecture Review
+
+-------------------
+
+Confirm:
+
+- Layered architecture is consistently followed
+
+- Routes remain thin
+
+- Services contain business logic
+
+- Repositories contain data access logic
+
+- Dependency injection is used appropriately
+
+Database Review
+
+---------------
+
+Verify:
+
+- All ERD entities exist
+
+- Relationships are implemented correctly
+
+- Constraints are enforced correctly
+
+- Alembic migrations work correctly
+
+- Seed data can be loaded successfully
+
+API Review
+
+----------
+
+Verify:
+
+Users
+
+Roles
+
+Threads
+
+Posts
+
+Comments
+
+For each resource confirm:
+
+- CRUD operations implemented
+
+- Correct status codes returned
+
+- Request validation works
+
+- Response schemas work
+
+- OpenAPI documentation is complete
+
+Testing Review
+
+--------------
+
+Review test coverage.
+
+Identify:
+
+- Missing tests
+
+- Weak coverage areas
+
+- Redundant tests
+
+Provide an estimated coverage assessment by feature area.
+
+Documentation Review
+
+--------------------
+
+Verify:
+
+- README is complete
+
+- Environment setup instructions are accurate
+
+- Migration commands are correct
+
+- Seed-data instructions are correct
+
+- Swagger UI documentation is complete
+
+Production and Grading Readiness
+
+--------------------------------
+
+Identify:
+
+- Code quality concerns
+
+- Technical debt
+
+- Inconsistencies
+
+- Missing functionality
+
+- Potential grading risks
+
+Generate a final readiness matrix:
+
+| Area | Status | Notes |
+
+|--------|--------|--------|
+
+| Database Schema | Pass/Fail | |
+
+| Migrations | Pass/Fail | |
+
+| Pydantic Schemas | Pass/Fail | |
+
+| User API | Pass/Fail | |
+
+| Role API | Pass/Fail | |
+
+| Thread API | Pass/Fail | |
+
+| Post API | Pass/Fail | |
+
+| Comment API | Pass/Fail | |
+
+| Tests | Pass/Fail | |
+
+| Seed Data | Pass/Fail | |
+
+| OpenAPI Docs | Pass/Fail | |
+
+| README | Pass/Fail | |
+
+Provide a final list of recommended fixes, ordered by priority, before project submission.
+
+## Why these prompts work
+
+At this stage, you are no longer building new features. You're preparing the project for **grading, demonstration, and maintenance**.
+
+**Prompt 1** is implementation-focused. It tells the agent to identify gaps and finish incomplete testing, seed data, and documentation rather than recreating work that already exists.
+
+**Prompt 2** acts like a senior code review. It forces the agent to evaluate the entire project holistically against the specification, architecture, database, APIs, and documentation. This is often where AI agents catch missing OpenAPI examples, incomplete test coverage, orphaned endpoints, and README inconsistencies that could otherwise cost points during evaluation.
+
+Together, these two prompts are typically sufficient to complete the final milestone without unnecessary prompt fragmentation.

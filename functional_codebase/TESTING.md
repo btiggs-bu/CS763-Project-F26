@@ -19,9 +19,10 @@ from the project defaults:
 docker compose exec db sh -c 'createdb -U "$POSTGRES_USER" rbpdb_test'
 ```
 
-Set `TEST_DATABASE_URL` to that database, using the PostgreSQL credentials and
-host port from `.env` (URL-encode special characters in the password), then
-run the suite:
+Set `TEST_DATABASE_URL` in `.env` or in the current PowerShell session to that
+database, using the PostgreSQL credentials and host port from `.env` (URL-encode
+special characters in the password). The test harness reads the process
+environment first, then `.env`. For example:
 
 ```powershell
 $env:TEST_DATABASE_URL = "postgresql+psycopg://rbpdb:rbpdb@localhost:5432/rbpdb_test"
