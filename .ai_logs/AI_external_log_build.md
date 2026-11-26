@@ -2314,3 +2314,589 @@ before you begin building repositories and routes.
 ---
 
 For your project specifically, I would stop at these **3 prompts**. That's enough structure to produce high-quality Pydantic schemas while keeping the workflow efficient and avoiding the over-fragmentation that was useful for the database-schema milestone but isn't necessary here.
+
+Prompt
+
+Please generate one prompt to Implement User, Role, and Thread CRUD endpoints and one prompt to validate them.
+
+Response
+
+Since you've already completed:
+
+- Project setup
+- Docker/PostgreSQL
+- SQLAlchemy
+- Alembic
+- Database schema/models
+- Pydantic schemas
+
+the next milestone should focus on implementing the **CRUD API layer**, not redesigning models or database structures. A single implementation prompt and a single validation prompt are sufficient.
+
+---
+
+## Prompt 1: Implement User, Role, and Thread CRUD Endpoints
+
+Implement the User, Role, and Thread API functionality using the existing SQLAlchemy models, Pydantic schemas, and database configuration.
+
+Requirements:
+
+Architecture:
+
+- Follow the existing layered architecture:
+
+  - routers/api
+
+  - services
+
+  - repositories
+
+  - models
+
+  - schemas
+
+- Keep business logic out of route handlers.
+
+- Route handlers should delegate work to service classes.
+
+- Services should use repositories for database access.
+
+Implement CRUD functionality for:
+
+Users
+
+-----
+
+GET    /users
+
+GET    /users/{id}
+
+POST   /users
+
+PUT    /users/{id}
+
+DELETE /users/{id}
+
+Roles
+
+-----
+
+GET    /roles
+
+GET    /roles/{id}
+
+POST   /roles
+
+PUT    /roles/{id}
+
+DELETE /roles/{id}
+
+Threads
+
+-------
+
+GET    /threads
+
+GET    /threads/{id}
+
+POST   /threads
+
+PUT    /threads/{id}
+
+DELETE /threads/{id}
+
+Requirements:
+
+User Endpoints
+
+- Support create, retrieve, update, delete, and list operations.
+
+- Return appropriate HTTP status codes.
+
+- Validate request bodies using Pydantic schemas.
+
+- Return response schemas consistently.
+
+- Prevent creation of duplicate unique values where applicable.
+
+Role Endpoints
+
+- Implement complete CRUD operations.
+
+- Validate enum values and role names.
+
+- Return appropriate error responses.
+
+Thread Endpoints
+
+- Implement complete CRUD operations.
+
+- Support parent-child thread relationships.
+
+- Support thread type values defined in the specification.
+
+- Support associations already defined in the database schema.
+
+- Validate referenced entity IDs before persistence.
+
+General Requirements
+
+Repository Layer
+
+- Create repositories for User, Role, and Thread entities.
+
+- Reuse common CRUD functionality where practical.
+
+Service Layer
+
+- Implement business services for User, Role, and Thread operations.
+
+- Handle validation and integrity checks within services.
+
+API Layer
+
+- Register routers with FastAPI.
+
+- Group endpoints logically.
+
+- Add endpoint summaries and descriptions for Swagger/OpenAPI.
+
+Error Handling
+
+- Use the existing exception framework.
+
+- Return meaningful errors for:
+
+  - entity not found
+
+  - validation failures
+
+  - duplicate records
+
+  - foreign key violations
+
+Deliverables
+
+Provide:
+
+- All new files created
+
+- All modified files
+
+- Complete implementation code
+
+- OpenAPI endpoint summary
+
+- Example requests and responses
+
+---
+
+## Prompt 2: Validate User, Role, and Thread CRUD Endpoints
+
+Perform a complete validation review of the implemented User, Role, and Thread CRUD functionality.
+
+Review the implementation against:
+
+- Project specification
+
+- ERD
+
+- SQLAlchemy models
+
+- Pydantic schemas
+
+- Existing architecture
+
+Validate the following:
+
+Endpoint Coverage
+
+-----------------
+
+Verify all required endpoints exist:
+
+Users
+
+- GET /users
+
+- GET /users/{id}
+
+- POST /users
+
+- PUT /users/{id}
+
+- DELETE /users/{id}
+
+Roles
+
+- GET /roles
+
+- GET /roles/{id}
+
+- POST /roles
+
+- PUT /roles/{id}
+
+- DELETE /roles/{id}
+
+Threads
+
+- GET /threads
+
+- GET /threads/{id}
+
+- POST /threads
+
+- PUT /threads/{id}
+
+- DELETE /threads/{id}
+
+Architecture Review
+
+-------------------
+
+Confirm:
+
+- Routes contain minimal logic
+
+- Services handle business operations
+
+- Repositories handle database access
+
+- Dependency injection is implemented properly
+
+Schema Validation
+
+-----------------
+
+Confirm:
+
+- Request schemas are correct
+
+- Response schemas are correct
+
+- Update schemas support partial updates
+
+- ORM serialization functions correctly
+
+Database Validation
+
+-------------------
+
+Confirm:
+
+- Foreign keys are respected
+
+- Relationships function correctly
+
+- Cascade behavior is appropriate
+
+- Unique constraints are enforced
+
+API Behavior Validation
+
+-----------------------
+
+Verify:
+
+- Correct HTTP status codes
+
+- Consistent error responses
+
+- OpenAPI documentation generation
+
+- Resource creation and update behavior
+
+- Resource deletion behavior
+
+Testing Review
+
+--------------
+
+Generate and/or verify:
+
+- Unit tests for services
+
+- Repository tests
+
+- API integration tests
+
+Create a validation matrix showing:
+
+| Area | Status | Notes |
+
+|--------|--------|--------|
+
+| User CRUD | Pass/Fail | |
+
+| Role CRUD | Pass/Fail | |
+
+| Thread CRUD | Pass/Fail | |
+
+| Repositories | Pass/Fail | |
+
+| Services | Pass/Fail | |
+
+| Schemas | Pass/Fail | |
+
+| OpenAPI Docs | Pass/Fail | |
+
+| Integration Tests | Pass/Fail | |
+
+Identify all defects, inconsistencies, missing functionality, or opportunities for simplification before proceeding to the next milestone.
+
+---
+
+### Why these prompts work
+
+**Prompt 1** is implementation-focused and gives the agent enough architectural guidance to avoid common mistakes such as:
+
+- Putting database queries directly in routes
+- Mixing business logic into controllers
+- Returning SQLAlchemy models directly
+- Skipping validation
+
+**Prompt 2** forces the agent to act as a reviewer rather than a developer. AI coding agents frequently produce code that "works" but does not fully align with the specification. This validation prompt verifies:
+
+- endpoint completeness,
+- architecture compliance,
+- schema correctness,
+- database integrity,
+- and test coverage
+
+before you move on to Posts, Comments, and Tags. This is typically the point where defects become much harder to fix if left undiscovered.
+
+Prompt
+
+Please generate one prompt to Implement Post and Comment CRUD endpoints and one prompt to validate them.
+
+Response
+
+## Prompt 1: Implement Post and Comment CRUD Endpoints
+
+Implement the Post and Comment API functionality using the existing SQLAlchemy models
+
+---
+
+## Prompt 2: Validate Post and Comment CRUD Endpoints
+
+Perform a complete validation review of the implemented Post and Comment functionality.
+
+Review the implementation against:
+
+- Project specification
+
+- ERD
+
+- SQLAlchemy models
+
+- Pydantic schemas
+
+- Existing architecture
+
+Endpoint Coverage
+
+-----------------
+
+Verify all required endpoints exist:
+
+Posts
+
+- GET /posts
+
+- GET /posts/{id}
+
+- POST /posts
+
+- PUT /posts/{id}
+
+- DELETE /posts/{id}
+
+Comments
+
+- GET /posts/{post_id}/comments
+
+- GET /posts/{post_id}/comments/{comment_id}
+
+- POST /posts/{post_id}/comments
+
+- PUT /posts/{post_id}/comments/{comment_id}
+
+- DELETE /posts/{post_id}/comments/{comment_id}
+
+Architecture Review
+
+-------------------
+
+Confirm:
+
+- Routes contain minimal business logic
+
+- Services encapsulate business functionality
+
+- Repositories encapsulate data access
+
+- Dependency injection is used consistently
+
+- Existing architectural patterns are followed
+
+Schema Validation
+
+-----------------
+
+Verify:
+
+- All request schemas are correct
+
+- All response schemas are correct
+
+- Partial updates function correctly
+
+- ORM serialization works correctly
+
+- Enum fields serialize correctly
+
+Relationship Validation
+
+-----------------------
+
+Verify:
+
+Posts correctly reference:
+
+- Users
+
+- Threads
+
+- Tags
+
+Comments correctly reference:
+
+- Posts
+
+- Users
+
+- Parent comments
+
+Nested comment relationships function correctly.
+
+Database Validation
+
+-------------------
+
+Verify:
+
+- Foreign key constraints work correctly
+
+- Deletes behave as intended
+
+- Database integrity is maintained
+
+- Required relationships are enforced
+
+Filtering and Query Validation
+
+------------------------------
+
+Verify all filtering/search functionality defined in the specification works correctly.
+
+Examples may include:
+
+- Filter by thread
+
+- Filter by author
+
+- Filter by tag
+
+- Filter by post type
+
+- Filter by moderation status
+
+- Keyword search
+
+Adjust validation criteria according to the implemented API specification.
+
+API Behavior Validation
+
+-----------------------
+
+Confirm:
+
+- Correct HTTP status codes
+
+- Consistent error responses
+
+- Proper OpenAPI documentation
+
+- Consistent request/response formats
+
+Testing Review
+
+--------------
+
+Create and/or verify:
+
+Unit Tests
+
+- Post service tests
+
+- Comment service tests
+
+- Repository tests
+
+Integration Tests
+
+- Post CRUD operations
+
+- Comment CRUD operations
+
+- Nested comments
+
+- Relationship validation
+
+- Filtering and search functionality
+
+Generate a validation matrix:
+
+| Area | Status | Notes |
+
+|--------|--------|--------|
+
+| Post CRUD | Pass/Fail | |
+
+| Comment CRUD | Pass/Fail | |
+
+| Post Relationships | Pass/Fail | |
+
+| Comment Relationships | Pass/Fail | |
+
+| Repositories | Pass/Fail | |
+
+| Services | Pass/Fail | |
+
+| Schemas | Pass/Fail | |
+
+| OpenAPI Docs | Pass/Fail | |
+
+| Unit Tests | Pass/Fail | |
+
+| Integration Tests | Pass/Fail | |
+
+Identify:
+
+- Missing functionality
+
+- Specification mismatches
+
+- Validation gaps
+
+- Redundant code
+
+- Opportunities for simplification
+
+Provide recommended fixes before proceeding to the next milestone.
+
+### Why these prompts work
+
+**The implementation prompt** assumes the foundation is already complete and focuses exclusively on the Post and Comment domain. It explicitly scopes the work to CRUD operations, relationship validation, nested comments, and OpenAPI documentation while preventing the agent from drifting into authorization or permission logic that is out of scope for your project.
+
+**The validation prompt** treats the implementation as a completed deliverable and forces the agent to verify endpoint coverage, schema correctness, relationship integrity, database behavior, and test coverage. This catches issues with nested comments, foreign keys, and filtering before you move on to the final milestone (tags, moderation endpoints, timeline endpoint, testing, and documentation).

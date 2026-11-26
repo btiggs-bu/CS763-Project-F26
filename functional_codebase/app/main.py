@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 
 from app.api.health import router as health_router
+from app.api.threads import router as threads_router
+from app.api.users import router as users_router
 from app.core.exceptions import register_exception_handlers
 
 app = FastAPI(
@@ -9,3 +11,5 @@ app = FastAPI(
 )
 register_exception_handlers(app)
 app.include_router(health_router)
+app.include_router(users_router)
+app.include_router(threads_router)
