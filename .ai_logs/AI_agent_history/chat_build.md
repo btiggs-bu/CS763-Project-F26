@@ -36,6 +36,7 @@
 - [Request 28](#request-28): include tags in the spec's timeline `postread` example and fix the pydantic `...
 - [Request 29](#request-29): Implement the User and Thread API functionality using the existing SQLAlchemy...
 - [Request 30](#request-30): Perform a complete validation review of the implemented User and Thread CRUD ...
+- [Request 31](#request-31): Please perform the same implementation and validation steps for the Post and ...
 
 ---
 
@@ -3677,7 +3678,7 @@ Its response includes `thread_id`, the course subtype fields, `parent_thread_id`
 ---
 
 <a name="request-30"></a>
-## Request 30 [^](#table-of-contents) [<](#request-29) >
+## Request 30 [^](#table-of-contents) [<](#request-29) [>](#request-31)
 
 ### Participant
 
@@ -3925,4 +3926,389 @@ During this review, I added separate repository and service tests, moved the SQL
 The endpoints are registered in [main.py](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py>); implementations are in the [user router](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/users.py>), [thread router](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/threads.py>), [services](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/services>), and [repositories](</D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/repositories>).
 
 > *Response time: 186.48 seconds*
+> <br>*Model: agent-host-copilotcli:auto*
+
+---
+
+<a name="request-31"></a>
+## Request 31 [^](#table-of-contents) [<](#request-30) >
+
+### Participant
+
+Please perform the same implementation and validation steps for the Post and Comment API functionality using the existing SQLAlchemy models and specifications
+
+### Assistant
+
+I’ll map the documented Post/Comment routes and fields to the existing ORM and schemas first. I’ll implement CRUD plus the documented timeline and moderation/report operations, and keep the text-export branch as a raw response rather than a Pydantic JSON model.
+<details>
+  <summary>Read **content.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\models\\content.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **posts.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\posts.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **comments.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\comments.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **moderation.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\moderation.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **tags.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\tags.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **queries.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\queries.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **enums.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\models\\enums.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **threads.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\api\\threads.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **spec.md**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\spec.md",
+  "view_range": [
+    227,
+    330
+  ]
+}</p>
+</details>
+
+<details>
+  <summary>Read **spec.md**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\spec.md",
+  "view_range": [
+    415,
+    515
+  ]
+}</p>
+</details>
+
+<details>
+  <summary>Read **spec.md**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\spec.md",
+  "view_range": [
+    755,
+    930
+  ]
+}</p>
+</details>
+
+<details>
+  <summary>Read **threads.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\repositories\\threads.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **persistence.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\services\\persistence.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **tag.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\models\\tag.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **spec.md**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\spec.md",
+  "view_range": [
+    470,
+    555
+  ]
+}</p>
+</details>
+
+<details>
+  <summary>Read **__init__.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\__init__.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **responses.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\api\\responses.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **main.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\main.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **requirements-dev.txt**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\requirements-dev.txt"
+}</p>
+</details>
+
+<details>
+  <summary>Read **spec.md**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\spec.md",
+  "view_range": [
+    1,
+    118
+  ]
+}</p>
+</details>
+
+<details>
+  <summary>Read **tags.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\repositories\\tags.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **base.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\repositories\\base.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **users.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\repositories\\users.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **threads.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\services\\threads.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **persistence.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\services\\persistence.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **posts.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\posts.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **comments.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\comments.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **queries.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\queries.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **enums.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\models\\enums.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **enums.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\enums.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **threads.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\api\\threads.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **moderation.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\moderation.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **common.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\schemas\\common.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **responses.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\api\\responses.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **conftest.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\tests\\conftest.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **test_user_thread_api.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\tests\\test_user_thread_api.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **threads.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\repositories\\threads.py"
+}</p>
+</details>
+
+<details>
+  <summary>Read **spec.md**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\spec.md",
+  "view_range": [
+    210,
+    330
+  ]
+}</p>
+</details>
+
+<details>
+  <summary>Read **spec.md**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\spec.md",
+  "view_range": [
+    400,
+    450
+  ]
+}</p>
+</details>
+
+<details>
+  <summary>Read **content.py**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\app\\models\\content.py",
+  "view_range": [
+    1,
+    200
+  ]
+}</p>
+</details>
+
+<details>
+  <summary>Read **requirements.txt**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\requirements.txt"
+}</p>
+</details>
+
+<details>
+  <summary>Read **requirements-dev.txt**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\requirements-dev.txt"
+}</p>
+</details>
+
+<details>
+  <summary>Read **Dockerfile**</summary>
+  <p>Completed with input: {
+  "path": "D:\\Downloads_D\\Grad Stuff\\CS763 (Secure Software Dev)\\GitHub\\CS763-Project-F26\\functional_codebase\\Dockerfile"
+}</p>
+</details>
+
+The API paths and SQLite-backed cases are in place. I’m rerunning the runnable suite and checking the final diff; PostgreSQL integration remains unavailable without its required test database URL.
+
+Implemented and registered Post and Comment CRUD, moderation/report routes, and the chronological thread timeline. Existing Pydantic schemas are reused; no models, endpoints beyond the requested API, or migrations were added.
+
+**Validation**
+- SQLite-backed suite: **14 passed**. OpenAPI includes the comment text-export response; export returns a downloadable `text/plain` response.
+- Pylance diagnostics on the changed API, service, and repository files: no errors.
+- PostgreSQL integration remains unverified: `TEST_DATABASE_URL` is unset, and the integration-test setup requires a dedicated database whose name contains `_test`.
+- Authorization is not complete without an authenticated caller. Creation checks the submitted `user_id`, roles, and thread restrictions, but author-only edits and Faculty/Admin-only moderation cannot verify who made the request. This limitation is documented in [spec.md](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/spec.md>).
+
+| Area | Status | Notes |
+|---|---|---|
+| Post and Comment CRUD | Pass | Covered by SQLite API tests |
+| Repositories and services | Pass | Filtering, validation, and persistence exercised |
+| Schemas | Pass | Existing schemas used for request and response validation |
+| OpenAPI | Pass | Routes and text export documented |
+| PostgreSQL integration | Pending | Requires `TEST_DATABASE_URL` |
+
+**Routes added:** Post and Comment collection/single-resource CRUD; `PATCH` report and moderation routes; `GET /api/v1/discussions/scopes/{thread_type}/{thread_id}/timeline` with singular `project`, `course`, or `lab` values.
+
+**Example request**
+```json
+{
+  "post_type": "discussion",
+  "user_id": 1,
+  "thread_id": 2,
+  "title": "Research update",
+  "content": "A discussion post.",
+  "tags": ["research"]
+}
+```
+Creates a post with `201 Created`; the response includes its generated ID, moderation/restriction metadata, and tags.
+
+**Files added:** [posts.py](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/posts.py>), [comments.py](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/comments.py>), [timeline.py](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/timeline.py>), [posts.py service](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/services/posts.py>), [comments.py service](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/services/comments.py>), [content_access.py](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/services/content_access.py>), [posts.py repository](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/repositories/posts.py>), [comments.py repository](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/repositories/comments.py>), [search.py](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/repositories/search.py>), and [test_post_comment_api.py](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/tests/test_post_comment_api.py>).
+
+**Modified:** [main.py](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/main.py>), [responses.py](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/api/responses.py>), [users.py repository](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/functional_codebase/app/repositories/users.py>), and [spec.md](<D:/Downloads_D/Grad Stuff/CS763 (Secure Software Dev)/GitHub/CS763-Project-F26/spec.md>).
+
+> *Response time: 480.09 seconds*
 > <br>*Model: agent-host-copilotcli:auto*

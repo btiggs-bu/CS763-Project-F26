@@ -1,7 +1,7 @@
 from collections.abc import Sequence
 from datetime import datetime, timezone
 
-from sqlalchemy import func, select, update
+from sqlalchemy import exists, func, select, update
 from sqlalchemy.orm import Session, selectinload
 
 from app.models.content import Comment, Post
@@ -35,6 +35,25 @@ class UserRepository(BaseRepository[User]):
 
     def get_by_email(self, email: str) -> User | None:
         return self.session.scalar(select(User).where(User.email == email))
+
+    def is_thread_member(self, user_id: int, thread_id: int) -> bool:
+        membership = self.session.scalar(
+            select(
+                exists().where(
+                    UserThread.user_id == user_id,
+                    UserThread.thread_id == thread_id,
+                )
+            )
+        )
+        created = self.session.scalar(
+            select(
+                exists().where(
+                    Thread.user_id == user_id,
+                    Thread.thread_id == thread_id,
+                )
+            )
+        )
+        return bool(membership or created)
 
     def list(
         self,

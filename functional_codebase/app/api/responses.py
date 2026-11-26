@@ -6,3 +6,8 @@ ERROR_RESPONSES = {
     422: {"model": ErrorEnvelope, "description": "The request or referenced IDs are invalid"},
     500: {"model": ErrorEnvelope, "description": "An unexpected server or database error occurred"},
 }
+
+FORBIDDEN_RESPONSE = {
+    "model": ErrorEnvelope,
+    "description": "The user is not permitted to perform this operation",
+}

@@ -273,6 +273,9 @@ Optional Query Parameters:
   variant returns a raw `PlainTextResponse` downloadable response with
   `Content-Type: text/plain; charset=utf-8` and
   `Content-Disposition: attachment`. It is not a Pydantic JSON response.
+  The text archive renders each comment as a header containing its comment ID,
+  author user ID, and ISO timestamp, followed by its content; comments are
+  separated by a blank line.
 
 **POST /discussions/posts/{post_id}/comments**  
 Create a new comment on a post.
@@ -300,6 +303,13 @@ Delete a specific comment and its replies.
 The PATCH functions for Posts and Comments should only be used by their
 authors, so separate PATCH functions to allow all Users to report them and
 Faculty/Admin users to moderate them have been included as well.
+
+**Pre-authentication implementation note:** the current API does not establish
+an authenticated caller. Create operations use the request's `user_id` to
+validate the selected author and creation restrictions, but update, report,
+and moderation operations cannot yet verify the caller's identity or role.
+Author-only edits and Faculty/Admin-only moderation remain authorization work
+for the authentication phase.
 #### Post Moderation
 
 **PATCH /discussions/posts/{post_id}/report**
