@@ -1,8 +1,8 @@
 # Pydantic API Schema Plan
 
 This plan describes the Pydantic schemas for the API documented in
-[`spec.md`](../spec.md). It is a design document only; no Pydantic schema
-implementation is included.
+[`spec.md`](../spec.md). The schema families are implemented in
+[`functional_codebase/app/schemas/`](../functional_codebase/app/schemas/).
 
 ## Conventions
 
@@ -11,6 +11,9 @@ implementation is included.
 - Use `EmailStr` for user email; `email-validator` is a runtime dependency.
 - PATCH schemas are partial: every field is optional, omitted fields remain
   unchanged, and an empty update should be rejected.
+- Validation covers the request's shape and field constraints. Existing-record
+  uniqueness, foreign-key existence, subtype hierarchy, and same-post comment
+  parent checks remain database/service concerns.
 - `user_id` values remain client-supplied for create requests until
   authentication is implemented.
 - Response relationships are represented as simple values rather than nested
@@ -22,6 +25,31 @@ implementation is included.
   `UserRead.deleted_at` is nullable.
 - DELETE operations return HTTP 204 with no body and therefore have no
   Pydantic response schema.
+
+## Implemented Inheritance
+
+- `Schema` provides Pydantic configuration, including `from_attributes=True`,
+  to the schema families. `TimestampedRead` adds the common timestamp fields.
+- `UserProfileBase` defines email and display name. `UserBase` extends it with
+  username; `UserCreate` and `UserRead` extend `UserBase`. `UserRead` also
+  inherits `TimestampedRead`. `UserUpdate` inherits both `UserProfileBase` and
+  `PatchSchema`, omitting username because it is immutable.
+- `ThreadBase` defines the common thread fields. The three subtype create
+  schemas inherit a shared create base, which adds `user_id`; their literal
+  `thread_type` fields form the discriminated `ThreadCreate` union.
+  `ThreadRead` extends `ThreadBase` and `TimestampedRead`;
+  `ThreadUpdate` extends `ThreadBase` and `PatchSchema`.
+- `PostBase` defines title, content, and restriction level. `PostCreate` and
+  `PostRead` extend it (`PostRead` also extends `TimestampedRead`), while
+  `PostUpdate` extends `PostBase` and `PatchSchema` so immutable fields are
+  not accepted.
+- `CommentBase` defines content. `CommentCreate` and `CommentRead` extend it
+  (`CommentRead` also extends `TimestampedRead`); `CommentUpdate` extends
+  `CommentBase` and `PatchSchema`.
+- `TagBase` defines the constrained tag name. `TagCreate` and `TagRead` extend
+  it; `TagUpdate` extends `TagBase` and `PatchSchema`.
+- All update schemas share `PatchSchema`, which rejects empty updates and
+  explicit nulls for non-nullable fields.
 
 ## User and Role
 
@@ -93,19 +121,24 @@ service must preserve that invariant when validating `p_comment_id`.
   `thread_type`, `restriction_level`, `tag_id`, `parent_thread_id`); post
   filters (`keyword`, `thread_id`, `user_id`, `post_type`, `tag_id`,
   `mod_status`); and comment filters (`keyword`, `user_id`, `mod_status`,
-  `format`, restricted to `json` or `txt`).
+  `format`, restricted to `json` or `txt`, defaulting to `json`). For
+  `format=json`, the response is the Pydantic `CommentList`. For `format=txt`,
+  return a raw downloadable `PlainTextResponse`
+  (`text/plain; charset=utf-8`, `Content-Disposition: attachment`); that
+  branch intentionally has no Pydantic JSON response model. The endpoint
+  should branch on the validated query value rather than applying the
+  `CommentList` response model to both formats.
 - `thread_type` path values for timeline requests are singular: `project`,
   `course`, or `lab`. Timeline results use the post response schema and list
   wrapper.
 
 ## Entities Without Standalone API Schemas
 
-`Role`, `UserRole`, `UserThread`, `Tag`, `ThreadTag`, and `PostTag` have no
-standalone create/update/read routes in the current API. Their public
-representations are respectively role-name strings, user/thread IDs,
-tag-name strings, and the `parent_thread_id` relationship field. A future
-endpoint for managing these records would need its own request and response
-schemas.
+`Role`, `UserRole`, `UserThread`, `ThreadTag`, and `PostTag` have no standalone
+routes in the current API. Roles are represented as role-name strings,
+membership as user/thread IDs, and thread hierarchy as `parent_thread_id`.
+`Tag` has reusable base/create/update/read schemas for validation and
+serialization, although no standalone tag endpoints are currently specified.
 
 ## Errors and Health
 

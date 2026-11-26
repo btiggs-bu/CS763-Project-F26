@@ -268,7 +268,11 @@ Optional Query Parameters:
 - `keyword` - Full-text search comment content
 - `user_id` - Return comments created by a specific user
 - `mod_status` - Filter by `active`, `reported`, or `hidden_by_moderator` comments
-- `format` - Return comments as `json` or downloadable `txt` archive
+- `format` - Return comments as `json` or downloadable `txt` archive; defaults
+  to `json`. The JSON variant returns the `CommentList` response. The `txt`
+  variant returns a raw `PlainTextResponse` downloadable response with
+  `Content-Type: text/plain; charset=utf-8` and
+  `Content-Disposition: attachment`. It is not a Pydantic JSON response.
 
 **POST /discussions/posts/{post_id}/comments**  
 Create a new comment on a post.
@@ -675,6 +679,10 @@ Returns `204 No Content`; no response body.
       "content": "Please submit all Sprint 2 deliverables by Friday.",
       "restriction_level": "inherited",
       "mod_status": "active",
+      "tags": [
+        "Sprint",
+        "Announcement"
+      ],
       "created_at": "2026-11-02T11:06:07.235541Z",
       "updated_at": "2026-11-05T15:22:11.947651Z"
     },
@@ -687,6 +695,10 @@ Returns `204 No Content`; no response body.
       "content": "Can we use FastAPI dependency injection here?",
       "restriction_level": "inherited",
       "mod_status": "active",
+      "tags": [
+        "Sprint",
+        "Discussion"
+      ],
       "created_at": "2026-11-03T10:01:02.100000Z",
       "updated_at": "2026-11-03T10:01:02.100000Z"
     }
