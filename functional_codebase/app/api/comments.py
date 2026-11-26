@@ -6,6 +6,18 @@ from pydantic import PositiveInt
 from sqlalchemy.orm import Session
 
 from app.api.responses import ERROR_RESPONSES, FORBIDDEN_RESPONSE
+from app.api.openapi_examples import (
+    COMMENT,
+    COMMENT_CREATE,
+    COMMENT_LIST,
+    COMMENT_MODERATION,
+    COMMENT_MODERATION_HIDDEN,
+    COMMENT_UPDATE,
+    MODERATION_UPDATE,
+    json_response_documentation,
+    path_parameter_example,
+    request_body_examples,
+)
 from app.db.database import get_db
 from app.models.content import Comment
 from app.schemas.comments import CommentCreate, CommentList, CommentRead, CommentUpdate
@@ -36,22 +48,40 @@ def get_comment_service(session: Session = Depends(get_db)) -> CommentService:
     ),
     responses={
         200: {
+            **json_response_documentation(
+                "The matching comments as JSON, or a text archive when requested.",
+                COMMENT_LIST,
+            ),
             "content": {
+                "application/json": {
+                    "examples": {
+                        "success": {
+                            "summary": "Successful response",
+                            "value": COMMENT_LIST,
+                        }
+                    }
+                },
                 "text/plain": {
                     "schema": {"type": "string"},
-                    "example": (
-                        "Comment 12 | User 4 | Created 2026-11-02T11:06:07\\n"
-                        "A useful reply."
-                    ),
+                    "examples": {
+                        "download": {
+                            "summary": "Download comments as text",
+                            "value": (
+                                "Comment 50413740 | User 456 | "
+                                f"Created {COMMENT['created_at']}\n"
+                                f"{COMMENT['content']}"
+                            ),
+                        }
+                    }
                 }
-            }
+            },
         },
         404: ERROR_RESPONSES[404],
         500: ERROR_RESPONSES[500],
     },
 )
 def list_comments(
-    post_id: PositiveInt,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
     query: Annotated[CommentListQuery, Query()],
     service: CommentService = Depends(get_comment_service),
 ) -> CommentList | PlainTextResponse:
@@ -74,6 +104,7 @@ def list_comments(
         "same post. The supplied user_id identifies the author."
     ),
     responses={
+        201: json_response_documentation("The created comment.", COMMENT),
         403: FORBIDDEN_RESPONSE,
         404: ERROR_RESPONSES[404],
         422: ERROR_RESPONSES[422],
@@ -81,8 +112,18 @@ def list_comments(
     },
 )
 def create_comment(
-    post_id: PositiveInt,
-    payload: CommentCreate,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
+    payload: Annotated[
+        CommentCreate,
+        request_body_examples(
+            {
+                "comment": {
+                    "summary": "Add a comment to a post",
+                    "value": COMMENT_CREATE,
+                }
+            }
+        ),
+    ],
     service: CommentService = Depends(get_comment_service),
 ) -> Comment:
     return service.create_comment(post_id, payload)
@@ -93,11 +134,15 @@ def create_comment(
     response_model=CommentRead,
     summary="Get a comment",
     description="Return one comment belonging to the specified post.",
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        200: json_response_documentation("The requested comment.", COMMENT),
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def get_comment(
-    post_id: PositiveInt,
-    comment_id: PositiveInt,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
+    comment_id: Annotated[PositiveInt, path_parameter_example(50413740)],
     service: CommentService = Depends(get_comment_service),
 ) -> Comment:
     return service.get_comment(post_id, comment_id)
@@ -109,15 +154,26 @@ def get_comment(
     summary="Update a comment",
     description="Partially update a comment's content.",
     responses={
+        200: json_response_documentation("The updated comment.", COMMENT),
         404: ERROR_RESPONSES[404],
         422: ERROR_RESPONSES[422],
         500: ERROR_RESPONSES[500],
     },
 )
 def update_comment(
-    post_id: PositiveInt,
-    comment_id: PositiveInt,
-    payload: CommentUpdate,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
+    comment_id: Annotated[PositiveInt, path_parameter_example(50413740)],
+    payload: Annotated[
+        CommentUpdate,
+        request_body_examples(
+            {
+                "content": {
+                    "summary": "Edit a comment",
+                    "value": COMMENT_UPDATE,
+                }
+            }
+        ),
+    ],
     service: CommentService = Depends(get_comment_service),
 ) -> Comment:
     return service.update_comment(post_id, comment_id, payload)
@@ -130,11 +186,15 @@ def update_comment(
     response_model=None,
     summary="Delete a comment",
     description="Delete a comment and its dependent replies.",
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        204: {"description": "The comment and its dependent replies were deleted."},
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def delete_comment(
-    post_id: PositiveInt,
-    comment_id: PositiveInt,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
+    comment_id: Annotated[PositiveInt, path_parameter_example(50413740)],
     service: CommentService = Depends(get_comment_service),
 ) -> Response:
     service.delete_comment(post_id, comment_id)
@@ -146,11 +206,18 @@ def delete_comment(
     response_model=CommentModerationResult,
     summary="Report a comment",
     description="Mark a comment as reported for moderator review.",
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        200: json_response_documentation(
+            "The comment marked as reported.",
+            COMMENT_MODERATION,
+        ),
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def report_comment(
-    post_id: PositiveInt,
-    comment_id: PositiveInt,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
+    comment_id: Annotated[PositiveInt, path_parameter_example(50413740)],
     service: CommentService = Depends(get_comment_service),
 ) -> Comment:
     return service.report_comment(post_id, comment_id)
@@ -162,15 +229,29 @@ def report_comment(
     summary="Moderate a comment",
     description="Update a comment's moderation status.",
     responses={
+        200: json_response_documentation(
+            "The comment with its updated moderation status.",
+            COMMENT_MODERATION_HIDDEN,
+        ),
         404: ERROR_RESPONSES[404],
         422: ERROR_RESPONSES[422],
         500: ERROR_RESPONSES[500],
     },
 )
 def moderate_comment(
-    post_id: PositiveInt,
-    comment_id: PositiveInt,
-    payload: ModerationStatusUpdate,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
+    comment_id: Annotated[PositiveInt, path_parameter_example(50413740)],
+    payload: Annotated[
+        ModerationStatusUpdate,
+        request_body_examples(
+            {
+                "hide": {
+                    "summary": "Hide a reported comment",
+                    "value": MODERATION_UPDATE,
+                }
+            }
+        ),
+    ],
     service: CommentService = Depends(get_comment_service),
 ) -> Comment:
     return service.moderate_comment(post_id, comment_id, payload.mod_status)

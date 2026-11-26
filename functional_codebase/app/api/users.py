@@ -4,6 +4,15 @@ from fastapi import APIRouter, Depends, Query, Response, status
 from pydantic import PositiveInt
 from sqlalchemy.orm import Session
 
+from app.api.openapi_examples import (
+    USER,
+    USER_CREATE,
+    USER_LIST,
+    USER_UPDATE,
+    json_response_documentation,
+    path_parameter_example,
+    request_body_examples,
+)
 from app.api.responses import ERROR_RESPONSES
 from app.db.database import get_db
 from app.models.user import User
@@ -23,7 +32,13 @@ def get_user_service(session: Session = Depends(get_db)) -> UserService:
     response_model=UserList,
     summary="List users",
     description="Return users, optionally filtered by role or thread membership.",
-    responses=ERROR_RESPONSES,
+    responses={
+        200: json_response_documentation(
+            "The matching users and total count.",
+            USER_LIST,
+        ),
+        **ERROR_RESPONSES,
+    },
 )
 def list_users(
     query: Annotated[UserListQuery, Query()],
@@ -40,13 +55,24 @@ def list_users(
     summary="Create a user",
     description="Create a user and assign the requested roles, defaulting to student.",
     responses={
+        201: json_response_documentation("The created user.", USER),
         409: ERROR_RESPONSES[409],
         422: ERROR_RESPONSES[422],
         500: ERROR_RESPONSES[500],
     },
 )
 def create_user(
-    payload: UserCreate,
+    payload: Annotated[
+        UserCreate,
+        request_body_examples(
+            {
+                "student": {
+                    "summary": "Create a student user",
+                    "value": USER_CREATE,
+                }
+            }
+        ),
+    ],
     service: UserService = Depends(get_user_service),
 ) -> User:
     return service.create_user(payload)
@@ -57,10 +83,14 @@ def create_user(
     response_model=UserRead,
     summary="Get a user",
     description="Return a user by ID, including soft-deletion metadata.",
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        200: json_response_documentation("The requested user.", USER),
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def get_user(
-    user_id: PositiveInt,
+    user_id: Annotated[PositiveInt, path_parameter_example(123)],
     service: UserService = Depends(get_user_service),
 ) -> User:
     return service.get_user(user_id)
@@ -72,6 +102,7 @@ def get_user(
     summary="Update a user",
     description="Partially update a user's profile or role assignments.",
     responses={
+        200: json_response_documentation("The updated user.", USER),
         404: ERROR_RESPONSES[404],
         409: ERROR_RESPONSES[409],
         422: ERROR_RESPONSES[422],
@@ -79,8 +110,18 @@ def get_user(
     },
 )
 def update_user(
-    user_id: PositiveInt,
-    payload: UserUpdate,
+    user_id: Annotated[PositiveInt, path_parameter_example(123)],
+    payload: Annotated[
+        UserUpdate,
+        request_body_examples(
+            {
+                "profile": {
+                    "summary": "Update the display name",
+                    "value": USER_UPDATE,
+                }
+            }
+        ),
+    ],
     service: UserService = Depends(get_user_service),
 ) -> User:
     return service.update_user(user_id, payload)
@@ -96,10 +137,14 @@ def update_user(
         "Set deleted_at and close the restriction levels of the user's "
         "created threads, posts, and comments."
     ),
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        204: {"description": "The user was soft-deleted; no response body."},
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def delete_user(
-    user_id: PositiveInt,
+    user_id: Annotated[PositiveInt, path_parameter_example(123)],
     service: UserService = Depends(get_user_service),
 ) -> Response:
     service.delete_user(user_id)

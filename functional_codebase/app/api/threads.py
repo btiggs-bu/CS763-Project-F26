@@ -4,6 +4,17 @@ from fastapi import APIRouter, Depends, Query, Response, status
 from pydantic import PositiveInt
 from sqlalchemy.orm import Session
 
+from app.api.openapi_examples import (
+    THREAD,
+    THREAD_COURSE_CREATE,
+    THREAD_LAB_CREATE,
+    THREAD_LIST,
+    THREAD_PROJECT_CREATE,
+    THREAD_UPDATE,
+    json_response_documentation,
+    path_parameter_example,
+    request_body_examples,
+)
 from app.api.responses import ERROR_RESPONSES
 from app.db.database import get_db
 from app.models.thread import Thread
@@ -25,7 +36,13 @@ def get_thread_service(session: Session = Depends(get_db)) -> ThreadService:
     description=(
         "Return threads filtered by creator, type, restriction, tag, or parent."
     ),
-    responses=ERROR_RESPONSES,
+    responses={
+        200: json_response_documentation(
+            "The matching threads and total count.",
+            THREAD_LIST,
+        ),
+        **ERROR_RESPONSES,
+    },
 )
 def list_threads(
     query: Annotated[ThreadListQuery, Query()],
@@ -45,13 +62,32 @@ def list_threads(
         "optional parent, and tags."
     ),
     responses={
+        201: json_response_documentation("The created thread.", THREAD),
         409: ERROR_RESPONSES[409],
         422: ERROR_RESPONSES[422],
         500: ERROR_RESPONSES[500],
     },
 )
 def create_thread(
-    payload: ThreadCreate,
+    payload: Annotated[
+        ThreadCreate,
+        request_body_examples(
+            {
+                "lab": {
+                    "summary": "Create a lab thread",
+                    "value": THREAD_LAB_CREATE,
+                },
+                "course": {
+                    "summary": "Create a course under a lab",
+                    "value": THREAD_COURSE_CREATE,
+                },
+                "project": {
+                    "summary": "Create a project under a course",
+                    "value": THREAD_PROJECT_CREATE,
+                },
+            }
+        ),
+    ],
     service: ThreadService = Depends(get_thread_service),
 ) -> Thread:
     return service.create_thread(payload)
@@ -62,10 +98,14 @@ def create_thread(
     response_model=ThreadRead,
     summary="Get a thread",
     description="Return a thread with its subtype, parent, and tags.",
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        200: json_response_documentation("The requested thread.", THREAD),
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def get_thread(
-    thread_id: PositiveInt,
+    thread_id: Annotated[PositiveInt, path_parameter_example(1001)],
     service: ThreadService = Depends(get_thread_service),
 ) -> Thread:
     return service.get_thread(thread_id)
@@ -77,6 +117,7 @@ def get_thread(
     summary="Update a thread",
     description="Partially update thread details, parent relationship, or tags.",
     responses={
+        200: json_response_documentation("The updated thread.", THREAD),
         404: ERROR_RESPONSES[404],
         409: ERROR_RESPONSES[409],
         422: ERROR_RESPONSES[422],
@@ -84,8 +125,18 @@ def get_thread(
     },
 )
 def update_thread(
-    thread_id: PositiveInt,
-    payload: ThreadUpdate,
+    thread_id: Annotated[PositiveInt, path_parameter_example(1001)],
+    payload: Annotated[
+        ThreadUpdate,
+        request_body_examples(
+            {
+                "project": {
+                    "summary": "Update a project thread",
+                    "value": THREAD_UPDATE,
+                }
+            }
+        ),
+    ],
     service: ThreadService = Depends(get_thread_service),
 ) -> Thread:
     return service.update_thread(thread_id, payload)
@@ -98,10 +149,14 @@ def update_thread(
     response_model=None,
     summary="Delete a thread",
     description="Delete a thread and its dependent records.",
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        204: {"description": "The thread and dependent records were deleted."},
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def delete_thread(
-    thread_id: PositiveInt,
+    thread_id: Annotated[PositiveInt, path_parameter_example(1001)],
     service: ThreadService = Depends(get_thread_service),
 ) -> Response:
     service.delete_thread(thread_id)

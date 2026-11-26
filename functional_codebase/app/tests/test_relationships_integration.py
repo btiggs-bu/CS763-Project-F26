@@ -8,7 +8,6 @@ from app.models import (
     Course,
     Lab,
     Post,
-    PostTag,
     Project,
     Tag,
     User,
@@ -43,7 +42,7 @@ def test_orm_relationships_round_trip():
         project_tag = session.scalar(
             select(Tag).where(Tag.tag == SEED_TAG_NAMES[2])
         )
-        discussion.tag_assignments.append(PostTag(tag=project_tag))
+        assert project_tag in discussion.tags
 
     with SessionLocal() as session:
         student = session.scalar(
@@ -82,14 +81,20 @@ def test_orm_relationships_round_trip():
         )
         assert discussion.author is student
         assert discussion in student.posts
-        assert len(discussion.comments) == 2
+        assert len(discussion.comments) == 3
         reply = next(
             comment
             for comment in discussion.comments
-            if comment.parent_comment is not None
+            if comment.content == "A seed reply to the faculty comment."
+        )
+        follow_up = next(
+            comment
+            for comment in discussion.comments
+            if comment.content == "A follow-up reply in the nested discussion."
         )
         assert reply.parent_comment.post is discussion
         assert reply in reply.parent_comment.replies
+        assert follow_up.parent_comment is reply
         assert any(comment.author is faculty for comment in discussion.comments)
 
         project_tag = session.scalar(

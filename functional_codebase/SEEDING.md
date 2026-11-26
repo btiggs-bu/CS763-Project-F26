@@ -5,8 +5,9 @@ The seed command creates a small, repeatable fixture set for API testing:
 - The `student`, `faculty`, and `admin` roles.
 - One user per role.
 - One lab, two courses, and two projects, arranged Lab → Course → Project.
-- Three tags associated with the lab, one course, and one project.
-- Two posts (one discussion and one announcement) with three comments, including a reply.
+- Three tags associated with threads and posts.
+- Two posts (one discussion and one announcement) with four comments, including a
+  root comment and a two-level reply chain.
 
 Run from `functional_codebase` after configuring `.env`, starting PostgreSQL, and applying migrations:
 

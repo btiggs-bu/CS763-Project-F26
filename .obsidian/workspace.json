@@ -190,17 +190,18 @@
   },
   "active": "873803ccf2e34510",
   "lastOpenFiles": [
+    "functional_codebase/tests/__pycache__/test_content_services.cpython-310-pytest-8.4.2.pyc",
+    "functional_codebase/tests/__pycache__/test_content_repositories.cpython-310-pytest-8.4.2.pyc",
+    "functional_codebase/tests/__pycache__/test_openapi_documentation.cpython-310-pytest-8.4.2.pyc",
+    "functional_codebase/app/api/__pycache__/openapi_examples.cpython-310.pyc",
+    "README.md",
+    "functional_codebase/tests/test_openapi_documentation.py",
+    "functional_codebase/app/api/openapi_examples.py",
+    "functional_codebase/tests/test_content_repositories.py",
+    "functional_codebase/tests/test_content_services.py",
     "functional_codebase/alembic/versions/__pycache__/e903d6ff7eed_create_initial_application_schema.cpython-310.pyc",
     "functional_codebase/alembic/versions/__pycache__/20261120_2000_initial_migration_framework.cpython-310.pyc",
     "functional_codebase/alembic/versions/__pycache__",
-    "functional_codebase/app/tests/__pycache__/test_seed_integration.cpython-310-pytest-8.4.2.pyc",
-    "functional_codebase/app/tests/__pycache__/test_schema_integration.cpython-310-pytest-8.4.2.pyc",
-    "functional_codebase/app/tests/__pycache__/test_relationships_integration.cpython-310-pytest-8.4.2.pyc",
-    "functional_codebase/app/tests/__pycache__/conftest.cpython-310-pytest-8.4.2.pyc",
-    "functional_codebase/tests/__pycache__/test_post_comment_api.cpython-310-pytest-8.4.2.pyc",
-    "functional_codebase/app/api/__pycache__/timeline.cpython-310.pyc",
-    "functional_codebase/app/services/__pycache__/posts.cpython-310.pyc",
-    "functional_codebase/app/api/__pycache__/posts.cpython-310.pyc",
     ".ai_logs/AI_agent_history/agent_log_manual.md",
     "spec.md",
     ".pytest_cache/README.md",
@@ -224,7 +225,6 @@
     "Agent_environment.md",
     ".ai_logs/AI_agent_log.md",
     ".ai_logs/assignment_1/Prompt_test_log_assignment1.md",
-    ".ai_logs/assignment_1/AI_log_assignment1.md",
-    "README.md"
+    ".ai_logs/assignment_1/AI_log_assignment1.md"
   ]
 }

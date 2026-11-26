@@ -5,6 +5,18 @@ from pydantic import PositiveInt
 from sqlalchemy.orm import Session
 
 from app.api.responses import ERROR_RESPONSES, FORBIDDEN_RESPONSE
+from app.api.openapi_examples import (
+    POST,
+    POST_CREATE,
+    POST_LIST,
+    POST_MODERATION,
+    POST_MODERATION_HIDDEN,
+    POST_UPDATE,
+    MODERATION_UPDATE,
+    json_response_documentation,
+    path_parameter_example,
+    request_body_examples,
+)
 from app.db.database import get_db
 from app.models.content import Post
 from app.schemas.moderation import (
@@ -30,7 +42,13 @@ def get_post_service(session: Session = Depends(get_db)) -> PostService:
         "Return posts filtered by keyword, thread, author, type, tag, or "
         "moderation status."
     ),
-    responses=ERROR_RESPONSES,
+    responses={
+        200: json_response_documentation(
+            "The matching posts and total count.",
+            POST_LIST,
+        ),
+        **ERROR_RESPONSES,
+    },
 )
 def list_posts(
     query: Annotated[PostListQuery, Query()],
@@ -51,6 +69,7 @@ def list_posts(
         "restrictions."
     ),
     responses={
+        201: json_response_documentation("The created post.", POST),
         403: FORBIDDEN_RESPONSE,
         409: ERROR_RESPONSES[409],
         422: ERROR_RESPONSES[422],
@@ -58,7 +77,17 @@ def list_posts(
     },
 )
 def create_post(
-    payload: PostCreate,
+    payload: Annotated[
+        PostCreate,
+        request_body_examples(
+            {
+                "discussion": {
+                    "summary": "Create a tagged discussion post",
+                    "value": POST_CREATE,
+                }
+            }
+        ),
+    ],
     service: PostService = Depends(get_post_service),
 ) -> Post:
     return service.create_post(payload)
@@ -69,10 +98,14 @@ def create_post(
     response_model=PostRead,
     summary="Get a post",
     description="Return a post, including its tags and moderation metadata.",
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        200: json_response_documentation("The requested post.", POST),
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def get_post(
-    post_id: PositiveInt,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
     service: PostService = Depends(get_post_service),
 ) -> Post:
     return service.get_post(post_id)
@@ -84,6 +117,7 @@ def get_post(
     summary="Update a post",
     description="Partially update a post's title, content, or restriction level.",
     responses={
+        200: json_response_documentation("The updated post.", POST),
         403: FORBIDDEN_RESPONSE,
         404: ERROR_RESPONSES[404],
         422: ERROR_RESPONSES[422],
@@ -91,8 +125,18 @@ def get_post(
     },
 )
 def update_post(
-    post_id: PositiveInt,
-    payload: PostUpdate,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
+    payload: Annotated[
+        PostUpdate,
+        request_body_examples(
+            {
+                "content": {
+                    "summary": "Update post content",
+                    "value": POST_UPDATE,
+                }
+            }
+        ),
+    ],
     service: PostService = Depends(get_post_service),
 ) -> Post:
     return service.update_post(post_id, payload)
@@ -105,10 +149,14 @@ def update_post(
     response_model=None,
     summary="Delete a post",
     description="Delete a post and its dependent comments and tag associations.",
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        204: {"description": "The post and dependent records were deleted."},
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def delete_post(
-    post_id: PositiveInt,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
     service: PostService = Depends(get_post_service),
 ) -> Response:
     service.delete_post(post_id)
@@ -120,10 +168,14 @@ def delete_post(
     response_model=PostModerationResult,
     summary="Report a post",
     description="Mark a post as reported for moderator review.",
-    responses={404: ERROR_RESPONSES[404], 500: ERROR_RESPONSES[500]},
+    responses={
+        200: json_response_documentation("The post marked as reported.", POST_MODERATION),
+        404: ERROR_RESPONSES[404],
+        500: ERROR_RESPONSES[500],
+    },
 )
 def report_post(
-    post_id: PositiveInt,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
     service: PostService = Depends(get_post_service),
 ) -> Post:
     return service.report_post(post_id)
@@ -135,14 +187,28 @@ def report_post(
     summary="Moderate a post",
     description="Update a post's moderation status.",
     responses={
+        200: json_response_documentation(
+            "The post with its updated moderation status.",
+            POST_MODERATION_HIDDEN,
+        ),
         404: ERROR_RESPONSES[404],
         422: ERROR_RESPONSES[422],
         500: ERROR_RESPONSES[500],
     },
 )
 def moderate_post(
-    post_id: PositiveInt,
-    payload: ModerationStatusUpdate,
+    post_id: Annotated[PositiveInt, path_parameter_example(64368473)],
+    payload: Annotated[
+        ModerationStatusUpdate,
+        request_body_examples(
+            {
+                "hide": {
+                    "summary": "Hide a reported post",
+                    "value": MODERATION_UPDATE,
+                }
+            }
+        ),
+    ],
     service: PostService = Depends(get_post_service),
 ) -> Post:
     return service.moderate_post(post_id, payload.mod_status)

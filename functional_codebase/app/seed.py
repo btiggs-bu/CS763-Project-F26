@@ -14,6 +14,7 @@ from app.models import (
     ModerationStatus,
     Post,
     PostRestrictionLevel,
+    PostTag,
     PostType,
     Project,
     Role,
@@ -56,6 +57,10 @@ SEED_POSTS = (
         "A small announcement fixture for API testing.",
     ),
 )
+SEED_POST_TAGS = {
+    SEED_POSTS[0][0]: (SEED_TAG_NAMES[0], SEED_TAG_NAMES[2]),
+    SEED_POSTS[1][0]: (SEED_TAG_NAMES[1],),
+}
 SEED_COMMENTS = (
     (
         "discussion_root",
@@ -70,6 +75,13 @@ SEED_COMMENTS = (
         "rbpdb_seed_student",
         "A seed reply to the faculty comment.",
         "discussion_root",
+    ),
+    (
+        "discussion_follow_up",
+        SEED_POSTS[0][0],
+        "rbpdb_seed_faculty",
+        "A follow-up reply in the nested discussion.",
+        "discussion_reply",
     ),
     (
         "announcement_comment",
@@ -257,6 +269,7 @@ def seed_posts(
     session: Session,
     users: dict[str, User],
     threads: dict[str, Thread],
+    tags: dict[str, Tag],
 ) -> dict[str, Post]:
     posts: dict[str, Post] = {}
     for title, username, thread_name, post_type, content in SEED_POSTS:
@@ -281,8 +294,19 @@ def seed_posts(
             )
             session.add(post)
             session.flush()
+        for tag_name in SEED_POST_TAGS[title]:
+            tag = tags[tag_name]
+            assignment = session.scalar(
+                select(PostTag).where(
+                    PostTag.post_id == post.post_id,
+                    PostTag.tag_id == tag.tag_id,
+                )
+            )
+            if assignment is None:
+                session.add(PostTag(post=post, tag=tag))
         posts[title] = post
 
+    session.flush()
     return posts
 
 
@@ -371,7 +395,7 @@ def populate_seed_data(*, reset: bool = False, clean: bool = False) -> None:
         users = seed_users(session, roles)
         threads = seed_threads(session, users)
         tags = seed_tags(session, threads)
-        posts = seed_posts(session, users, threads)
+        posts = seed_posts(session, users, threads, tags)
         comments = seed_comments(session, users, posts)
         logger.info(
             "Seed data ready: %d roles, %d users, %d threads, %d tags, "

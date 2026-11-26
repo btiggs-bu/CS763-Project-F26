@@ -65,6 +65,28 @@ def test_post_comment_crud_filters_timeline_and_exports(api_context) -> None:
     assert client.get(
         f"/api/v1/discussions/posts/{post['post_id']}"
     ).json()["post_id"] == post["post_id"]
+    missing_author = client.post(
+        "/api/v1/discussions/posts",
+        json={
+            "post_type": "discussion",
+            "user_id": 99999,
+            "thread_id": thread["thread_id"],
+            "title": "Missing author",
+            "content": "The author ID must reference an active user.",
+        },
+    )
+    assert missing_author.status_code == 422
+    missing_thread = client.post(
+        "/api/v1/discussions/posts",
+        json={
+            "post_type": "discussion",
+            "user_id": user["user_id"],
+            "thread_id": 99999,
+            "title": "Missing thread",
+            "content": "The thread ID must reference an existing thread.",
+        },
+    )
+    assert missing_thread.status_code == 422
 
     with session_factory() as session:
         systems_tag_id = session.scalar(
@@ -99,6 +121,14 @@ def test_post_comment_crud_filters_timeline_and_exports(api_context) -> None:
     )
     assert first_comment_response.status_code == 201
     first_comment = first_comment_response.json()
+    missing_comment_author = client.post(
+        f"/api/v1/discussions/posts/{post['post_id']}/comments",
+        json={
+            "user_id": 99999,
+            "content": "The author ID must reference an active user.",
+        },
+    )
+    assert missing_comment_author.status_code == 422
     assert first_comment["restriction_level"] == "inherited"
 
     reply_response = client.post(
